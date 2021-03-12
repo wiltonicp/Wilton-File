@@ -1,0 +1,72 @@
+server:
+  port: 8282
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: Rocket-Admin
+  profiles:
+    active: dev
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 文件大小限制
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+rocket:
+  auth:
+    jwtAccessKey: rocket-admin-secret
+    socialLoginClientId:
+  security:
+    ignored:
+      urls: #安全路径白名单
+        - /doc.html
+        - /swagger-resources/**
+        - /swagger/**
+        - /**/v2/api-docs
+        - /admin/images/**
+        - /**/*.js
+        - /**/*.css
+        - /**/*.png
+        - /favicon.ico
+        - /webjars/**
+        - /actuator/**
+        - /druid/**
+        - /login
+        - /oauth/**
+        - /auth/captcha
+        - /auth/token
+        - /auth/register
+        - /auth/info
+        - /dashboard
+
+mybatis-plus:
+  type-aliases-package: cn.wilton.rocket.*.entity
+  type-enums-package: cn.wilton.rocket.common.entity.enums
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    db-config:
+      #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: ID_WORKER
+    banner: false
+    configuration:
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_NULL
+      # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+      map-underscore-to-camel-case: true
+      # 返回map时true:当查询数据为空时字段返回为null,false:不加这个查询数据为空时，字段将被隐藏
+      call-setters-on-nulls: true
+
+logging:
+  config: classpath:logback-spring.xml
