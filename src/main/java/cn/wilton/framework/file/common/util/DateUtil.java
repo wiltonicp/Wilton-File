@@ -10,15 +10,16 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
-* 基于 java8 的时间工具类
-* @Description
-* @Author: Ranger
-* @Date: 2021/1/15 13:55
-* @Email: wilton.icp@gmail.com
-*/
+ * 基于 java8 的时间工具类
+ * @author Ranger
+ * @since 2021/3/15
+ * @email wilton.icp@gmail.com
+ */
 public class DateUtil {
 
     public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
+
+    public static final String FULLS_TIME_PATTERN = "yyyyMMddhhmmssS";
 
     public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
