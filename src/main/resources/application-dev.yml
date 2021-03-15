@@ -1,0 +1,26 @@
+# 开发环境配置
+spring:
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    dynamic:
+      p6spy: true
+      primary: base
+      datasource:
+        base:
+          url: jdbc:mysql://rm-uf6rb2523f415bc6dno.mysql.rds.aliyuncs.com:3306/rocket_base?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: wilton
+          password: Wilton2019
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: #RocketAdmin123
+    lettuce:
+      pool:
+        min-idle: 8 # 连接池中的最小空闲连接
+        max-idle: 500 # 连接池中的最大空闲连接
+        max-active: 2000 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: 10000 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    timeout: 5000ms # 连接超时时间（毫秒）
