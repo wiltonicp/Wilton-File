@@ -1,7 +1,7 @@
 package cn.wilton.framework.file.common.handler;
 
 import cn.wilton.framework.file.common.api.ResultCode;
-import cn.wilton.framework.file.common.api.RocketResult;
+import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.exception.BizException;
 import cn.wilton.framework.file.common.exception.WiltonException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +34,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = WiltonException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult handleBaseException(WiltonException e) {
+    public WiltonResult handleBaseException(WiltonException e) {
         log.error("Rocket Admin系统异常", e);
-        return RocketResult.failed(e.getMessage());
+        return WiltonResult.failed(e.getMessage());
     }
 
     /**
@@ -46,9 +46,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BizException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult bizExceptionHandler(BizException e){
+    public WiltonResult bizExceptionHandler(BizException e){
         log.error("发生业务异常！原因是：{}",e.getErrorMsg());
-        return RocketResult.failed(e.getMessage());
+        return WiltonResult.failed(e.getMessage());
     }
 
     /**
@@ -58,9 +58,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value =NullPointerException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult exceptionHandler(NullPointerException e){
+    public WiltonResult exceptionHandler(NullPointerException e){
         log.error("发生空指针异常！原因是:",e);
-        return RocketResult.failed(ResultCode.BODY_NOT_MATCH);
+        return WiltonResult.failed(ResultCode.BODY_NOT_MATCH);
     }
 
     /**
@@ -70,43 +70,43 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult exceptionHandler(MethodArgumentNotValidException e) {
+    public WiltonResult exceptionHandler(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
         String errorMesssage = "";
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             errorMesssage += fieldError.getDefaultMessage() + "!";
         }
         log.error("参数异常:",e);
-        return RocketResult.failed(errorMesssage);
+        return WiltonResult.failed(errorMesssage);
     }
 
     /**
      * 统一处理请求参数校验(实体对象传参)
      *
      * @param e BindException
-     * @return RocketResult
+     * @return WiltonResult
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult handleBindException(BindException e) {
+    public WiltonResult handleBindException(BindException e) {
         StringBuilder message = new StringBuilder();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         for (FieldError error : fieldErrors) {
             message.append(error.getField()).append(error.getDefaultMessage()).append(",");
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
-        return RocketResult.failed(message.toString());
+        return WiltonResult.failed(message.toString());
     }
 
     /**
      * 统一处理请求参数校验(普通传参)
      *
      * @param e ConstraintViolationException
-     * @return RocketResult
+     * @return WiltonResult
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult handleConstraintViolationException(ConstraintViolationException e) {
+    public WiltonResult handleConstraintViolationException(ConstraintViolationException e) {
         StringBuilder message = new StringBuilder();
         Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
         for (ConstraintViolation<?> violation : violations) {
@@ -115,20 +115,20 @@ public class GlobalExceptionHandler {
             message.append(pathArr[1]).append(violation.getMessage()).append(",");
         }
         message = new StringBuilder(message.substring(0, message.length() - 1));
-        return RocketResult.failed(message.toString());
+        return WiltonResult.failed(message.toString());
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult handleWiltonException(WiltonException e) {
+    public WiltonResult handleWiltonException(WiltonException e) {
         log.error("系统内部异常，异常信息", e);
-        return RocketResult.failed(e.getMessage());
+        return WiltonResult.failed(e.getMessage());
     }
 
 
     @ExceptionHandler(value = AccessDeniedException.class)
     @ResponseStatus(HttpStatus.OK)
-    public RocketResult handleAccessDeniedException(){
-        return RocketResult.failed(ResultCode.FORBIDDEN);
+    public WiltonResult handleAccessDeniedException(){
+        return WiltonResult.failed(ResultCode.FORBIDDEN);
     }
 }

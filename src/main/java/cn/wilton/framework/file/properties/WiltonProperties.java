@@ -12,6 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @SpringBootConfiguration
-@ConfigurationProperties(prefix = "wilton")
+@ConfigurationProperties(prefix = "wilton.upload")
 public class WiltonProperties {
+
+    public String path;
 }

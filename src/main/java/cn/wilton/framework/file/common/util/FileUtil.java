@@ -1,9 +1,15 @@
 package cn.wilton.framework.file.common.util;
 
 import cn.hutool.core.util.IdUtil;
+import cn.wilton.framework.file.common.entity.FileInfo;
+import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
 import cn.wilton.framework.file.common.exception.BizException;
+import cn.wilton.framework.file.common.exception.WiltonException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -150,45 +156,48 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
     /**
      * 将文件名解析成文件的上传路径
      */
-    public static File upload(MultipartFile file, String filePath) {
-        String name = getFileNameNoEx(file.getOriginalFilename());
+    public static FileInfo upload(MultipartFile file, String filePath) {
+        String uuid = IdUtil.simpleUUID();
         String suffix = getExtensionName(file.getOriginalFilename());
         String nowStr = "-" + DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULLS_TIME_PATTERN);
         try {
-            String fileName = name + nowStr + "." + suffix;
+            String fileName = uuid + nowStr + "." + suffix;
             String path = filePath + fileName;
             // getCanonicalFile 可解析正确各种路径
             File dest = new File(path).getCanonicalFile();
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
                 if (!dest.getParentFile().mkdirs()) {
-                    System.out.println("was not successful.");
+                    log.error("was not successful");
                 }
             }
             // 文件写入
             file.transferTo(dest);
-            return dest;
+            log.info("文件写入成功");
+            FileInfo fileInfo = new FileInfo();
+            fileInfo.setPath(path);
+            return fileInfo;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return null;
     }
 
-    public static String getFileType(String type) {
+    public static FileTypeEnum getFileType(String type) {
         String documents = "txt doc pdf ppt pps xlsx xls docx";
         String music = "mp3 wav wma mpa ram ra aac aif m4a";
         String video = "avi mpg mpe mpeg asf wmv mov qt rm mp4 flv m4v webm ogv ogg";
         String image = "bmp dib pcp dif wmf gif jpg tif eps psd cdr iff tga pcd mpt png jpeg";
         if (image.contains(type)) {
-            return IMAGE;
+            return FileTypeEnum.IMAGE;
         } else if (documents.contains(type)) {
-            return TXT;
+            return FileTypeEnum.TXT;
         } else if (music.contains(type)) {
-            return MUSIC;
+            return FileTypeEnum.MUSIC;
         } else if (video.contains(type)) {
-            return VIDEO;
+            return FileTypeEnum.VIDEO;
         } else {
-            return OTHER;
+            return FileTypeEnum.OTHER;
         }
     }
 
@@ -257,18 +266,22 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
 
     /**
      * 下载文件
-     *
-     * @param request  /
-     * @param response /
-     * @param file     /
+     * @param request
+     * @param response
+     * @param file
+     * @param deleteOnExit 下载后是否删除源文件
+     * @throws WiltonException
      */
-    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file, boolean deleteOnExit) {
+    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file, boolean deleteOnExit) throws WiltonException {
+        if (!file.exists()) {
+            throw new WiltonException("文件未找到");
+        }
         response.setCharacterEncoding(request.getCharacterEncoding());
-        response.setContentType("application/octet-stream");
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
-            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + java.net.URLEncoder.encode(file.getName(), "UTF-8"));
             IOUtils.copy(fis, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
