@@ -1,6 +1,6 @@
 package cn.wilton.framework.file.modules.mapper;
 
-import cn.wilton.framework.file.common.entity.FileInfo;
+import cn.wilton.framework.file.common.entity.FileEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @since 2021/3/16
  */
 @Repository
-public interface IFileMapper extends BaseMapper<FileInfo>{
+public interface IFileMapper extends BaseMapper<FileEntity>{
 }

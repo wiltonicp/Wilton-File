@@ -9,13 +9,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * <p>
  * @author Ranger
  * @email wilton.icp@gmail.com
  * @since 2021/3/16
  */
 @Data
-public class FileInfo {
+public class FileEntity {
 
     /**
      * 文件id

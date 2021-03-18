@@ -11,7 +11,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
-    mode: HTML
+    mode: LEGACYHTML5
     encoding: UTF-8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -19,8 +19,9 @@ spring:
   # 文件大小限制
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 100MB
+      enabled: true
+      max-request-size: 1024MB
+      max-file-size: 1024MB
 
 
 wilton:

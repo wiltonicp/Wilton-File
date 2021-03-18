@@ -4,34 +4,34 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * 文件类型
+ * <p>
  * @author Ranger
  * @email wilton.icp@gmail.com
- * @since 2021/3/16
+ * @since 2021/3/18
  */
-public enum FileTypeEnum implements EnumMessage{
-    IMAGE ("image","图片"),
-    TXT ("txt","文档"),
-    MUSIC ("music","音乐"),
-    VIDEO ("video","视频"),
-    OTHER ("other","其他");
+public enum PermissionEnum implements EnumMessage{
+
+    NO_LANDING (0,"禁止登陆"),
+    SUPER_ADMIN (1,"超级管理员"),
+    ADMIN (2,"管理员"),
+    USER (3,"普通用户");
 
     /**
      * 标记数据库存的值是code
      */
     @EnumValue
-    private final String code;
+    private final Integer code;
     @JsonValue
     private final String title;
 
-    FileTypeEnum (String code,String title){
+    PermissionEnum (Integer code,String title){
         this.code = code;
         this.title = title;
     }
 
     @Override
     public String getCode() {
-        return this.code;
+        return String.valueOf(this.code);
     }
 
     @Override
@@ -39,4 +39,3 @@ public enum FileTypeEnum implements EnumMessage{
         return this.title;
     }
 }
-

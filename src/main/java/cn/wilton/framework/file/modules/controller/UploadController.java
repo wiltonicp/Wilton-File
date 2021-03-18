@@ -1,12 +1,11 @@
 package cn.wilton.framework.file.modules.controller;
 
 import cn.wilton.framework.file.common.api.WiltonResult;
-import cn.wilton.framework.file.common.entity.FileInfo;
+import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.properties.WiltonProperties;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.UUDecoderStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,7 @@ public class UploadController {
             new WiltonException("请选文件需要上传的文件");
         }
         String fileName = file.getOriginalFilename();
-        FileInfo fileInfo = FileUtil.upload(file, properties.path);
+        FileEntity fileInfo = FileUtil.upload(file, properties.path);
         if(fileInfo == null){
             new WiltonException("文件上传失败!");
         }

@@ -1,7 +1,7 @@
 package cn.wilton.framework.file.common.util;
 
 import cn.hutool.core.util.IdUtil;
-import cn.wilton.framework.file.common.entity.FileInfo;
+import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
 import cn.wilton.framework.file.common.exception.BizException;
 import cn.wilton.framework.file.common.exception.WiltonException;
@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -156,7 +155,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
     /**
      * 将文件名解析成文件的上传路径
      */
-    public static FileInfo upload(MultipartFile file, String filePath) {
+    public static FileEntity upload(MultipartFile file, String filePath) {
         String uuid = IdUtil.simpleUUID();
         String suffix = getExtensionName(file.getOriginalFilename());
         String nowStr = "-" + DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULLS_TIME_PATTERN);
@@ -174,7 +173,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
             // 文件写入
             file.transferTo(dest);
             log.info("文件写入成功");
-            FileInfo fileInfo = new FileInfo();
+            FileEntity fileInfo = new FileEntity();
             fileInfo.setPath(path);
             return fileInfo;
         } catch (Exception e) {
