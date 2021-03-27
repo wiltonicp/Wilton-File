@@ -19,6 +19,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
+        <docker.host>http://127.0.0.1:8150</docker.host>
+        <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
+        <docker.serverId>docker-aliyun</docker.serverId>
+        <docker.registry>registry.cn-shanghai.aliyuncs.com/wilton</docker.registry>
+        <docker.registry.name>wilton/rocket</docker.registry.name>
         <mysql-connector.version>8.0.11</mysql-connector.version>
         <hutool.version>5.4.0</hutool.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
@@ -120,32 +125,58 @@
 
     </dependencies>
 
-    <repositories>
+    <!-- 在项目的pom.xml中 配置私服的仓库地址，可以将项目打jar包部署到私服 -->
+    <distributionManagement>
         <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
+            <id>nexus-releases</id> <!-- nexus认证id -->
+            <url>https://maven.wiltonic.cn/repository/maven-releases</url>
         </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+        <snapshotRepository>
+            <id>nexus-snapshots</id> <!-- nexus认证id -->
+            <url>https://maven.wiltonic.cn/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
-        <finalName>rocket-admin-${project.version}</finalName>
+        <finalName>wilton-file-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.maven.plugin.version}</version>
+                <!--将插件绑定在某个phase执行 只需执行mvn package ，就会自动执行mvn docker:build -->
+                <executions>
+                    <!--执行 mvn package 时 自动 执行 mvn docker:build-->
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 覆盖相同标签镜像 -->
+                    <forceTags>true</forceTags>
+                    <!-- install阶段上传镜像 -->
+                    <pushImage>true</pushImage>
+                    <serverId>${docker.serverId}</serverId>
+                    <!-- 远程仓库地址 -->
+                    <registryUrl>${docker.registry}</registryUrl>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <imageName>${docker.registry}/${project.artifactId}:${project.version}</imageName>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
