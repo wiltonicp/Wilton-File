@@ -22,6 +22,7 @@ public class ViewController {
 
     @GetMapping("/files")
     public String files(Model model){
+        model.addAttribute("userName","Ranger");
         return "page-files";
     }
 

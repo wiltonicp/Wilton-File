@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -42,9 +43,9 @@ public class UploadController {
         }
         fileInfo.setFileName(fileName);
         fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-        fileInfo.setFileSize(file.getSize());
+        fileInfo.setFileSize(new BigDecimal(file.getSize()));
         fileInfo.setOpen(true);
-        fileInfo.setUserId(1L);
+        fileInfo.setCreatedBy(1L);
         fileInfo.setModifyTime(LocalDateTime.now());
         fileService.save(fileInfo);
         return WiltonResult.success();

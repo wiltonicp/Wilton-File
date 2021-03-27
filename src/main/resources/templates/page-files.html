@@ -1,31 +1,31 @@
-﻿<!doctype html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Wilton-Cloud | 云文件分享系统</title>
       
       <!-- Favicon -->
-      <link rel="shortcut icon" href="assets/images/favicon.ico" />
-      <link rel="stylesheet" href="assets/css/iconfont.css">
-      <link rel="stylesheet" href="assets/css/backend.min.css">
-      <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-      <link rel="stylesheet" href="assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
-      <link rel="stylesheet" href="assets/vendor/remixicon/fonts/remixicon.css">
+      <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
+      <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
+      <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
+      <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
+      <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
+      <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
       
       <!-- Viewer Plugin -->
         <!--PDF-->
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/pdf/pdf.viewer.css">
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/pdf/pdf.viewer.css}">
         <!--Docs-->
         <!--PPTX-->
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css">
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css">
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css}">
         <!--All Spreadsheet -->
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css">
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css}">
         <!--Image viewer-->
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css">
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
         <!--officeToHtml-->
-        <link rel="stylesheet" href="assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css">  
+        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
         <style>
             .header-logo h5 {
                 color: #613F9D;
@@ -133,12 +133,10 @@
                                   <span class="caret"><!--icon--></span>
                                   </label>
                                   <ul class="dropdown-menu">
-                                      <li><a href="#"><div class="item"><i class="far fa-file-pdf bg-info"></i>PDFs</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-alt bg-primary"></i>Documents</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-excel bg-success"></i>Spreadsheet</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-powerpoint bg-danger"></i>Presentation</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-image bg-warning"></i>Photos & Images</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-video bg-info"></i>Videos</div></a></li>
+                                      <li><a href="#"><div class="item"><i class="far fa-file-alt bg-primary"></i>文档</div></a></li>
+                                      <li><a href="#"><div class="item"><i class="far fa-file-excel bg-success"></i>音乐</div></a></li>
+                                      <li><a href="#"><div class="item"><i class="far fa-file-image bg-warning"></i>图片</div></a></li>
+                                      <li><a href="#"><div class="item"><i class="far fa-file-video bg-info"></i>视频</div></a></li>
                                   </ul>
                               </div>
                           </div>
@@ -212,7 +210,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-detail mt-3">
-                                                <h5><a href="user-profile-edit.html">Ranger</a></h5>
+                                                <h5><a href="user-profile-edit.html" th:text="${userName}">Ranger</a></h5>
                                                 <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
                                                 </div>
                                                 <a href="auth-sign-in.html" class="btn btn-primary">退出</a>
@@ -231,7 +229,6 @@
       <div class="content-page">
         <div class="container-fluid">
             <div class="row">
-                
                 <div class="col-lg-12">
                      <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
                         <h5>全部文件</h5>
@@ -247,7 +244,7 @@
                 <div class="col-lg-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><a href="#">根目录</a></li>
+                           <li class="breadcrumb-item"><a href="/">根目录</a></li>
                            <li class="breadcrumb-item active">我的文件</li>
                            <li class="breadcrumb-item" aria-current="page">
                             <svg class="my-icon svg-icon" aria-hidden="true">
@@ -259,8 +256,8 @@
                 </div>
             </div>
             <div class="icon icon-grid i-grid">
-                <div class="row"> 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="row" id="gridTable" style="width: -webkit-fill-available;" th:fragment="gridTable">
+                    <div class="col-lg-3 col-md-6 col-sm-6" th:each="folder:${folderList}">
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body image-thumb">
                                 <div class="mb-4 text-center p-3 rounded iq-thumb">
@@ -269,51 +266,18 @@
                                         <use xlink:href="#icon-wenjianjia2"></use>
                                     </svg>
                                 </div>
-                                <h6>我的相册</h6>            
+                                <h6 th:text="${folder.folderName}"></h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="col-lg-3 col-md-6 col-sm-6" th:each="file:${fileList}">
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body image-thumb">
                                 <div class="mb-4 text-center p-3 rounded iq-thumb">
                                     <div class="iq-image-overlay"></div>
-                                    <a href="#" data-title="Spike.pdf" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/pdf.png" class="img-fluid" alt="image1"></a>         
+                                    <a href="#" data-title="Spike.pdf" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/pdf.png" class="img-fluid" alt="image1"></a>
                                 </div>
-                                <h6>Spike.pdf</h6>            
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb">
-                                <div class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <div class="iq-image-overlay"></div>
-                                    <a href="#" data-title="Support.docx" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/doc.png" class="img-fluid" alt="image1"></a>
-                                </div>
-                                <h6>Support.docx</h6>     
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb">
-                                <div class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <div class="iq-image-overlay"></div>
-                                    <a href="#"  data-title="Colour.xlsx" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.xlsx" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/xlsx.png" class="img-fluid" alt="image1"></a>
-                                </div>
-                                <h6>Colour.xlsx</h6> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb">
-                                <div class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <div class="iq-image-overlay"></div>
-                                    <a href="#" data-title="Flavour.pptx" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pptx" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/ppt.png" class="img-fluid" alt="image1"></a>           
-                                </div>
-                                <h6>Flavour.pptx</h6>          
+                                <h6 th:text="${file.fileName}"></h6>
                             </div>
                         </div>
                     </div>
@@ -324,20 +288,20 @@
                     <div class="col-lg-12">
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="gridList" th:fragment="gridList">
                                     <table class="table mb-0 table-borderless tbl-server-info">
                                     <thead>
                                         <tr>
-                                            <th scope="col">文件名</th>
-                                            <th scope="col">文件大小</th>
-                                            <th scope="col">种类</th>
-                                            <th scope="col">上传者</th>
-                                            <th scope="col">修改时间</th>
-                                            <th scope="col">操作</th>
+                                            <th scope="col" th:text="文件名"></th>
+                                            <th scope="col" th:text="文件大小"></th>
+                                            <th scope="col" th:text="种类"></th>
+                                            <th scope="col" th:text="上传者"></th>
+                                            <th scope="col" th:text="修改时间"></th>
+                                            <th scope="col" th:text="操作"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr th:each="folder:${folderList}">
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="icon-small rounded mr-3">
@@ -345,16 +309,16 @@
                                                             <use xlink:href="#icon-wenjianjia2"></use>
                                                           </svg>
                                                     </div>
-                                                    <div data-load-file="file" style="cursor: pointer;">我的相册</div>
+                                                    <div data-load-file="file" style="cursor: pointer;" th:text="${folder.folderName}"></div>
                                                 </div>
                                             </td>
                                             <td> </td>
                                             <td>文件夹</td>
                                             <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
+                                            <td th:text="${#temporals.format(folder.modifyTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td>
                                                 <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
+                                                    <span class="dropdown-toggle" id="dropdownMenuButton9" data-toggle="dropdown">
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
@@ -366,103 +330,22 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr th:each="file:${fileList}">
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="icon-small bg-danger rounded mr-3">
                                                         <i class="ri-file-excel-line"></i>
                                                     </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="alexa5.pdf" style="cursor: pointer;">Weekly Report.pdf</div>
+                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="alexa5.pdf" style="cursor: pointer;" th:text="${file.fileName}"></div>
                                                 </div>
                                             </td>
-                                            <td>3.68 MB</td>
-                                            <td>pdf</td>
+                                            <td th:text="${file.fileSize}"></td>
+                                            <td th:text="${file.fileType}"></td>
                                             <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
+                                            <td th:text="${#temporals.format(file.modifyTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-primary rounded mr-3">
-                                                        <i class="ri-file-download-line"></i>
-                                                    </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal" data-title="alexa6.docx" style="cursor: pointer;">Milestone.docx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>docx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton11" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-info rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
-                                                    </div>
-                                                    <div data-title="Alexa8.xlsx" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.xlsx" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Training center.xlsx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>xlsx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton13" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-success rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
-                                                    </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal" data-title="alexa7.pptx" style="cursor: pointer;">Flavour.pptx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>pptx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton12" data-toggle="dropdown">
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
@@ -497,43 +380,12 @@
             </div>
         </div>
     </footer>
-    <!-- Backend Bundle JavaScript -->
-    <script src="assets/js/iconfont.js"></script>
-    <script src="assets/js/backend-bundle.min.js"></script>
-    
-    <!-- Chart Custom JavaScript -->
-    <script src="assets/js/customizer.js"></script>
-    
-    <!-- Chart Custom JavaScript -->
-    <script src="assets/js/chart-custom.js"></script>
-    
-    <!--PDF-->
-    <script src="assets/vendor/doc-viewer/include/pdf/pdf.js"></script>
-    <!--Docs-->
-    <script src="assets/vendor/doc-viewer/include/docx/jszip-utils.js"></script>
-    <script src="assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js"></script>
-    <!--PPTX-->
-    <script src="assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js"></script>
-    <script src="assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js"></script>
-    <script src="assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js"></script>
-    <script src="assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js"></script>
-    <script src="assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js"></script>
-    <!--All Spreadsheet -->
-    <script src="assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js"></script>
-    <script src="assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js"></script>
-    <!--Image viewer-->
-    <script src="assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js"></script>
-    <!--officeToHtml-->
-    <script src="assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js"></script>
-    <script src="assets/js/doc-viewer.js"></script>
-    <!-- app JavaScript -->
-    <script src="assets/js/app.js"></script>
-     <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Title</h4>
+                    <h4 class="modal-title">Title</h4>
                     <div>
                         <a class="btn" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -548,5 +400,62 @@
             </div>
         </div>
     </div>
+    <!-- Backend Bundle JavaScript -->
+    <script th:src="@{/assets/js/iconfont.js}"></script>
+    <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script th:src="@{/assets/js/customizer.js}"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script th:src="@{/assets/js/chart-custom.js}"></script>
+    
+    <!--PDF-->
+    <script th:src="@{/assets/vendor/doc-viewer/include/pdf/pdf.js}"></script>
+    <!--Docs-->
+    <script th:src="@{/assets/vendor/doc-viewer/include/docx/jszip-utils.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js}"></script>
+    <!--PPTX-->
+    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js}"></script>
+    <!--All Spreadsheet -->
+    <script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js}"></script>
+    <script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js}"></script>
+    <!--Image viewer-->
+    <script th:src="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js}"></script>
+    <!--officeToHtml-->
+    <script th:src="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js}"></script>
+    <script th:src="@{/assets/js/doc-viewer.js}"></script>
+    <!-- app JavaScript -->
+    <script th:src="@{/assets/js/app.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function(){
+            listFile(1);
+            list(1);
+        });
+        function listFile(folderId){
+            $.ajax({
+                url:"/file/list",
+                type:"GET",
+                data:{folderId:folderId},
+                success:function (data) {
+                    $("#gridTable").html(data);
+                }
+            });
+        }
+        function list(folderId){
+            $.ajax({
+                url:"/file/listToTable",
+                type:"GET",
+                data:{folderId:folderId},
+                success:function (data) {
+                    $("#gridList").html(data);
+                }
+            });
+        }
+    </script>
   </body>
 </html>

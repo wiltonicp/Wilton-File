@@ -1,24 +1,24 @@
 package cn.wilton.framework.file.common.entity;
 
-import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
+ * <p>文件层级
  * @author Ranger
  * @email wilton.icp@gmail.com
- * @since 2021/3/16
+ * @since 2021/3/27
  */
 @Data
-@TableName("f_file")
-public class FileEntity {
+@TableName("f_folder")
+public class FolderEntity {
 
     /**
      * 文件id
@@ -27,43 +27,25 @@ public class FileEntity {
     private Long id;
 
     /**
-     * 目录 id
+     * 文件夹名称
      */
-    @TableField("folder_id")
-    private Long folderId;
+    @TableField("folder_name")
+    private String folderName;
 
     /**
-     * 文件名称(上传的名称)
+     * 父id
      */
-    @TableField("file_name")
-    private String fileName;
+    @TableField("parent_id")
+    private Long parentId;
 
     /**
-     * 文件类型
+     * 类型
      */
-    @TableField("file_type")
-    private FileTypeEnum fileType;
+    @TableField("type")
+    private Long type;
 
     /**
-     * 文件大小
-     */
-    @TableField("file_size")
-    private BigDecimal fileSize;
-
-    /**
-     * 存储路径
-     */
-    @TableField("path")
-    private String path;
-
-    /**
-     * 是否公开
-     */
-    @TableField("open")
-    private Boolean open;
-
-    /**
-     * 上传者
+     * 创建者
      */
     @TableField("created_by")
     private Long createdBy;
@@ -72,7 +54,7 @@ public class FileEntity {
      * 最后更新时间
      */
     @TableField("modify_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
     private LocalDateTime modifyTime;
 
 }
