@@ -13,4 +13,11 @@ import java.util.List;
 public interface IFolderService extends IService<FolderEntity> {
 
     List<FolderEntity> list(Long parentId);
+
+    /**
+     * 根据 子id 查询所有父节点
+     * @param id
+     * @return
+     */
+    List<FolderEntity> findParentById(Long id);
 }

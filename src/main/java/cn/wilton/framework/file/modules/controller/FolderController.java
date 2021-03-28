@@ -1,13 +1,13 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,11 +24,29 @@ public class FolderController {
 
     private final IFolderService folderService;
 
-    @GetMapping("list/{parentId}")
-    public String listByParentId(Model model,@PathVariable Long parentId){
-        List<FolderEntity> list = folderService.list(parentId);
-        model.addAttribute("breadcrumb",list);
-        return "page-files::breadcrumb";
+    /**
+     * 根据 id 查询所有父节点
+     * @param model
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public String listByParentId(Model model,@PathVariable Long id){
+        List<FolderEntity> folderList = folderService.findParentById(id);
+        model.addAttribute("breadcrumb",folderList);
+        return "page-files::breadcrumbList";
+    }
+
+    /**
+     * 新建文件夹
+     * @param folderEntity
+     * @return
+     */
+    @PostMapping("/add")
+    public@ResponseBody WiltonResult<FolderEntity> add(@Validated FolderEntity folderEntity){
+        folderEntity.created();
+        boolean save = folderService.save(folderEntity);
+        return WiltonResult.data(folderEntity);
     }
 
 }

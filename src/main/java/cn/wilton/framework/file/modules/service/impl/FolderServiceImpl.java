@@ -24,4 +24,9 @@ public class FolderServiceImpl extends ServiceImpl<IFolderMapper, FolderEntity> 
         );
         return list;
     }
+
+    @Override
+    public List<FolderEntity> findParentById(Long id) {
+        return this.baseMapper.findParentById(id);
+    }
 }

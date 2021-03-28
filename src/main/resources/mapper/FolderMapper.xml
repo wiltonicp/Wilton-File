@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wilton.framework.file.modules.mapper.IFolderMapper">
+
+    <select id="findParentById" resultType="cn.wilton.framework.file.common.entity.FolderEntity">
+        SELECT T2.id, T2.folder_name
+        FROM (
+        SELECT
+        @r AS _id,
+        (SELECT @r := parent_id FROM f_folder WHERE id = _id) AS parent_id,
+        @l := @l + 1 AS lvl
+        FROM
+        (SELECT @r := #{id}, @l := 0) vars,
+        f_folder h
+        WHERE @r &lt;&gt; 0) T1
+        JOIN f_folder T2
+        ON T1._id = T2.id
+        ORDER BY T1.lvl DESC
+    </select>
+</mapper>

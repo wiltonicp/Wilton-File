@@ -39,7 +39,7 @@
             .my-icon {
                 width: 2em;
                 height: 1.5em;
-                vertical-align: -0.15em;
+                vertical-align: -0.4em;
                 fill: currentColor;
                 overflow: hidden;
             }
@@ -76,11 +76,11 @@
             <div class="new-create select-dropdown input-prepend input-append">
                 <div class="btn-group" style="cursor: pointer;">
                     <label data-toggle="dropdown">
-                    <div class="search-query selet-caption" style="cursor: pointer;"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
+                    <div class="search-query selet-caption" style="cursor: pointer;color: #fff;background: #613F9D"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
                     <span class="caret"><!--icon--></span>
                     </label>
                     <ul class="dropdown-menu">
-                        <li><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
+                        <li data-toggle="modal" data-target="#exampleModalCenter"><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
                         <li><div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div></li>
                     </ul>
                 </div>
@@ -104,7 +104,7 @@
                 </ul>
             </nav>
             <div class="sidebar-bottom">
-                <h4 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h4>
+                <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
                 <p>17.1 / 20 GB 已使用</p>
                 <div class="iq-progress-bar mb-3">
                     <span class="bg-primary iq-progress progress-1" data-percent="67">
@@ -213,7 +213,7 @@
                                                 <h5><a href="user-profile-edit.html" th:text="${userName}">Ranger</a></h5>
                                                 <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
                                                 </div>
-                                                <a href="auth-sign-in.html" class="btn btn-primary">退出</a>
+                                                <a th:href="@{/logout}" class="btn btn-primary">退出</a>
                                             </div>
                                         </div>
                                     </div>
@@ -241,25 +241,52 @@
                         </div>
                      </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="breadcrumb" th:fragment="breadcrumbList">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                           <li class="breadcrumb-item"><a href="/files">根目录</a></li>
-                           <li class="breadcrumb-item active">我的文件</li>
-                           <li class="breadcrumb-item" aria-current="page">
-                            <svg class="my-icon svg-icon" aria-hidden="true">
-                                <use xlink:href="#icon-wenjianjia"></use>
-                            </svg>
-                            文件夹</li>
+                           <li class="breadcrumb-item " th:each="bc,loopStatus:${breadcrumb}" th:attr="data-id=${bc.id}">
+                               <a th:if="${loopStatus.count} eq ${loopStatus.size}" th:text="${bc.folderName}"></a>
+                               <a th:if="${loopStatus.count} ne ${loopStatus.size}" th:text="${bc.folderName}" th:onclick="initFolder([[${bc.id}]])" href="#" ></a>
+                           </li>
+                           <li class="breadcrumb-item" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">
+                               <a href="#">
+                                   <svg class="my-icon svg-icon" aria-hidden="true">
+                                       <use xlink:href="#icon-wenjianjia"></use>
+                                   </svg>
+                                   <span>文件夹</span>
+                               </a>
+                           </li>
                         </ol>
                      </nav>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="border-bottom:none">
+                                    <h5 class="modal-title" id="exampleModalLabel">新建文件夹</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="">
+                                    <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" id="folderName">
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top:none">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 25%;">取消</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addFolder()" style="width: 25%;">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="icon icon-grid i-grid">
                 <div class="row" id="gridTable" style="width: -webkit-fill-available;" th:fragment="gridTable">
                     <div class="col-lg-3 col-md-6 col-sm-6" th:each="folder:${folderList}">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb">
+                        <div class="card card-block card-stretch card-height" th:onclick="initFolder([[${folder.id}]])">
+                            <div class="card-body image-thumb" style="cursor:pointer">
                                 <div class="mb-4 text-center p-3 rounded iq-thumb">
                                     <div class="iq-image-overlay"></div>
                                     <svg class="my-icon svg-icon" aria-hidden="true" style="width: 100px;height: 100px;">
@@ -272,7 +299,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6" th:each="file:${fileList}">
                         <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb">
+                            <div class="card-body image-thumb" style="cursor:pointer">
                                 <div class="mb-4 text-center p-3 rounded iq-thumb">
                                     <div class="iq-image-overlay"></div>
                                     <a href="#" data-title="Spike.pdf" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal"><img src="assets/images/layouts/page-7/pdf.png" class="img-fluid" alt="image1"></a>
@@ -303,7 +330,7 @@
                                     <tbody>
                                         <tr th:each="folder:${folderList}">
                                             <td>
-                                                <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center" th:onclick="initFolder([[${folder.id}]])">
                                                     <div class="icon-small rounded mr-3">
                                                         <svg class="icon svg-icon" aria-hidden="true" style="width: 40px; height: 40px;">
                                                             <use xlink:href="#icon-wenjianjia2"></use>
@@ -433,10 +460,19 @@
     <script th:src="@{/assets/js/app.js}"></script>
     <script type="text/javascript" th:inline="javascript">
         $(function(){
-            listFile(1);
-            list(1);
+            initFolder(1);
         });
+
+        /**
+         * 列表
+         * @param folderId
+         */
         function listFile(folderId){
+            list1(folderId);
+            list2(folderId);
+        }
+
+        function list1(folderId){
             $.ajax({
                 url:"/file/list",
                 type:"GET",
@@ -446,13 +482,54 @@
                 }
             });
         }
-        function list(folderId){
+        function list2(folderId){
             $.ajax({
                 url:"/file/listToTable",
                 type:"GET",
                 data:{folderId:folderId},
                 success:function (data) {
                     $("#gridList").html(data);
+                }
+            });
+        }
+
+        /**
+         * 导航信息
+         * @param folderId
+         */
+        function initBreadcrumb(folderId){
+            $.ajax({
+                url:"/folder/" + folderId,
+                type:"GET",
+                success:function (data) {
+                    $("#breadcrumb").html(data);
+                }
+            });
+        }
+
+        /**
+         * 进入下一层文件夹
+         * @param id  文件夹id
+         */
+        function initFolder(folderId){
+            initBreadcrumb(folderId);
+            listFile(folderId);
+        }
+
+        function addFolder(){
+            let jQuery = $(".breadcrumb").children().last().prev();
+            let parentId = $(jQuery).data("id");
+            let folderName = $('#folderName').val();
+            if(folderName == '' || folderName == null){
+                alert("文件夹不能为空!");
+                return
+            }
+            $.ajax({
+                url:"/folder/add",
+                type:"POST",
+                data:{folderName:folderName,parentId:parentId},
+                success:function (result) {
+                    initFolder(result.data.id)
                 }
             });
         }
