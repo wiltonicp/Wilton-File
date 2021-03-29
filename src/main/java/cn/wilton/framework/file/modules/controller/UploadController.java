@@ -30,14 +30,16 @@ public class UploadController {
     private final IFileService fileService;
     private final WiltonProperties properties;
 
-    @PostMapping("uploadMultiFile")
+    @PostMapping("multiFile")
     public WiltonResult<Void> upload(
-                               @RequestParam("file") MultipartFile file){
+                               @RequestParam("file") MultipartFile file,
+                               Long folderId){
         if(file.isEmpty() || file.getSize() == 0){
             new WiltonException("请选文件需要上传的文件");
         }
         String fileName = file.getOriginalFilename();
         FileEntity fileInfo = FileUtil.upload(file, properties.path);
+        fileInfo.setFolderId(folderId);
         if(fileInfo == null){
             new WiltonException("文件上传失败!");
         }

@@ -9,6 +9,7 @@
       <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
       <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
       <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
+      <link rel="stylesheet" th:href="@{/assets/css/upload.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
@@ -81,7 +82,10 @@
                     </label>
                     <ul class="dropdown-menu">
                         <li data-toggle="modal" data-target="#exampleModalCenter"><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
-                        <li><div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div></li>
+                        <li data-toggle="modal" data-target=".bd-example-modal-lg">
+                            <div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div>
+                        </li>
+                        <input type="file" id="uFile" name="file" onchange="upload()" style="position:absolute;clip:rect(0 0 0 0);">
                     </ul>
                 </div>
             </div>
@@ -231,7 +235,7 @@
             <div class="row">
                 <div class="col-lg-12">
                      <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
-                        <h5>全部文件</h5>
+                        <h6>全部文件</h6>
                         <div class="d-flex align-items-center">
                             <div class="list-grid-toggle mr-4">
                                 <span class="icon icon-grid i-grid"><i class="ri-layout-grid-line font-size-20"></i></span>
@@ -270,7 +274,7 @@
                                 </div>
                                 <div class="">
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" id="folderName">
+                                        <input type="text" autocomplete="off" class="form-control" id="folderName">
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top:none">
@@ -533,6 +537,194 @@
                 }
             });
         }
+
+        function selectFile(){
+            $('#uFile').click();
+        }
+
+        //<div class="form-group">
+        // <label class="col-md-3 col-sm-3  col-xs-3 control-label">上传进度:
+        // </label>
+        // <div class="col-md-7 col-sm-7  col-xs-7">
+        //     <!--进度条部分(默认隐藏)-->
+        //     <div class="progress-body">
+        //         <span style="display: inline-block; text-align: right"></span>
+        //         <progress></progress>
+        //         <percentage>0%</percentage>
+        //     </div>
+        // </div>
+        // </div>
+
+
+        /**
+         * 文件上传
+         */
+        function upload() {
+            // 验证文件内容
+            var file = $("#uFile")[0].files[0];
+            var fileId = showFileTab(file);
+            // 上传
+            doIt(fileId)
+        }
+
+        function showFileTab(file){
+            //隐藏选择框
+            $('#xFile').css("display","none");
+            $('#hasfile').css("display","");
+            $('#hasfileBtn').css("display","")
+            var fileName = file.name;
+            var fileSize = getfilesize(file.size);
+            var uuid = createUUID();
+            var html = '<li id="'+uuid+'" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"\n' +
+                '                                                                                                                     rel="ico"></i>\n' +
+                '                                <span class="file-name" title="'+ fileName +'" style="width: 315px;">'+ fileName +' <i\n' +
+                '                                        rel="size_str">- '+fileSize+'</i></span>\n' +
+                '                                <span class="file-status" rel="status"\n' +
+                '                                      style="width: 265px;font-size: 14px;float: none;">\n' +
+                '                                <div class="progress" style="width: 220px;">\n' +
+                '                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>\n' +
+                '                                 </div>\n' +
+                '                            </span>\n' +
+                '                            </li>';
+            $('#fileList').append(html);
+            return uuid;
+        }
+
+        function doIt(fileId) {
+            let jQuery = $(".breadcrumb").children().last().prev();
+            let folderId = $(jQuery).data("id");
+            var formData = new FormData();
+            formData.append("file", $("#uFile")[0].files[0]);
+            formData.append("folderId", folderId);
+            $.ajax({
+                contentType : "multipart/form-data",
+                url : "/upload/multiFile",
+                type : "POST",
+                data : formData,
+                processData : false, // 告诉jQuery不要去处理发送的数据
+                contentType : false, // 告诉jQuery不要去设置Content-Type请求头
+                success : function(data) {
+                    $("#appUrl").val(data); // 保存文件路径
+                },
+                xhr : function() {
+                    var xhr = $.ajaxSettings.xhr();
+                    if (xhr.upload) {
+                        //处理进度条的事件
+                        xhr.upload.addEventListener("progress", progressHandle,
+                            false);
+                        //加载完成的事件
+                        xhr.addEventListener("load", completeHandle, false);
+                        //加载出错的事件
+                        xhr.addEventListener("error", failedHandle, false);
+                        return xhr;
+                    }
+                }
+            });
+        }
+
+        /**
+         * 进度条更新
+         * @param e
+         */
+        function progressHandle(e) {
+            $('.progress').attr({
+                value : e.loaded,
+                max : e.total
+            });
+            var percent = e.loaded / e.total * 100;
+            $('.progress-bar').css("width",percent.toFixed(2) + "%");
+            $('.progress-bar').html(percent.toFixed(2) + "%");
+        };
+        //上传完成处理函数
+        function completeHandle(e) {
+            console.log("上传完成");
+        };
+        //上传出错处理函数
+        function failedHandle(e) {
+            console.log("上传失败");
+        };
+
+        String.prototype.endWith = function(endStr) {
+            var d = this.length - endStr.length;
+            return (d >= 0 && this.lastIndexOf(endStr) == d)
+        }
+
+        function cleanFileList(){
+            $('#fileList').html("");
+            $('#xFile').css("display","");
+            $('#hasfile').css("display","none");
+            $('#hasfileBtn').css("display","none")
+        }
+
+        /**
+         * 计算文件大小
+         * @param size
+         * @returns {string}
+         */
+        function getfilesize(size) {
+            if (!size)
+                return "";
+            var num = 1024.00; //byte
+            if (size < num)
+                return size + "B";
+            if (size < Math.pow(num, 2))
+                return (size / num).toFixed(2) + "K"; //kb
+            if (size < Math.pow(num, 3))
+                return (size / Math.pow(num, 2)).toFixed(2) + "M"; //M
+            if (size < Math.pow(num, 4))
+                return (size / Math.pow(num, 3)).toFixed(2) + "G"; //G
+            return (size / Math.pow(num, 4)).toFixed(2) + "T"; //T
+        }
+
+        random4 = function () {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        createUUID = function () {
+            return (random4() + random4() + "-" + random4() + "-" + random4() + "-" + random4() + random4());
+        };
+
     </script>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">文件上传</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="drop-box" th:id="xFile" onclick="selectFile()" style=" cursor:pointer;">
+                        <div class="drop-text" rel="drop_text">把文件拖到这里，即可上传</div>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn btn-primary">添加文件</button>
+                        </div>
+                    </div>
+                    <div class="upload-box-list" id="hasfile" style="height: 331px;display: none">
+                        <ul th:id="fileList">
+<!--                            <li file_id="p1f1v17h2h1m8losd1gd11han1lng4" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"-->
+<!--                                                                                                                     rel="ico"></i>-->
+<!--                                <span class="file-name" title="WechatIMG220.jpeg" style="width: 350px;">WechatIMG220.jpeg <i-->
+<!--                                        rel="size_str">- 57.5KB</i></span>-->
+<!--                                <span class="file-status" rel="status"-->
+<!--                                      style="width: 265px;font-size: 14px;">上传成功</span>-->
+<!--                                <em rel="op"><a href="javascript:;" class="ico-opt ico-folder"-->
+<!--                                                style="margin-left:5px;">查看</a><a href="javascript:;" class="ico-opt ico-remove"-->
+<!--                                                                                  style="margin-left:5px;">删除</a></em><b rel="progress" style="width: 100%; display: none;"></b>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                    <div class="upload-status" th:id="hasfileBtn" style="display: none">
+                        <button type="button" onclick="selectFile()" class="btn btn-primary" style="float: left;">添加文件</button>
+                        <a href="javascript:;" onclick="cleanFileList()" style="float: right;">清空已完成任务</a>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                   <button type="button" class="btn btn-primary">确认</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
   </body>
 </html>
