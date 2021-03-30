@@ -1,85 +1,84 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Wilton-Cloud | 云文件分享系统</title>
-      
-      <!-- Favicon -->
-      <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
-      <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
-      <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
-      <link rel="stylesheet" th:href="@{/assets/css/upload.css}">
-      <link rel="stylesheet" th:href="@{/assets/css/webuploader.css}">
-      <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
-      <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
-      <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
-      
-      <!-- Viewer Plugin -->
-        <!--PDF-->
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/pdf/pdf.viewer.css}">
-        <!--Docs-->
-        <!--PPTX-->
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css}">
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css}">
-        <!--All Spreadsheet -->
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css}">
-        <!--Image viewer-->
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
-        <!--officeToHtml-->
-        <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
-        <style>
-            .header-logo h5 {
-                color: #613F9D;
-                line-height: 50px;
-                padding-top: 2px;
-                letter-spacing: 1.5px;
-                margin-left: 10px;
-                flex: 1;
-                transition: all .6s ease-in-out;
-            }
-            .my-icon {
-                width: 2em;
-                height: 1.5em;
-                vertical-align: -0.4em;
-                fill: currentColor;
-                overflow: hidden;
-            }
-            .scroll-content {
-                height: 80%;
-            }
-            .image-thumb {
-                text-align: center;
-            }
-        </style>
-    </head>
-  <body class="  ">
-    <!-- loader Start -->
-    <div id="loading">
-          <div id="loading-center">
-          </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Wilton-Cloud | 云文件分享系统</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/upload.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
+
+    <!-- Viewer Plugin -->
+    <!--PDF-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/pdf/pdf.viewer.css}">
+    <!--Docs-->
+    <!--PPTX-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css}">
+    <!--All Spreadsheet -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css}">
+    <!--Image viewer-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
+    <!--officeToHtml-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
+    <style>
+        .header-logo h5 {
+            color: #613F9D;
+            line-height: 50px;
+            padding-top: 2px;
+            letter-spacing: 1.5px;
+            margin-left: 10px;
+            flex: 1;
+            transition: all .6s ease-in-out;
+        }
+        .my-icon {
+            width: 2em;
+            height: 1.5em;
+            vertical-align: -0.4em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        .scroll-content {
+            height: 80%;
+        }
+        .image-thumb {
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="  ">
+<!-- loader Start -->
+<div id="loading">
+    <div id="loading-center">
     </div>
-    <!-- loader END -->
-    <!-- Wrapper Start -->
-    <div class="wrapper">
-      
-      <div class="iq-sidebar  sidebar-default ">
-          <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
+</div>
+<!-- loader END -->
+<!-- Wrapper Start -->
+<div class="wrapper">
+
+    <div class="iq-sidebar  sidebar-default ">
+        <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
             <a href="#" class="header-logo">
                 <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
                 <img src="assets/images/logo.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
                 <h5>WiltonCloud</h5>
             </a>
-              <div class="iq-menu-bt-sidebar">
-                  <i class="las la-bars wrapper-menu"></i>
-              </div>
-          </div>
-          <div class="data-scrollbar" data-scroll="1">
+            <div class="iq-menu-bt-sidebar">
+                <i class="las la-bars wrapper-menu"></i>
+            </div>
+        </div>
+        <div class="data-scrollbar" data-scroll="1">
             <div class="new-create select-dropdown input-prepend input-append">
                 <div class="btn-group" style="cursor: pointer;">
                     <label data-toggle="dropdown">
-                    <div class="search-query selet-caption" style="cursor: pointer;color: #fff;background: #613F9D"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
-                    <span class="caret"><!--icon--></span>
+                        <div class="search-query selet-caption" style="cursor: pointer;color: #fff;background: #613F9D"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
+                        <span class="caret"><!--icon--></span>
                     </label>
                     <ul class="dropdown-menu">
                         <li data-toggle="modal" data-target="#exampleModalCenter"><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
@@ -92,20 +91,20 @@
             </div>
             <nav class="iq-sidebar-menu" style="height: 75%;">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
-                     <li class="active">
-                            <a th:href="@{/files}" class="">
-                                <i class="las la-hdd"></i><span>我的云盘</span>
-                            </a>
+                    <li class="active">
+                        <a th:href="@{/files}" class="">
+                            <i class="las la-hdd"></i><span>我的云盘</span>
+                        </a>
                         <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         </ul>
-                     </li>
-                     <li class=" ">
-                            <a th:href="@{/files}" class="">
-                                <i class="las la-stopwatch iq-arrow-left"></i><span>我的分享</span>
-                            </a>
+                    </li>
+                    <li class=" ">
+                        <a th:href="@{/files}" class="">
+                            <i class="las la-stopwatch iq-arrow-left"></i><span>我的分享</span>
+                        </a>
                         <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         </ul>
-                     </li>
+                    </li>
                 </ul>
             </nav>
             <div class="sidebar-bottom">
@@ -116,107 +115,107 @@
                     </span>
                 </div>
             </div>
-          </div>
-          </div>       <div class="iq-top-navbar">
-          <div class="iq-navbar-custom">
-              <nav class="navbar navbar-expand-lg navbar-light p-0">
-              <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
-                  <i class="ri-menu-line wrapper-menu"></i>
-                  <a href="index.html" class="header-logo">
-                      <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
-                      <img src="assets/images/logo.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
-                  </a>
-              </div>
-                  <div class="iq-search-bar device-search">
-                      
-                      <form>
-                          <div class="input-prepend input-append">
-                              <div class="btn-group">
-                                  <label class="dropdown-toggle searchbox" data-toggle="dropdown">
-                                  <input class="dropdown-toggle search-query text search-input" type="text"  placeholder="请输入你要搜索的内容..."><span class="search-replace"></span>
-                                  <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                  <span class="caret"><!--icon--></span>
-                                  </label>
-                                  <ul class="dropdown-menu">
-                                      <li><a href="#"><div class="item"><i class="far fa-file-alt bg-primary"></i>文档</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-excel bg-success"></i>音乐</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-image bg-warning"></i>图片</div></a></li>
-                                      <li><a href="#"><div class="item"><i class="far fa-file-video bg-info"></i>视频</div></a></li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-      
-                  <div class="d-flex align-items-center">
-                      <div class="change-mode">
-                          <div class="custom-control custom-switch custom-switch-icon custom-control-inline">
-                              <div class="custom-switch-inner">
-                                  <p class="mb-0"> </p>
-                                  <input type="checkbox" class="custom-control-input" id="dark-mode" data-active="true">
-                                  <label class="custom-control-label" for="dark-mode" data-mode="toggle">
-                                      <span class="switch-icon-left"><i class="a-left"></i></span>
-                                      <span class="switch-icon-right"><i class="a-right"></i></span>
-                                  </label>
-                              </div>
-                          </div>
-                      </div>
-                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
-                      <i class="ri-menu-3-line"></i>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                          <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                          <li class="nav-item nav-icon search-content">
-                              <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i class="ri-search-line"></i>
-                              </a>
-                              <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
-                                  <form action="#" class="searchbox p-2">
-                                      <div class="form-group mb-0 position-relative">
-                                      <input type="text" class="text search-input font-size-12" placeholder="type here to search...">
-                                      <a href="#" class="search-link"><i class="las la-search"></i></a> 
-                                      </div>
-                                  </form>
-                              </div>
-                          </li> 
-                          <li class="nav-item nav-icon dropdown"> 
-                              <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                              <i class="ri-settings-3-line"></i>
-                              </a>
-                              <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton02">
-                                  <div class="card shadow-none m-0">
-                                      <div class="card-body p-0 ">
-                                          <div class="p-3">
-                                              <a href="#" class="iq-sub-card pt-0"><i class="ri-settings-3-line"></i>  设置</a>
-                                          </div>                                
-                                      </div>
-                                  </div>
-                              </div>
-                          </li>
-                          <li class="nav-item nav-icon dropdown caption-content">
+        </div>
+    </div>       <div class="iq-top-navbar">
+    <div class="iq-navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                <i class="ri-menu-line wrapper-menu"></i>
+                <a href="index.html" class="header-logo">
+                    <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
+                    <img src="assets/images/logo.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
+                </a>
+            </div>
+            <div class="iq-search-bar device-search">
+
+                <form>
+                    <div class="input-prepend input-append">
+                        <div class="btn-group">
+                            <label class="dropdown-toggle searchbox" data-toggle="dropdown">
+                                <input class="dropdown-toggle search-query text search-input" type="text"  placeholder="请输入你要搜索的内容..."><span class="search-replace"></span>
+                                <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                <span class="caret"><!--icon--></span>
+                            </label>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><div class="item"><i class="far fa-file-alt bg-primary"></i>文档</div></a></li>
+                                <li><a href="#"><div class="item"><i class="far fa-file-excel bg-success"></i>音乐</div></a></li>
+                                <li><a href="#"><div class="item"><i class="far fa-file-image bg-warning"></i>图片</div></a></li>
+                                <li><a href="#"><div class="item"><i class="far fa-file-video bg-info"></i>视频</div></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="change-mode">
+                    <div class="custom-control custom-switch custom-switch-icon custom-control-inline">
+                        <div class="custom-switch-inner">
+                            <p class="mb-0"> </p>
+                            <input type="checkbox" class="custom-control-input" id="dark-mode" data-active="true">
+                            <label class="custom-control-label" for="dark-mode" data-mode="toggle">
+                                <span class="switch-icon-left"><i class="a-left"></i></span>
+                                <span class="switch-icon-right"><i class="a-right"></i></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
+                    <i class="ri-menu-3-line"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                        <li class="nav-item nav-icon search-content">
+                            <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ri-search-line"></i>
+                            </a>
+                            <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
+                                <form action="#" class="searchbox p-2">
+                                    <div class="form-group mb-0 position-relative">
+                                        <input type="text" class="text search-input font-size-12" placeholder="type here to search...">
+                                        <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-icon dropdown">
+                            <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                <i class="ri-settings-3-line"></i>
+                            </a>
+                            <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton02">
+                                <div class="card shadow-none m-0">
+                                    <div class="card-body p-0 ">
+                                        <div class="p-3">
+                                            <a href="#" class="iq-sub-card pt-0"><i class="ri-settings-3-line"></i>  设置</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-icon dropdown caption-content">
                             <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <div class="caption bg-primary line-height">R</div>
                             </a>
                             <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton03">
                                 <div class="card mb-0">
                                     <div class="card-header d-flex justify-content-between align-items-center mb-0">
-                                    <div class="header-title">
-                                        <h4 class="card-title mb-0"> 个人信息</h4>
-                                    </div>
-                                    <div class="close-data text-right badge badge-primary cursor-pointer "><i class="ri-close-fill"></i></div>
+                                        <div class="header-title">
+                                            <h4 class="card-title mb-0"> 个人信息</h4>
+                                        </div>
+                                        <div class="close-data text-right badge badge-primary cursor-pointer "><i class="ri-close-fill"></i></div>
                                     </div>
                                     <div class="card-body">
                                         <div class="profile-header">
                                             <div class="cover-container text-center">
                                                 <div class="rounded-circle profile-icon bg-primary mx-auto d-block">
-                                                    P                                                    
+                                                    P
                                                     <a href="">
-                                                        
+
                                                     </a>
                                                 </div>
                                                 <div class="profile-detail mt-3">
-                                                <h5><a href="user-profile-edit.html" th:text="${userName}">Ranger</a></h5>
-                                                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
+                                                    <h5><a href="user-profile-edit.html" th:text="${userName}">Ranger</a></h5>
+                                                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
                                                 </div>
                                                 <a th:href="@{/logout}" class="btn btn-primary">退出</a>
                                             </div>
@@ -225,17 +224,17 @@
                                 </div>
                             </div>
                         </li>
-                          </ul>                     
-                      </div> 
-                  </div>
-              </nav>
-          </div>
-      </div>
-      <div class="content-page">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+    <div class="content-page">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                     <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
+                    <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
                         <h6>全部文件</h6>
                         <div class="d-flex align-items-center">
                             <div class="list-grid-toggle mr-4">
@@ -244,25 +243,25 @@
                                 <span class="label label-list">List</span>
                             </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
                 <div class="col-lg-12" id="breadcrumb" th:fragment="breadcrumbList">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                           <li class="breadcrumb-item " th:each="bc,loopStatus:${breadcrumb}" th:attr="data-id=${bc.id}">
-                               <a th:if="${loopStatus.count} eq ${loopStatus.size}" th:text="${bc.folderName}"></a>
-                               <a th:if="${loopStatus.count} ne ${loopStatus.size}" th:text="${bc.folderName}" th:onclick="initFolder([[${bc.id}]])" href="#" ></a>
-                           </li>
-                           <li class="breadcrumb-item" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">
-                               <a href="#">
-                                   <svg class="my-icon svg-icon" aria-hidden="true">
-                                       <use xlink:href="#icon-wenjianjia"></use>
-                                   </svg>
-                                   <span>文件夹</span>
-                               </a>
-                           </li>
+                            <li class="breadcrumb-item " th:each="bc,loopStatus:${breadcrumb}" th:attr="data-id=${bc.id}">
+                                <a th:if="${loopStatus.count} eq ${loopStatus.size}" th:text="${bc.folderName}"></a>
+                                <a th:if="${loopStatus.count} ne ${loopStatus.size}" th:text="${bc.folderName}" th:onclick="initFolder([[${bc.id}]])" href="#" ></a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">
+                                <a href="#">
+                                    <svg class="my-icon svg-icon" aria-hidden="true">
+                                        <use xlink:href="#icon-wenjianjia"></use>
+                                    </svg>
+                                    <span>文件夹</span>
+                                </a>
+                            </li>
                         </ol>
-                     </nav>
+                    </nav>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -322,7 +321,7 @@
                             <div class="card-body">
                                 <div class="table-responsive" id="gridList" th:fragment="gridList">
                                     <table class="table mb-0 table-borderless tbl-server-info">
-                                    <thead>
+                                        <thead>
                                         <tr>
                                             <th scope="col" th:text="文件名"></th>
                                             <th scope="col" th:text="文件大小"></th>
@@ -331,15 +330,15 @@
                                             <th scope="col" th:text="修改时间"></th>
                                             <th scope="col" th:text="操作"></th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                        </thead>
+                                        <tbody>
                                         <tr th:each="folder:${folderList}">
                                             <td>
                                                 <div class="d-flex align-items-center" th:onclick="initFolder([[${folder.id}]])">
                                                     <div class="icon-small rounded mr-3">
                                                         <svg class="icon svg-icon" aria-hidden="true" style="width: 40px; height: 40px;">
                                                             <use xlink:href="#icon-wenjianjia2"></use>
-                                                          </svg>
+                                                        </svg>
                                                     </div>
                                                     <div data-load-file="file" style="cursor: pointer;" th:text="${folder.folderName}"></div>
                                                 </div>
@@ -389,7 +388,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -398,333 +397,327 @@
                 </div>
             </div>
         </div>
-      </div>
     </div>
-    <!-- Wrapper End-->
-    <footer class="iq-footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                </div>
-                <div class="col-lg-6 text-right">
-                    Copyright © 2020 <a href="http://file.wiltonic.cn">Wilton-Cloud-File</a> All Rights Reserved.
-                </div>
+</div>
+<!-- Wrapper End-->
+<footer class="iq-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
             </div>
-        </div>
-    </footer>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Title</h4>
-                    <div>
-                        <a class="btn" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div id="resolte-contaniner" style="height: 500px;" class="overflow-auto">
-                        File not found
-                    </div>
-                </div>
+            <div class="col-lg-6 text-right">
+                Copyright © 2020 <a href="http://file.wiltonic.cn">Wilton-Cloud-File</a> All Rights Reserved.
             </div>
         </div>
     </div>
-    <!-- Backend Bundle JavaScript -->
-    <script th:src="@{/assets/js/iconfont.js}"></script>
-    <script th:src="@{/assets/js/webuploader.js}"></script>
-    <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
-    
-    <!-- Chart Custom JavaScript -->
-    <script th:src="@{/assets/js/customizer.js}"></script>
-    
-    <!-- Chart Custom JavaScript -->
-    <script th:src="@{/assets/js/chart-custom.js}"></script>
-    
-    <!--PDF-->
-    <script th:src="@{/assets/vendor/doc-viewer/include/pdf/pdf.js}"></script>
-    <!--Docs-->
-    <script th:src="@{/assets/vendor/doc-viewer/include/docx/jszip-utils.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js}"></script>
-    <!--PPTX-->
-    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js}"></script>
-    <!--All Spreadsheet -->
-    <script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js}"></script>
-    <script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js}"></script>
-    <!--Image viewer-->
-    <script th:src="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js}"></script>
-    <!--officeToHtml-->
-    <script th:src="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js}"></script>
-    <script th:src="@{/assets/js/doc-viewer.js}"></script>
-    <!-- app JavaScript -->
-    <script th:src="@{/assets/js/app.js}"></script>
-    <script type="text/javascript" th:inline="javascript">
-        $(function(){
-            initFolder(1);
-        });
-
-        /**
-         * 列表
-         * @param folderId
-         */
-        function listFile(folderId){
-            list1(folderId);
-            list2(folderId);
-        }
-
-        function list1(folderId){
-            $.ajax({
-                url:"/file/list",
-                type:"GET",
-                data:{folderId:folderId},
-                success:function (data) {
-                    $("#gridTable").html(data);
-                }
-            });
-        }
-        function list2(folderId){
-            $.ajax({
-                url:"/file/listToTable",
-                type:"GET",
-                data:{folderId:folderId},
-                success:function (data) {
-                    $("#gridList").html(data);
-                }
-            });
-        }
-
-        /**
-         * 导航信息
-         * @param folderId
-         */
-        function initBreadcrumb(folderId){
-            $.ajax({
-                url:"/folder/" + folderId,
-                type:"GET",
-                success:function (data) {
-                    $("#breadcrumb").html(data);
-                }
-            });
-        }
-
-        /**
-         * 进入下一层文件夹
-         * @param id  文件夹id
-         */
-        function initFolder(folderId){
-            initBreadcrumb(folderId);
-            listFile(folderId);
-        }
-
-        function addFolder(){
-            let jQuery = $(".breadcrumb").children().last().prev();
-            let parentId = $(jQuery).data("id");
-            let folderName = $('#folderName').val();
-            if(folderName == '' || folderName == null){
-                alert("文件夹不能为空!");
-                return
-            }
-            $.ajax({
-                url:"/folder/add",
-                type:"POST",
-                data:{folderName:folderName,parentId:parentId},
-                success:function (result) {
-                    initFolder(result.data.id)
-                }
-            });
-        }
-
-        function selectFile(){
-            $('#uFile').click();
-        }
-
-
-        /**
-         * 文件上传
-         */
-        function upload() {
-            //加载到上传队列
-            for(var i=0; i<$('#uFile')[0].files.length;i++){
-                var fileId = showFileTab($('#uFile')[0].files[i]);
-            }
-            // 上传
-            doIt("")
-        }
-
-        function showFileTab(file){
-            //隐藏选择框
-            $('#xFile').css("display","none");
-            $('#hasfile').css("display","");
-            $('#hasfileBtn').css("display","")
-            var fileName = file.name;
-            var fileSize = getfilesize(file.size);
-            var uuid = createUUID();
-            var html = '<li id="'+uuid+'" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"\n' +
-                '                                                                                                                     rel="ico"></i>\n' +
-                '                                <span class="file-name" title="'+ fileName +'" style="width: 315px;">'+ fileName +' <i\n' +
-                '                                        rel="size_str">- '+fileSize+'</i></span>\n' +
-                '                                <span class="file-status" rel="status"\n' +
-                '                                      style="width: 265px;font-size: 14px;float: none;">\n' +
-                '                                <div class="progress" style="width: 220px;">\n' +
-                '                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>\n' +
-                '                                 </div>\n' +
-                '                            </span>\n' +
-                '                            </li>';
-            $('#fileList').append(html);
-            return uuid;
-        }
-
-        function doIt(fileId) {
-            let jQuery = $(".breadcrumb").children().last().prev();
-            let folderId = $(jQuery).data("id");
-            var formData = new FormData();
-            formData.append("folderId", folderId);
-            for(var i=0; i< $('#uFile')[0].files.length;i++){
-                formData.append('files', $('#uFile')[0].files[i]);
-            }
-            console.log(formData)
-            $.ajax({
-                contentType : "multipart/form-data",
-                url : "/upload/batch/file",
-                type : "POST",
-                data : formData,
-                processData : false, // 告诉jQuery不要去处理发送的数据
-                contentType : false, // 告诉jQuery不要去设置Content-Type请求头
-                success : function(data) {
-                    listFile(folderId);
-                    //$("#appUrl").val(data); // 保存文件路径
-                },
-                xhr : function() {
-                    var xhr = $.ajaxSettings.xhr();
-                    if (xhr.upload) {
-                        //处理进度条的事件
-                        xhr.upload.addEventListener("progress", progressHandle,
-                            false);
-                        //加载完成的事件
-                        xhr.addEventListener("load", completeHandle, false);
-                        //加载出错的事件
-                        xhr.addEventListener("error", failedHandle, false);
-                        return xhr;
-                    }
-                }
-            });
-        }
-
-        /**
-         * 进度条更新
-         * @param e
-         */
-        function progressHandle(e,file) {
-            console.log("1111111111")
-            console.log(file)
-            $('.progress').attr({
-                value : e.loaded,
-                max : e.total
-            });
-            var percent = e.loaded / e.total * 100;
-            $('.progress-bar').css("width",percent.toFixed(2) + "%");
-            $('.progress-bar').html(percent.toFixed(2) + "%");
-        };
-        //上传完成处理函数
-        function completeHandle(e,file) {
-            console.log("22222222222")
-            console.log(file)
-            console.log("上传完成");
-        };
-        //上传出错处理函数
-        function failedHandle(e,file) {
-            console.log("3333333333")
-            console.log(file)
-            console.log("上传失败");
-        };
-
-        String.prototype.endWith = function(endStr) {
-            var d = this.length - endStr.length;
-            return (d >= 0 && this.lastIndexOf(endStr) == d)
-        }
-
-        function cleanFileList(){
-            $('#fileList').html("");
-            $('#xFile').css("display","");
-            $('#hasfile').css("display","none");
-            $('#hasfileBtn').css("display","none")
-        }
-
-        /**
-         * 计算文件大小
-         * @param size
-         * @returns {string}
-         */
-        function getfilesize(size) {
-            if (!size)
-                return "";
-            var num = 1024.00; //byte
-            if (size < num)
-                return size + "B";
-            if (size < Math.pow(num, 2))
-                return (size / num).toFixed(2) + "K"; //kb
-            if (size < Math.pow(num, 3))
-                return (size / Math.pow(num, 2)).toFixed(2) + "M"; //M
-            if (size < Math.pow(num, 4))
-                return (size / Math.pow(num, 3)).toFixed(2) + "G"; //G
-            return (size / Math.pow(num, 4)).toFixed(2) + "T"; //T
-        }
-
-        random4 = function () {
-            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-        };
-        createUUID = function () {
-            return (random4() + random4() + "-" + random4() + "-" + random4() + "-" + random4() + random4());
-        };
-
-    </script>
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">文件上传</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+</footer>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Title</h4>
+                <div>
+                    <a class="btn" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </a>
                 </div>
-                <div class="modal-body">
-                    <div class="drop-box" th:id="xFile" onclick="selectFile()" style=" cursor:pointer;">
-                        <div class="drop-text" rel="drop_text">把文件拖到这里，即可上传</div>
-                        <div class="btn-wrap">
-                            <button type="button" class="btn btn-primary">添加文件</button>
-                        </div>
-                    </div>
-                    <div class="upload-box-list" id="hasfile" style="height: 331px;display: none">
-                        <ul th:id="fileList">
-<!--                            <li file_id="p1f1v17h2h1m8losd1gd11han1lng4" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"-->
-<!--                                                                                                                     rel="ico"></i>-->
-<!--                                <span class="file-name" title="WechatIMG220.jpeg" style="width: 350px;">WechatIMG220.jpeg <i-->
-<!--                                        rel="size_str">- 57.5KB</i></span>-->
-<!--                                <span class="file-status" rel="status"-->
-<!--                                      style="width: 265px;font-size: 14px;">上传成功</span>-->
-<!--                                <em rel="op"><a href="javascript:;" class="ico-opt ico-folder"-->
-<!--                                                style="margin-left:5px;">查看</a><a href="javascript:;" class="ico-opt ico-remove"-->
-<!--                                                                                  style="margin-left:5px;">删除</a></em><b rel="progress" style="width: 100%; display: none;"></b>-->
-<!--                            </li>-->
-                        </ul>
-                    </div>
-                    <div class="upload-status" th:id="hasfileBtn" style="display: none">
-                        <button type="button" onclick="selectFile()" class="btn btn-primary" style="float: left;">添加文件</button>
-                        <a href="javascript:;" onclick="cleanFileList()" style="float: right;">清空已完成任务</a>
-                    </div>
+            </div>
+            <div class="modal-body">
+                <div id="resolte-contaniner" style="height: 500px;" class="overflow-auto">
+                    File not found
                 </div>
-                <!-- <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                   <button type="button" class="btn btn-primary">确认</button>
-                </div> -->
             </div>
         </div>
     </div>
-  </body>
+</div>
+<!-- Backend Bundle JavaScript -->
+<script th:src="@{/assets/js/iconfont.js}"></script>
+<script th:src="@{/assets/js/backend-bundle.min.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/customizer.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/chart-custom.js}"></script>
+
+<!--PDF-->
+<script th:src="@{/assets/vendor/doc-viewer/include/pdf/pdf.js}"></script>
+<!--Docs-->
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/jszip-utils.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js}"></script>
+<!--PPTX-->
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js}"></script>
+<!--All Spreadsheet -->
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js}"></script>
+<!--Image viewer-->
+<script th:src="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js}"></script>
+<!--officeToHtml-->
+<script th:src="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js}"></script>
+<script th:src="@{/assets/js/doc-viewer.js}"></script>
+<!-- app JavaScript -->
+<script th:src="@{/assets/js/app.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    $(function(){
+        initFolder(1);
+    });
+
+    /**
+     * 列表
+     * @param folderId
+     */
+    function listFile(folderId){
+        list1(folderId);
+        list2(folderId);
+    }
+
+    function list1(folderId){
+        $.ajax({
+            url:"/file/list",
+            type:"GET",
+            data:{folderId:folderId},
+            success:function (data) {
+                $("#gridTable").html(data);
+            }
+        });
+    }
+    function list2(folderId){
+        $.ajax({
+            url:"/file/listToTable",
+            type:"GET",
+            data:{folderId:folderId},
+            success:function (data) {
+                $("#gridList").html(data);
+            }
+        });
+    }
+
+    /**
+     * 导航信息
+     * @param folderId
+     */
+    function initBreadcrumb(folderId){
+        $.ajax({
+            url:"/folder/" + folderId,
+            type:"GET",
+            success:function (data) {
+                $("#breadcrumb").html(data);
+            }
+        });
+    }
+
+    /**
+     * 进入下一层文件夹
+     * @param id  文件夹id
+     */
+    function initFolder(folderId){
+        initBreadcrumb(folderId);
+        listFile(folderId);
+    }
+
+    function addFolder(){
+        let jQuery = $(".breadcrumb").children().last().prev();
+        let parentId = $(jQuery).data("id");
+        let folderName = $('#folderName').val();
+        if(folderName == '' || folderName == null){
+            alert("文件夹不能为空!");
+            return
+        }
+        $.ajax({
+            url:"/folder/add",
+            type:"POST",
+            data:{folderName:folderName,parentId:parentId},
+            success:function (result) {
+                initFolder(result.data.id)
+            }
+        });
+    }
+
+    function selectFile(){
+        $('#uFile').click();
+    }
+
+
+    /**
+     * 文件上传
+     */
+    function upload() {
+        //加载到上传队列
+        for(var i=0; i<$('#uFile')[0].files.length;i++){
+            var fileId = showFileTab($('#uFile')[0].files[i]);
+        }
+        // 上传
+        doIt("")
+    }
+
+    function showFileTab(file){
+        //隐藏选择框
+        $('#xFile').css("display","none");
+        $('#hasfile').css("display","");
+        $('#hasfileBtn').css("display","")
+        var fileName = file.name;
+        var fileSize = getfilesize(file.size);
+        var uuid = createUUID();
+        var html = '<li id="'+uuid+'" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"\n' +
+            '                                                                                                                     rel="ico"></i>\n' +
+            '                                <span class="file-name" title="'+ fileName +'" style="width: 315px;">'+ fileName +' <i\n' +
+            '                                        rel="size_str">- '+fileSize+'</i></span>\n' +
+            '                                <span class="file-status" rel="status"\n' +
+            '                                      style="width: 265px;font-size: 14px;float: none;">\n' +
+            '                                <div class="progress" style="width: 220px;">\n' +
+            '                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>\n' +
+            '                                 </div>\n' +
+            '                            </span>\n' +
+            '                            </li>';
+        $('#fileList').append(html);
+        return uuid;
+    }
+
+    function doIt(fileId) {
+        let jQuery = $(".breadcrumb").children().last().prev();
+        let folderId = $(jQuery).data("id");
+        var formData = new FormData();
+        formData.append("folderId", folderId);
+        for(var i=0; i< $('#uFile')[0].files.length;i++){
+            formData.append('files', $('#uFile')[0].files[i]);
+        }
+        console.log(formData)
+        $.ajax({
+            contentType : "multipart/form-data",
+            url : "/upload/batch/file",
+            type : "POST",
+            data : formData,
+            processData : false, // 告诉jQuery不要去处理发送的数据
+            contentType : false, // 告诉jQuery不要去设置Content-Type请求头
+            success : function(data) {
+                listFile(folderId);
+                //$("#appUrl").val(data); // 保存文件路径
+            },
+            xhr : function() {
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    //处理进度条的事件
+                    xhr.upload.addEventListener("progress", progressHandle,
+                        false);
+                    //加载完成的事件
+                    xhr.addEventListener("load", completeHandle, false);
+                    //加载出错的事件
+                    xhr.addEventListener("error", failedHandle, false);
+                    return xhr;
+                }
+            }
+        });
+    }
+
+    /**
+     * 进度条更新
+     * @param e
+     */
+    function progressHandle(e) {
+        console.log(e)
+        $('.progress').attr({
+            value : e.loaded,
+            max : e.total
+        });
+        var percent = e.loaded / e.total * 100;
+        $('.progress-bar').css("width",percent.toFixed(2) + "%");
+        $('.progress-bar').html(percent.toFixed(2) + "%");
+    };
+    //上传完成处理函数
+    function completeHandle(e) {
+        console.log("上传完成");
+    };
+    //上传出错处理函数
+    function failedHandle(e) {
+        console.log("上传失败");
+    };
+
+    String.prototype.endWith = function(endStr) {
+        var d = this.length - endStr.length;
+        return (d >= 0 && this.lastIndexOf(endStr) == d)
+    }
+
+    function cleanFileList(){
+        $('#fileList').html("");
+        $('#xFile').css("display","");
+        $('#hasfile').css("display","none");
+        $('#hasfileBtn').css("display","none")
+    }
+
+    /**
+     * 计算文件大小
+     * @param size
+     * @returns {string}
+     */
+    function getfilesize(size) {
+        if (!size)
+            return "";
+        var num = 1024.00; //byte
+        if (size < num)
+            return size + "B";
+        if (size < Math.pow(num, 2))
+            return (size / num).toFixed(2) + "K"; //kb
+        if (size < Math.pow(num, 3))
+            return (size / Math.pow(num, 2)).toFixed(2) + "M"; //M
+        if (size < Math.pow(num, 4))
+            return (size / Math.pow(num, 3)).toFixed(2) + "G"; //G
+        return (size / Math.pow(num, 4)).toFixed(2) + "T"; //T
+    }
+
+    random4 = function () {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    createUUID = function () {
+        return (random4() + random4() + "-" + random4() + "-" + random4() + "-" + random4() + random4());
+    };
+
+</script>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">文件上传</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="drop-box" th:id="xFile" onclick="selectFile()" style=" cursor:pointer;">
+                    <div class="drop-text" rel="drop_text">把文件拖到这里，即可上传</div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn btn-primary">添加文件</button>
+                    </div>
+                </div>
+                <div class="upload-box-list" id="hasfile" style="height: 331px;display: none">
+                    <ul th:id="fileList">
+                        <!--                            <li file_id="p1f1v17h2h1m8losd1gd11han1lng4" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"-->
+                        <!--                                                                                                                     rel="ico"></i>-->
+                        <!--                                <span class="file-name" title="WechatIMG220.jpeg" style="width: 350px;">WechatIMG220.jpeg <i-->
+                        <!--                                        rel="size_str">- 57.5KB</i></span>-->
+                        <!--                                <span class="file-status" rel="status"-->
+                        <!--                                      style="width: 265px;font-size: 14px;">上传成功</span>-->
+                        <!--                                <em rel="op"><a href="javascript:;" class="ico-opt ico-folder"-->
+                        <!--                                                style="margin-left:5px;">查看</a><a href="javascript:;" class="ico-opt ico-remove"-->
+                        <!--                                                                                  style="margin-left:5px;">删除</a></em><b rel="progress" style="width: 100%; display: none;"></b>-->
+                        <!--                            </li>-->
+                    </ul>
+                </div>
+                <div class="upload-status" th:id="hasfileBtn" style="display: none">
+                    <button type="button" onclick="selectFile()" class="btn btn-primary" style="float: left;">添加文件</button>
+                    <a href="javascript:;" onclick="cleanFileList()" style="float: right;">清空已完成任务</a>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+               <button type="button" class="btn btn-primary">确认</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+</body>
 </html>
