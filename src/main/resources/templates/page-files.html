@@ -604,7 +604,8 @@
                 processData : false, // 告诉jQuery不要去处理发送的数据
                 contentType : false, // 告诉jQuery不要去设置Content-Type请求头
                 success : function(data) {
-                    $("#appUrl").val(data); // 保存文件路径
+                    listFile(folderId);
+                    //$("#appUrl").val(data); // 保存文件路径
                 },
                 xhr : function() {
                     var xhr = $.ajaxSettings.xhr();
