@@ -10,6 +10,7 @@
       <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
       <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
       <link rel="stylesheet" th:href="@{/assets/css/upload.css}">
+      <link rel="stylesheet" th:href="@{/assets/css/webuploader.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
       <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
@@ -85,7 +86,7 @@
                         <li data-toggle="modal" data-target=".bd-example-modal-lg">
                             <div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div>
                         </li>
-                        <input type="file" id="uFile" name="file" onchange="upload()" style="position:absolute;clip:rect(0 0 0 0);">
+                        <input type="file" id="uFile" name="file" multiple="multiple" onchange="upload()" style="position:absolute;clip:rect(0 0 0 0);">
                     </ul>
                 </div>
             </div>
@@ -433,6 +434,7 @@
     </div>
     <!-- Backend Bundle JavaScript -->
     <script th:src="@{/assets/js/iconfont.js}"></script>
+    <script th:src="@{/assets/js/webuploader.js}"></script>
     <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
     
     <!-- Chart Custom JavaScript -->
@@ -542,29 +544,17 @@
             $('#uFile').click();
         }
 
-        //<div class="form-group">
-        // <label class="col-md-3 col-sm-3  col-xs-3 control-label">上传进度:
-        // </label>
-        // <div class="col-md-7 col-sm-7  col-xs-7">
-        //     <!--进度条部分(默认隐藏)-->
-        //     <div class="progress-body">
-        //         <span style="display: inline-block; text-align: right"></span>
-        //         <progress></progress>
-        //         <percentage>0%</percentage>
-        //     </div>
-        // </div>
-        // </div>
-
 
         /**
          * 文件上传
          */
         function upload() {
-            // 验证文件内容
-            var file = $("#uFile")[0].files[0];
-            var fileId = showFileTab(file);
+            //加载到上传队列
+            for(var i=0; i<$('#uFile')[0].files.length;i++){
+                var fileId = showFileTab($('#uFile')[0].files[i]);
+            }
             // 上传
-            doIt(fileId)
+            doIt("")
         }
 
         function showFileTab(file){
@@ -594,11 +584,14 @@
             let jQuery = $(".breadcrumb").children().last().prev();
             let folderId = $(jQuery).data("id");
             var formData = new FormData();
-            formData.append("file", $("#uFile")[0].files[0]);
             formData.append("folderId", folderId);
+            for(var i=0; i< $('#uFile')[0].files.length;i++){
+                formData.append('files', $('#uFile')[0].files[i]);
+            }
+            console.log(formData)
             $.ajax({
                 contentType : "multipart/form-data",
-                url : "/upload/multiFile",
+                url : "/upload/batch/file",
                 type : "POST",
                 data : formData,
                 processData : false, // 告诉jQuery不要去处理发送的数据
@@ -627,7 +620,9 @@
          * 进度条更新
          * @param e
          */
-        function progressHandle(e) {
+        function progressHandle(e,file) {
+            console.log("1111111111")
+            console.log(file)
             $('.progress').attr({
                 value : e.loaded,
                 max : e.total
@@ -637,11 +632,15 @@
             $('.progress-bar').html(percent.toFixed(2) + "%");
         };
         //上传完成处理函数
-        function completeHandle(e) {
+        function completeHandle(e,file) {
+            console.log("22222222222")
+            console.log(file)
             console.log("上传完成");
         };
         //上传出错处理函数
-        function failedHandle(e) {
+        function failedHandle(e,file) {
+            console.log("3333333333")
+            console.log(file)
             console.log("上传失败");
         };
 

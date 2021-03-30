@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- *
+ * 文件上传
  * @author Ranger
  * @email wilton.icp@gmail.com
  * @since 2021/3/15
@@ -30,26 +30,38 @@ public class UploadController {
     private final IFileService fileService;
     private final WiltonProperties properties;
 
-    @PostMapping("multiFile")
-    public WiltonResult<Void> upload(
-                               @RequestParam("file") MultipartFile file,
+    /**
+     * 批量上传文件
+     * @param files
+     * @param folderId
+     * @return
+     */
+    @PostMapping("batch/file")
+    public WiltonResult<Void> batchUpload(
+                               @RequestParam(value = "files") MultipartFile[] files,
                                Long folderId){
-        if(file.isEmpty() || file.getSize() == 0){
+        if(files == null || files.length == 0){
             new WiltonException("请选文件需要上传的文件");
         }
-        String fileName = file.getOriginalFilename();
-        FileEntity fileInfo = FileUtil.upload(file, properties.path);
-        fileInfo.setFolderId(folderId);
-        if(fileInfo == null){
-            new WiltonException("文件上传失败!");
+        for(int i = 0;i < files.length;i++){
+            MultipartFile file = files[i];
+            //保存文件
+            if (!file.isEmpty()){
+                String fileName = file.getOriginalFilename();
+                FileEntity fileInfo = FileUtil.upload(file, properties.path);
+                fileInfo.setFolderId(folderId);
+                if(fileInfo == null){
+                    new WiltonException("文件上传失败!");
+                }
+                fileInfo.setFileName(fileName);
+                fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
+                fileInfo.setFileSize(new BigDecimal(file.getSize()));
+                fileInfo.setOpen(true);
+                fileInfo.setCreatedBy(1L);
+                fileInfo.setModifyTime(LocalDateTime.now());
+                fileService.save(fileInfo);
+            }
         }
-        fileInfo.setFileName(fileName);
-        fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-        fileInfo.setFileSize(new BigDecimal(file.getSize()));
-        fileInfo.setOpen(true);
-        fileInfo.setCreatedBy(1L);
-        fileInfo.setModifyTime(LocalDateTime.now());
-        fileService.save(fileInfo);
         return WiltonResult.success();
     }
 }
