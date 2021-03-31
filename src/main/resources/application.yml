@@ -23,13 +23,6 @@ spring:
       max-request-size: 1024MB
       max-file-size: 1024MB
 
-
-wilton:
-  upload:
-    path: /Users/wilton/uploadData
-
-
-
 mybatis-plus:
   type-aliases-package: cn.wilton.framework.file*.entity
   type-enums-package: cn.wilton.framework.file.common.entity.enums

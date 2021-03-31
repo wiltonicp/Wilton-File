@@ -7,4 +7,4 @@ VOLUME /tmp
 EXPOSE 8127
 
 ADD wilton-file-1.0.0.jar /wilton/wilton-file-1.0.0.jar
-ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/wilton/wilton-file-1.0.0.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "/wilton/wilton-file-1.0.0.jar"]
