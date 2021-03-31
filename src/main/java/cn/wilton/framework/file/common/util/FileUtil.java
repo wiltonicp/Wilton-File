@@ -182,6 +182,8 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
         return null;
     }
 
+
+
     public static FileTypeEnum getFileType(String type) {
         String documents = "txt doc pdf ppt pps xlsx xls docx";
         String music = "mp3 wav wma mpa ram ra aac aif m4a";

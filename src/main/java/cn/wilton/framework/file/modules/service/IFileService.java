@@ -14,4 +14,6 @@ public interface IFileService extends IService<FileEntity> {
 
     List<FileEntity> listPage(Long folderId);
 
+    FileEntity getByFileMd5(String fileMd5);
+
 }

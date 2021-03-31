@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.html5uploader.js"></script>
+    <style type="text/css">
+        .uploadfile{
+            width:0;
+        }
+        .filelist li{
+            list-style-type:none;
+            margin-top:10px;
+        }
+        .filelist{
+            padding:0;
+        }
+        .uploadbtn,.delfilebtn,.uploadfilebtn{
+            display:inline-block;
+            border:1px solid #999;
+            line-height:24px;
+            border-radius:2px;
+            padding:0 18px;
+            font-size:12px;
+            color:#666;
+            cursor:pointer;
+            background:url(images/btnbg.png) repeat-x 0 0;
+            text-decoration:none;
+        }
+        .filename,.progressnum,.delfilebtn,.uploadbtn{
+            font-size:12px;
+            color:#666;
+            margin-left:10px;
+        }
+        .progress{
+            display:inline-block;
+            width:600px;
+            height:10px;
+            background-color:white;
+            border-radius:20px;
+            border:2px groove #666;
+            vertical-align:middle;
+            padding:0 2px;
+        }
+        .progressbar{
+            width:0;
+            height:9px;
+            border-radius:20px;
+            background:url('/images/jdt.png') repeat-x center;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            $('#upload').html5uploader({
+                auto:true,
+                multi:true,
+                removeTimeout:9999999,
+                url:'/upload/batch/file',
+                onUploadStart:function(){
+                    alert('开始上传');
+                },
+                onInit:function(){
+                    alert('初始化');
+                },
+                onUploadComplete:function(){
+                    alert('上传完成');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="upload"></div>
+</body>
+</html>

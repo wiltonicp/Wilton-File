@@ -26,4 +26,9 @@ public class ViewController {
         return "page-files";
     }
 
+    @GetMapping("/index")
+    public String index(Model model){
+        return "index";
+    }
+
 }

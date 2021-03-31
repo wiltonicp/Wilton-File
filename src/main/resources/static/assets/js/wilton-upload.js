@@ -27,12 +27,10 @@ $(function() {
         $('#upload-file-container').css("display","none");
         $('#hasFile').css("display","");
         $('#hasFileBtn').css("display","")
-        const html = '<li id="' + file.id + '" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s"\n' +
-            '                                                                                                                     rel="ico"></i>\n' +
-            '                                <span class="file-name" title="' + file.name + '" style="width: 315px;">' + file.name + ' <i\n' +
+        const html = '<li id="' + file.id + '" aid="1" cid="0" complete="1" success="1"><i class="hint-icon hint-suc-s" rel="ico"></i>\n' +
+            '                                <span class="file-name" title="' + file.name + '" style="width: 280px;">' + file.name + ' <i\n' +
             '                                        rel="size_str">- ' + getfilesize(file.size) + '</i></span>\n' +
-            '                                <span class="file-status" rel="status"\n' +
-            '                                      style="width: 265px;font-size: 14px;float: none;">\n' +
+            '                                <span class="file-status" rel="status" style="font-size: 14px;float: none;">\n' +
             '                                <div class="progress" style="width: 220px;">\n' +
             '                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
             '                                 </div>\n' +
@@ -48,7 +46,7 @@ $(function() {
         // 避免重复创建
         if (!$percent.length) {
             $percent = $(
-                ' <div class="progress" style="width: 220px;">' +
+                ' <div class="progress" style="width: 150px;">' +
                 '    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>' +
                 ' </div>')
                 .appendTo($li).find('.progress-bar');

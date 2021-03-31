@@ -51,6 +51,12 @@ public class FileEntity {
     private BigDecimal fileSize;
 
     /**
+     * 文件唯一指纹
+     */
+    @TableField("file_md5")
+    private String fileMd5;
+
+    /**
      * 存储路径
      */
     @TableField("path")
