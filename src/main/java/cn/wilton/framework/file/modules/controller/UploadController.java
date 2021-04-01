@@ -10,6 +10,7 @@ import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,7 +92,7 @@ public class UploadController {
         //当前文件的MD5值
         String guid = request.getParameter("guid");
         //分片上传路径
-        String tempPath = properties.path + File.separator + "temp";
+        String tempPath = properties.path + File.separator + WiltonConstant.TEMP_PATH;
         File checkFile = new File(tempPath + File.separator + guid + File.separator + chunk);
         response.setContentType("text/html;charset=utf-8");
         try {
@@ -141,17 +142,33 @@ public class UploadController {
              * 如果下标为 0，初始化到数据库
              */
             if(chunk == 0){
+                FileEntity fileByMd5 = this.fileService.getByFileMd5(guid);
                 String fileName = file.getOriginalFilename();
-                FileEntity fileInfo = new FileEntity();
-                fileInfo.setFolderId(folderId);
-                fileInfo.setFileName(fileName);
-                fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                fileInfo.setFileSize(new BigDecimal(file.getSize()));
-                fileInfo.setFileMd5(guid);
-                fileInfo.setOpen(true);
-                fileInfo.setCreatedBy(1L);
-                fileInfo.setModifyTime(LocalDateTime.now());
-                fileService.save(fileInfo);
+                if(fileByMd5 == null){
+                    fileByMd5 = new FileEntity();
+                    fileByMd5.setFolderId(folderId);
+                    fileByMd5.setFileName(fileName);
+                    fileByMd5.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
+                    fileByMd5.setFileSize(new BigDecimal(file.getSize()));
+                    fileByMd5.setFileMd5(guid);
+                    fileByMd5.setOpen(true);
+                    fileByMd5.setCreatedBy(1L);
+                    fileByMd5.setModifyTime(LocalDateTime.now());
+                    this.fileService.save(fileByMd5);
+                }else{
+                    FileEntity fileInfo = new FileEntity();
+                    BeanUtils.copyProperties(fileByMd5,fileInfo);
+                    fileInfo.setId(null);
+                    fileInfo.setFolderId(folderId);
+                    fileInfo.setFileName(fileName);
+                    fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
+                    fileInfo.setFileSize(new BigDecimal(file.getSize()));
+                    fileInfo.setFileMd5(guid);
+                    fileInfo.setOpen(true);
+                    fileInfo.setCreatedBy(1L);
+                    fileInfo.setModifyTime(LocalDateTime.now());
+                    this.fileService.save(fileInfo);
+                }
             }
         } catch (Exception e) {
             throw new IOException(e.getMessage());

@@ -46,11 +46,9 @@ WebUploader.Uploader.register({
             type: "POST",
             url: "/upload/checkblock", //ajax验证每一个分片
             data: {
-                //fileName: fileName,
-                //fileMd5: fileMd5, //文件唯一标记
                 chunk: block.chunk, //当前分块下标
                 chunkSize: block.end - block.start,//当前分块大小
-                guid: uploader.options.formData.guid,
+                guid: uploader.options.formData.guid,//文件唯一标记
             },
             cache: false,
             async: false, // 与js同步
