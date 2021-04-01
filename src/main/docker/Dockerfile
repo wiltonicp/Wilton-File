@@ -3,6 +3,7 @@ MAINTAINER Ranger wilton.icp@gmail.com
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && echo 'Asia/Shanghai' >/etc/timezone \
 
+WORKDIR /wilton/data/file-upload
 VOLUME /tmp
 EXPOSE 8127
 

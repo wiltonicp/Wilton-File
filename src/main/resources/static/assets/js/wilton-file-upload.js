@@ -120,8 +120,8 @@ uploader.on('fileQueued', function (file) {
     $list.append('<li id="' + file.id + '" aid="1" cid="0" complete="1" success="1" style="display: flex;"><i class="hint-icon hint-suc-s" rel="ico"></i>\n' +
         '                                <span class="file-name" title="' + file.name + '">' + fileName + ' <i\n' +
         '                                        rel="size_str">- ' + getfilesize(file.size) + '</i></span>\n' +
-        '                                <span class="file-status" rel="status" style="font-size: 14px;width: 250px;">\n' +
-        '                                   <div style="display: flex;"><p class="state" style="margin-left: 50px;">等待上传...</p><span class="time" style="margin-left: 50px;"></span></div>\n' +
+        '                                <span class="file-status" rel="status" style="font-size: 14px;width: 275px;">\n' +
+        '                                   <div style="display: flex;"><p class="state" style="margin-left: 20px;">等待上传...</p><span class="time" style="margin-left: 50px;"></span></div>\n' +
         '                               </span>\n' +
         '                               <em rel="op" style="width: 50px;">' +
         '                                   <a href="javascript:;" class="ico-opt ico-remove" style="margin-left:5px;">删除</a>' +

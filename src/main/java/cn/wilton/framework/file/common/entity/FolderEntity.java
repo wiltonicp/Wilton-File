@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -19,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("f_folder")
-public class FolderEntity {
+public class FolderEntity extends BaseEntity{
 
     /**
      * 文件id
@@ -47,28 +49,12 @@ public class FolderEntity {
     @TableField("type")
     private Long type;
 
-    /**
-     * 创建者
-     */
-    @TableField("created_by")
-    private Long createdBy;
-
-    /**
-     * 最后更新时间
-     */
-    @TableField("modify_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone="GMT+8")
-    private LocalDateTime modifyTime;
 
     public void created(){
-        this.createdBy = 1L;
         this.type = 0L;
-        this.modifyTime = LocalDateTime.now();
     }
 
     public void update(){
-        this.createdBy = 1L;
-        this.modifyTime = LocalDateTime.now();
     }
 
 }

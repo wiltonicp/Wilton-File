@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("f_file")
-public class FileEntity {
+public class FileEntity extends BaseEntity{
 
     /**
      * 文件id
@@ -67,18 +67,5 @@ public class FileEntity {
      */
     @TableField("open")
     private Boolean open;
-
-    /**
-     * 上传者
-     */
-    @TableField("created_by")
-    private Long createdBy;
-
-    /**
-     * 最后更新时间
-     */
-    @TableField("modify_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private LocalDateTime modifyTime;
 
 }

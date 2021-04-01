@@ -20,15 +20,21 @@ public class ViewController {
         return "auth-sign-in";
     }
 
-    @GetMapping("/files")
-    public String files(Model model){
+    @GetMapping("/")
+    public String files(Model model,Long fid){
+        model.addAttribute("fid",fid);
         model.addAttribute("userName","Ranger");
         return "page-files";
     }
 
-    @GetMapping("/index")
-    public String index(Model model){
-        return "index";
+    /**
+     * 分享
+     * @param model
+     * @return
+     */
+    @GetMapping("/share")
+    public String share(Model model){
+        return "page-share";
     }
 
 }

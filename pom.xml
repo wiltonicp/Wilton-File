@@ -121,9 +121,29 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.2.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>9.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.pdf</artifactId>
+            <version>4.3.4</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <url>http://repo.e-iceblue.cn/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
     <!-- 在项目的pom.xml中 配置私服的仓库地址，可以将项目打jar包部署到私服 -->
     <distributionManagement>

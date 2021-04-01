@@ -509,8 +509,12 @@
 <!-- app JavaScript -->
 <script th:src="@{/assets/js/app.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+    var fid = [[${fid}]];
     $(function(){
-        initFolder(1);
+        if(fid == null || fid == ''){
+            fid = 1;
+        }
+        initFolder(fid);
     });
 
     /**
@@ -520,6 +524,8 @@
     function listFile(folderId){
         list1(folderId);
         list2(folderId);
+        var path = getUrlAndPort();
+        setUrl(path + "?fid=" + folderId);
     }
 
     function list1(folderId){
@@ -609,6 +615,21 @@
         if (size < Math.pow(num, 4))
             return (size / Math.pow(num, 3)).toFixed(2) + "G"; //G
         return (size / Math.pow(num, 4)).toFixed(2) + "T"; //T
+    }
+
+    /**
+     * @description 设置url
+     */
+    function setUrl(url) {
+        history.pushState({url: url, title: document.title}, document.title, url)
+    }
+
+    /**
+     * @description 获取ip和端口
+     */
+    function getUrlAndPort() {
+        let host = location.pathname;
+        return host;
     }
 </script>
 
