@@ -182,23 +182,21 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
         return null;
     }
 
-
-
-    public static FileTypeEnum getFileType(String type) {
+    public static String getFileType(String type) {
         String documents = "txt doc pdf ppt pps xlsx xls docx";
         String music = "mp3 wav wma mpa ram ra aac aif m4a";
         String video = "avi mpg mpe mpeg asf wmv mov qt rm mp4 flv m4v webm ogv ogg";
         String image = "bmp dib pcp dif wmf gif jpg tif eps psd cdr iff tga pcd mpt png jpeg";
         if (image.contains(type)) {
-            return FileTypeEnum.IMAGE;
+            return FileTypeEnum.IMAGE.getCode();
         } else if (documents.contains(type)) {
-            return FileTypeEnum.TXT;
+            return FileTypeEnum.TXT.getCode();
         } else if (music.contains(type)) {
-            return FileTypeEnum.MUSIC;
+            return FileTypeEnum.MUSIC.getCode();
         } else if (video.contains(type)) {
-            return FileTypeEnum.VIDEO;
+            return FileTypeEnum.VIDEO.getCode();
         } else {
-            return FileTypeEnum.OTHER;
+            return FileTypeEnum.OTHER.getCode();
         }
     }
 

@@ -88,7 +88,8 @@ public class UploadServiceImpl implements IUploadService {
                     fileByMd5.setFolderId(folderId);
                     fileByMd5.setFileName(fileName);
                     fileByMd5.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                    fileByMd5.setFileSize(new BigDecimal(file.getSize()));
+                    fileByMd5.setIco(FileUtil.getExtensionName(fileName));
+                    fileByMd5.setFileSize(file.getSize());
                     fileByMd5.setFileMd5(guid);
                     fileByMd5.setOpen(true);
                     this.fileService.save(fileByMd5);
@@ -99,7 +100,8 @@ public class UploadServiceImpl implements IUploadService {
                     fileInfo.setFolderId(folderId);
                     fileInfo.setFileName(fileName);
                     fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                    fileInfo.setFileSize(new BigDecimal(file.getSize()));
+                    fileInfo.setIco(FileUtil.getExtensionName(fileName));
+                    fileInfo.setFileSize(file.getSize());
                     fileInfo.setFileMd5(guid);
                     fileInfo.setOpen(true);
                     this.fileService.save(fileInfo);
@@ -120,8 +122,8 @@ public class UploadServiceImpl implements IUploadService {
     @Override
     public void combineBlock(String guid, String fileName) {
         //分片文件临时目录
-        File tempPath = new File(properties.path + File.separator + "temp" + File.separator + guid);
-        String realFilePath = properties.path + File.separator + "real" + File.separator + IdUtils.getId() + fileName;
+        File tempPath = new File(properties.path + File.separator + WiltonConstant.TEMP_PATH + File.separator + guid);
+        String realFilePath = properties.path + File.separator + WiltonConstant.REAL_PATH + File.separator + IdUtils.getId() + fileName;
         File realFile = new File(realFilePath);
         /**
          * 文件追加写入
@@ -171,7 +173,7 @@ public class UploadServiceImpl implements IUploadService {
                  * 更新数据库文件路径
                  */
                 FileEntity fileEntity = this.fileService.getByFileMd5(guid);
-                fileEntity.setPath(realFilePath);
+                fileEntity.setPath(realFilePath.replace(properties.path,""));
                 this.fileService.updateById(fileEntity);
                 log.info("文件合并——结束 [ 文件名称：" + fileName + " ，MD5值：" + guid + " ]");
             }

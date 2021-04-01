@@ -42,13 +42,13 @@ public class FileEntity extends BaseEntity{
      * 文件类型
      */
     @TableField("file_type")
-    private FileTypeEnum fileType;
+    private String fileType;
 
     /**
      * 文件大小
      */
     @TableField("file_size")
-    private BigDecimal fileSize;
+    private Long fileSize;
 
     /**
      * 文件唯一指纹
@@ -61,6 +61,18 @@ public class FileEntity extends BaseEntity{
      */
     @TableField("path")
     private String path;
+
+    /**
+     * 文件后缀
+     */
+    @TableField("ico")
+    private String ico;
+
+    /**
+     * 预览地址
+     */
+    @TableField("thumb")
+    private String thumb;
 
     /**
      * 是否公开

@@ -21,6 +21,7 @@ public class FileServiceImpl extends ServiceImpl<IFileMapper, FileEntity> implem
     public List<FileEntity> listPage(Long folderId) {
         return this.list(new QueryWrapper<FileEntity>()
                 .eq(folderId != null, "folder_id", folderId)
+                .eq("deleted",0)
         );
     }
 
@@ -28,6 +29,7 @@ public class FileServiceImpl extends ServiceImpl<IFileMapper, FileEntity> implem
     public FileEntity getByFileMd5(String fileMd5) {
         return this.getOne(new QueryWrapper<FileEntity>()
                 .eq(fileMd5 != null, "file_md5", fileMd5)
+                .eq("deleted",0)
         );
     }
 }
