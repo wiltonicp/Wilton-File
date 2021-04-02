@@ -107,14 +107,14 @@
             <nav class="iq-sidebar-menu" style="height: 75%;">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="active">
-                        <a th:href="@{/files}" class="">
-                            <i class="las la-hdd"></i><span>我的云盘</span>
+                        <a th:href="@{/}" class="">
+                            <i class="las la-hdd"></i><span>我的资源</span>
                         </a>
                         <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         </ul>
                     </li>
                     <li class=" ">
-                        <a th:href="@{/files}" class="">
+                        <a th:href="@{/}" class="">
                             <i class="las la-stopwatch iq-arrow-left"></i><span>我的分享</span>
                         </a>
                         <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -390,11 +390,22 @@
                                         </tr>
                                         <tr th:each="file:${fileList}">
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-danger rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
+                                                <div th:if="${file.fileType} eq 'image'" class="d-flex align-items-center">
+                                                    <div class="mr-3">
+                                                        <a href="#"><img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" class="img-fluid avatar-30" alt="image1"></a>
                                                     </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="alexa5.pdf" style="cursor: pointer;" th:text="${file.fileName}"></div>
+                                                    <span th:text="${file.fileName}"></span>
+                                                </div>
+                                                <div th:if="${file.fileType} ne 'image'" class="d-flex align-items-center">
+                                                    <div class="mr-3">
+                                                        <a href="#">
+                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'pdf')}" src="assets/images/layouts/page-4/pdf.png" class="img-fluid avatar-30" alt="image1">
+                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'doc')}" src="assets/images/layouts/page-4/doc.png" class="img-fluid avatar-30" alt="image1">
+                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'xls')}" src="assets/images/layouts/page-4/xlsx.png" class="img-fluid avatar-30" alt="image1">
+                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'ppt')}" src="assets/images/layouts/page-4/ppt.png" class="img-fluid avatar-30" alt="image1">
+                                                        </a>
+                                                    </div>
+                                                    <div th:text="${file.fileName}" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;"></div>
                                                 </div>
                                             </td>
                                             <td th:text="${file.fileSize}"></td>
