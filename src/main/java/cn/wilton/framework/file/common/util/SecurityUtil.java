@@ -1,0 +1,44 @@
+package cn.wilton.framework.file.common.util;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ * <p>
+ * @author Ranger
+ * @email wilton.icp@gmail.com
+ * @since 2021/4/2
+ */
+public class SecurityUtil {
+
+    /**
+     * 从ThreadLocal获取其自己的SecurityContext，从而获取在Security上下文中缓存的登录用户
+     */
+    public static User getLoginUser() {
+        User user = null;
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        if (auth.getPrincipal() instanceof UserDetails) user = (User) auth.getPrincipal();
+        assert user != null;
+        return user;
+    }
+
+    /**
+     * 获取当前用户认证信息
+     * @return 认证对象
+     */
+    public static Authentication getUserAuthentication(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    /**
+     * 获取当前用户信息
+     * @return 用户对象
+     */
+    public static Object getCurrentPrincipal(){
+        return getUserAuthentication().getPrincipal();
+    }
+}

@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2021/3/27
  */
 @Repository
-public interface IFolderMapper extends BaseMapper<FolderEntity> {
+public interface FolderMapper extends BaseMapper<FolderEntity> {
 
     /**
      * 根据子id查询所有父节点

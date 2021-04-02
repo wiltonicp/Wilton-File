@@ -19,7 +19,7 @@ public class WiltonUtil {
         log.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Login: \thttp://{}:{}\n\t" +
-                        "----------------------------------------------------------",
+                 "----------------------------------------------------------",
                 environment.getProperty("spring.application.name"),
                 InetAddress.getLocalHost().getHostAddress(),
                 environment.getProperty("server.port"),

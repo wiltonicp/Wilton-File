@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -498,11 +500,11 @@
     </div>
 </div>
 <!-- Backend Bundle JavaScript -->
-<script th:src="@{/assets/js/iconfont.js}"></script>
-<script type="application/javascript" th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
-<script type="application/javascript" th:src="@{/assets/webuploader/webuploader.js}"></script>
-<script type="application/javascript" th:src="@{/assets/js/wilton-file-upload.js}"></script>
+<script th:src="@{/assets/js/iconfont.js}"></script>
+<script th:src="@{/assets/webuploader/webuploader.js}"></script>
+<script th:src="@{/assets/js/wilton-file-upload.js}"></script>
 
 <!-- Chart Custom JavaScript -->
 <script th:src="@{/assets/js/customizer.js}"></script>

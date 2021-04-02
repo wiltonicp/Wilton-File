@@ -2,7 +2,7 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.util.FileUtil;
-import cn.wilton.framework.file.modules.mapper.IFileMapper;
+import cn.wilton.framework.file.modules.mapper.FileMapper;
 import cn.wilton.framework.file.modules.service.IFileService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2021/3/16
  */
 @Service
-public class FileServiceImpl extends ServiceImpl<IFileMapper, FileEntity> implements IFileService {
+public class FileServiceImpl extends ServiceImpl<FileMapper, FileEntity> implements IFileService {
 
     @Override
     public List<FileEntity> listPage(Long folderId) {

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class ViewController {
 
-    @GetMapping("/login")
-    public String login(Model model){
+    @GetMapping("/toLogin")
+    public String login(){
         return "auth-sign-in";
     }
 

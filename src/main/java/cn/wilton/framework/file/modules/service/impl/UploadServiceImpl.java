@@ -4,7 +4,6 @@ import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.IdUtils;
-import cn.wilton.framework.file.modules.mapper.IFileMapper;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IUploadService;
 import cn.wilton.framework.file.properties.WiltonProperties;

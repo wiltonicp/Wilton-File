@@ -24,6 +24,16 @@ spring:
       enabled: true
       max-request-size: 1024MB
       max-file-size: 1024MB
+wilton:
+  security:
+    ignored:
+      urls: #安全路径白名单
+        - /favicon.ico
+        - /static/assets/**/**
+        - /assets/**
+        - /assets/**/**
+        - /assets/**/**/**
+
 
 mybatis-plus:
   type-aliases-package: cn.wilton.framework.file*.entity
