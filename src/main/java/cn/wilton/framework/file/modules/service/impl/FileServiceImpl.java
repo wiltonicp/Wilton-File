@@ -1,6 +1,7 @@
 package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.entity.FileEntity;
+import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.modules.mapper.IFileMapper;
 import cn.wilton.framework.file.modules.service.IFileService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,10 +20,14 @@ public class FileServiceImpl extends ServiceImpl<IFileMapper, FileEntity> implem
 
     @Override
     public List<FileEntity> listPage(Long folderId) {
-        return this.list(new QueryWrapper<FileEntity>()
+        List<FileEntity> list = this.list(new QueryWrapper<FileEntity>()
                 .eq(folderId != null, "folder_id", folderId)
-                .eq("deleted",0)
+                .eq("deleted", 0)
         );
+        list.forEach(file ->{
+            file.setFileSizeVal(FileUtil.getSize(file.getFileSize()));
+        });
+        return list;
     }
 
     @Override

@@ -1,15 +1,11 @@
 package cn.wilton.framework.file.common.entity;
 
-import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * @author Ranger
@@ -51,6 +47,12 @@ public class FileEntity extends BaseEntity{
     private Long fileSize;
 
     /**
+     * 文件大小单位转换
+     */
+    @TableField(exist = false)
+    private String fileSizeVal;
+
+    /**
      * 文件唯一指纹
      */
     @TableField("file_md5")
@@ -79,5 +81,4 @@ public class FileEntity extends BaseEntity{
      */
     @TableField("open")
     private Boolean open;
-
 }

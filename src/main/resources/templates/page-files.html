@@ -408,7 +408,7 @@
                                                     <div th:text="${file.fileName}" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;"></div>
                                                 </div>
                                             </td>
-                                            <td th:text="${file.fileSize}"></td>
+                                            <td th:text="${file.fileSizeVal}"></td>
                                             <td th:text="${file.fileType}"></td>
                                             <td>Ranger</td>
                                             <td th:text="${#temporals.format(file.modifyTime,'yyyy-MM-dd HH:mm')}"></td>
@@ -632,12 +632,12 @@
         if (size < num)
             return size + "B";
         if (size < Math.pow(num, 2))
-            return (size / num).toFixed(2) + "K"; //kb
+            return (size / num).toFixed(2) + "KB"; //kb
         if (size < Math.pow(num, 3))
-            return (size / Math.pow(num, 2)).toFixed(2) + "M"; //M
+            return (size / Math.pow(num, 2)).toFixed(2) + "MB"; //M
         if (size < Math.pow(num, 4))
-            return (size / Math.pow(num, 3)).toFixed(2) + "G"; //G
-        return (size / Math.pow(num, 4)).toFixed(2) + "T"; //T
+            return (size / Math.pow(num, 3)).toFixed(2) + "GB"; //G
+        return (size / Math.pow(num, 4)).toFixed(2) + "TB"; //T
     }
 
     /**
