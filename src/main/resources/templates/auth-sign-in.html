@@ -85,6 +85,8 @@
                            创建账户 <a href="#" class="text-primary">注册</a>
                         </p>
                      </form>
+                      <!-- 以下为显示认证失败等提示信息（th:if=""一定要写 ） -->
+                      <div th:if="${param.error} == 0" th:text="用户名或密码错误!"></div>
                   </div>
                </div>
             </div>

@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()
         .and()
         .formLogin().loginPage("/toLogin")
-        .loginProcessingUrl("/login").permitAll();
+        .loginProcessingUrl("/login").failureUrl("/toLogin?error=0").permitAll();
         http.logout().logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies();
         http.rememberMe().rememberMeParameter("rememberMe");
         http.csrf().disable();
