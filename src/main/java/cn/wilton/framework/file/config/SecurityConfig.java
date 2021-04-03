@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @author Ranger
@@ -20,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final DataSource dataSource;
     private final IgnoreUrlsConfig ignoreUrlsConfig;
     private final MyUserDetailsServiceImpl userDetailService;
 
@@ -37,10 +42,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()
         .and()
         .formLogin().loginPage("/toLogin")
-        .loginProcessingUrl("/login").failureUrl("/toLogin?error=0").permitAll();
-        http.logout().logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies();
-        http.rememberMe().rememberMeParameter("rememberMe");
-        http.csrf().disable();
+        .loginProcessingUrl("/login")
+        .defaultSuccessUrl("/")
+        .failureUrl("/toLogin?error=0").permitAll()
+        .and()
+        .logout().logoutSuccessUrl("/toLogin").invalidateHttpSession(true).permitAll()
+        .and()
+        .rememberMe().tokenRepository(persistentTokenRepository())
+        .tokenValiditySeconds(60*6).rememberMeParameter("rememberMe")
+        .and()
+        .csrf().disable();
+    }
+
+    /**
+     * 用于设置rememberMe往数据库存储token
+     * @return
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
     }
 
     @Override

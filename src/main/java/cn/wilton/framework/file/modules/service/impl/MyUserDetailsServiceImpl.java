@@ -78,7 +78,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         codes.toArray(perArray);
 
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getFullName())
+                .withUsername(user.getUsername())
                 .password(user.getPassword())
                 .authorities(perArray).build();
     }
