@@ -6,6 +6,7 @@ import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.common.exception.BizException;
 import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
+import cn.wilton.framework.file.common.util.PicUtil;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import cn.wilton.framework.file.properties.WiltonProperties;
@@ -84,7 +85,9 @@ public class FileController {
             try {
                 input= new FileInputStream(file);
                 data = new byte[input.available()];
-                input.read(data);
+                //图片压缩
+                byte[] bytes = PicUtil.compressPicForScale(data, 500, fid);
+                input.read(bytes);
                 response.getOutputStream().write(data);
             } catch (Exception e) {
                 new WiltonException("文件处理异常");
