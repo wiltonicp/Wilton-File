@@ -88,7 +88,7 @@ public class FileController {
                 //图片压缩
                 byte[] bytes = PicUtil.compressPicForScale(data, 500, fid);
                 input.read(bytes);
-                response.getOutputStream().write(data);
+                response.getOutputStream().write(bytes);
             } catch (Exception e) {
                 new WiltonException("文件处理异常");
             }finally{
