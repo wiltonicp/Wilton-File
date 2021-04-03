@@ -2,6 +2,7 @@ package cn.wilton.framework.file.config;
 
 import cn.wilton.framework.file.modules.service.impl.MyUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +25,8 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
     private final IgnoreUrlsConfig ignoreUrlsConfig;
     private final MyUserDetailsServiceImpl userDetailService;
 

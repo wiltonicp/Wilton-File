@@ -81,4 +81,10 @@ public class FileEntity extends BaseEntity{
      */
     @TableField("open")
     private Boolean open;
+
+    /**
+     * 用户姓名
+     */
+    @TableField(exist = false)
+    private String createdByName;
 }

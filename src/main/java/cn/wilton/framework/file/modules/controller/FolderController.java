@@ -49,4 +49,15 @@ public class FolderController {
         return WiltonResult.data(folderEntity);
     }
 
+    /**
+     * 删除文件夹
+     * @param folderId
+     * @return
+     */
+    @PostMapping("/delete")
+    public@ResponseBody WiltonResult<Void> delete(long folderId){
+        boolean b = folderService.removeById(folderId);
+        return WiltonResult.success();
+    }
+
 }

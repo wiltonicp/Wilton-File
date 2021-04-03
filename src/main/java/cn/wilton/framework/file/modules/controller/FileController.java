@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.FolderEntity;
@@ -13,10 +14,7 @@ import cn.wilton.framework.file.properties.WiltonProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,6 +63,17 @@ public class FileController {
         model.addAttribute("fileList",fileList);
         model.addAttribute("folderList",folderList);
         return "page-files::gridList";
+    }
+
+    /**
+     * 删除文件
+     * @param fileId
+     * @return
+     */
+    @PostMapping("/delete")
+    public@ResponseBody WiltonResult<Void> delete(long fileId){
+        boolean b = fileService.removeById(fileId);
+        return WiltonResult.success();
     }
 
     /**

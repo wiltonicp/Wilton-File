@@ -49,12 +49,14 @@ public class FolderEntity extends BaseEntity{
     @TableField("type")
     private Long type;
 
+    /**
+     * 创建者姓名
+     */
+    @TableField(exist = false)
+    private String createdByName;
 
     public void created(){
         this.type = 0L;
-    }
-
-    public void update(){
     }
 
 }
