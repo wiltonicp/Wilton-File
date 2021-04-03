@@ -25,8 +25,7 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
     private final IgnoreUrlsConfig ignoreUrlsConfig;
     private final MyUserDetailsServiceImpl userDetailService;
 

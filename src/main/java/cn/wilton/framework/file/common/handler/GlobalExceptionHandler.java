@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Path;
+import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public WiltonResult exceptionHandler(NullPointerException e){
         log.error("发生空指针异常！原因是:",e);
+        return WiltonResult.failed(ResultCode.BODY_NOT_MATCH);
+    }
+
+    @ExceptionHandler(value = IOException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public WiltonResult exceptionHandler(IOException e){
+        log.error("发生异常！原因是:",e);
         return WiltonResult.failed(ResultCode.BODY_NOT_MATCH);
     }
 

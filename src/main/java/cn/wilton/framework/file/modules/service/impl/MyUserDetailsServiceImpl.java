@@ -1,9 +1,7 @@
 package cn.wilton.framework.file.modules.service.impl;
 
-import cn.wilton.framework.file.common.entity.Permission;
-import cn.wilton.framework.file.common.entity.RolePermission;
-import cn.wilton.framework.file.common.entity.User;
-import cn.wilton.framework.file.common.entity.UserRole;
+import cn.wilton.framework.file.common.entity.*;
+import cn.wilton.framework.file.common.service.RedisService;
 import cn.wilton.framework.file.modules.mapper.PermissionMapper;
 import cn.wilton.framework.file.modules.mapper.RolePermissionMapper;
 import cn.wilton.framework.file.modules.mapper.UserMapper;
@@ -11,6 +9,8 @@ import cn.wilton.framework.file.modules.mapper.UserRoleMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserMapper userMapper;
+    private final RedisService redisService;
     private final UserRoleMapper userRoleMapper;
     private final PermissionMapper permissionMapper;
     private final RolePermissionMapper rolePermissionMapper;
@@ -47,7 +48,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
             log.info("账号输入错误，查询不到用户");
             return null;
         }
-
         User user = users.get(0);
         List<UserRole> userRoles = userRoleMapper.selectByMap(new HashMap<String, Object>() {{
             put("user_id", user.getId());
@@ -74,12 +74,17 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
             return null;
         }
         List<String> codes = permissions.stream().map(Permission::getCode).distinct().collect(Collectors.toList());
+        String permissionStr = permissions.stream().map(Permission::getCode).collect(Collectors.joining(","));
         String[] perArray = new String[codes.size()];
         codes.toArray(perArray);
-
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .authorities(perArray).build();
+        boolean notLocked = true;
+        AdminAuthUser authUser = new AdminAuthUser(user.getUsername(), user.getPassword(), true, true, true, notLocked,
+                AuthorityUtils.commaSeparatedStringToAuthorityList(permissionStr));
+        BeanUtils.copyProperties(user,authUser);
+        return authUser;
+//        return org.springframework.security.core.userdetails.User
+//                .withUsername(user.getUsername())
+//                .password(user.getPassword())
+//                .authorities(perArray).build();
     }
 }

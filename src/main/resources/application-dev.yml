@@ -14,8 +14,8 @@ spring:
           password: Wilton2019
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6379
+    host: file.wiltonic.cn
+    port: 8179
     password: RocketAdmin123
     lettuce:
       pool:

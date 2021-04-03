@@ -2,6 +2,8 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
+import cn.wilton.framework.file.common.exception.BizException;
+import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.IdUtils;
 import cn.wilton.framework.file.modules.service.IFileService;
@@ -54,7 +56,7 @@ public class UploadServiceImpl implements IUploadService {
     }
 
     @Override
-    public void uploadFile(MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException{
+    public void uploadFile(MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException {
         String filePath = properties.path + File.separator + WiltonConstant.TEMP_PATH + File.separator + guid;
         File tempPath = new File(filePath);
         if (!tempPath.exists()) {
@@ -65,57 +67,53 @@ public class UploadServiceImpl implements IUploadService {
         if (chunk == null) {
             chunk = 0;
         }
-        try {
-            File dirFile = new File(filePath, String.valueOf(chunk));
-            //以读写的方式打开目标文件
-            raFile = new RandomAccessFile(dirFile, "rw");
-            raFile.seek(raFile.length());
-            inputStream = new BufferedInputStream(file.getInputStream());
-            byte[] buf = new byte[1024];
-            int length = 0;
-            while ((length = inputStream.read(buf)) != -1) {
-                raFile.write(buf, 0, length);
-            }
-            /**
-             * 如果下标为 0，初始化到数据库
-             */
-            if(chunk == 0){
-                FileEntity fileByMd5 = this.fileService.getByFileMd5(guid);
-                String fileName = file.getOriginalFilename();
-                if(fileByMd5 == null){
-                    fileByMd5 = new FileEntity();
-                    fileByMd5.setFolderId(folderId);
-                    fileByMd5.setFileName(fileName);
-                    fileByMd5.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                    fileByMd5.setIco(FileUtil.getExtensionName(fileName));
-                    fileByMd5.setFileSize(file.getSize());
-                    fileByMd5.setFileMd5(guid);
-                    fileByMd5.setOpen(true);
-                    this.fileService.save(fileByMd5);
-                }else{
-                    FileEntity fileInfo = new FileEntity();
-                    BeanUtils.copyProperties(fileByMd5,fileInfo);
-                    fileInfo.setId(null);
-                    fileInfo.setFolderId(folderId);
-                    fileInfo.setFileName(fileName);
-                    fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                    fileInfo.setIco(FileUtil.getExtensionName(fileName));
-                    fileInfo.setFileSize(file.getSize());
-                    fileInfo.setFileMd5(guid);
-                    fileInfo.setOpen(true);
-                    this.fileService.save(fileInfo);
-                }
-            }
-        } catch (Exception e) {
-            throw new IOException(e.getMessage());
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (raFile != null) {
-                raFile.close();
+        File dirFile = new File(filePath, String.valueOf(chunk));
+        //以读写的方式打开目标文件
+        raFile = new RandomAccessFile(dirFile, "rw");
+        raFile.seek(raFile.length());
+        inputStream = new BufferedInputStream(file.getInputStream());
+        byte[] buf = new byte[1024];
+        int length = 0;
+        while ((length = inputStream.read(buf)) != -1) {
+            raFile.write(buf, 0, length);
+        }
+        /**
+         * 如果下标为 0，初始化到数据库
+         */
+        if(chunk == 0){
+            FileEntity fileByMd5 = this.fileService.getByFileMd5(guid);
+            String fileName = file.getOriginalFilename();
+            if(fileByMd5 == null){
+                fileByMd5 = new FileEntity();
+                fileByMd5.setFolderId(folderId);
+                fileByMd5.setFileName(fileName);
+                fileByMd5.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
+                fileByMd5.setIco(FileUtil.getExtensionName(fileName));
+                fileByMd5.setFileSize(file.getSize());
+                fileByMd5.setFileMd5(guid);
+                fileByMd5.setOpen(true);
+                this.fileService.save(fileByMd5);
+            }else{
+                FileEntity fileInfo = new FileEntity();
+                BeanUtils.copyProperties(fileByMd5,fileInfo);
+                fileInfo.setId(null);
+                fileInfo.setFolderId(folderId);
+                fileInfo.setFileName(fileName);
+                fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
+                fileInfo.setIco(FileUtil.getExtensionName(fileName));
+                fileInfo.setFileSize(file.getSize());
+                fileInfo.setFileMd5(guid);
+                fileInfo.setOpen(true);
+                this.fileService.save(fileInfo);
             }
         }
+        if (inputStream != null) {
+            inputStream.close();
+        }
+        if (raFile != null) {
+            raFile.close();
+        }
+
     }
 
     @Override

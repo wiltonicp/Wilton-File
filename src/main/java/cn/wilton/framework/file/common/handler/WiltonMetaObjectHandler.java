@@ -1,15 +1,11 @@
 package cn.wilton.framework.file.common.handler;
 
-import cn.wilton.framework.file.common.entity.User;
-import cn.wilton.framework.file.modules.service.IUserService;
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 /**
@@ -20,26 +16,21 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class WiltonMetaObjectHandler implements MetaObjectHandler {
-
-    private final IUserService userService;
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        User user = userService.getLoginUser();
         setFiledVal("version", 0L, metaObject);
         setFiledVal("deleted", 0, metaObject);
-        setFiledVal("createdBy", user.getId(), metaObject);
-        setFiledVal("modifyBy", user.getId(), metaObject);
+        setFiledVal("createdBy", SecurityUtil.getLoginUser().getId(), metaObject);
+        setFiledVal("modifyBy", SecurityUtil.getLoginUser().getId(), metaObject);
         setFiledVal("createdTime", LocalDateTime.now(), metaObject);
         setFiledVal("modifyTime", LocalDateTime.now(), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        User user = userService.getLoginUser();
-        setFiledVal("modifyBy", user.getId(), metaObject);
+        setFiledVal("modifyBy", SecurityUtil.getLoginUser().getId(), metaObject);
         setFiledVal("modifyTime", LocalDateTime.now(), metaObject);
     }
 

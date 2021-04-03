@@ -15,7 +15,7 @@ spring:
   redis:
     database: 0
     host: 127.0.0.1
-    port: 6379
+    port: 8179
     password: RocketAdmin123
     lettuce:
       pool:
