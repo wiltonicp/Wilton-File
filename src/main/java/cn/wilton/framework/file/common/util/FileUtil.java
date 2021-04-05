@@ -186,7 +186,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
         String documents = "txt doc pdf ppt pps xlsx xls docx";
         String music = "mp3 wav wma mpa ram ra aac aif m4a";
         String video = "avi mpg mpe mpeg asf wmv mov qt rm mp4 flv m4v webm ogv ogg";
-        String image = "bmp dib pcp dif wmf gif jpg tif eps psd cdr iff tga pcd mpt png jpeg";
+        String image = "bmp dib pcp dif wmf gif jpg tif eps psd cdr iff tga pcd mpt png jpeg ico";
         if (image.contains(type)) {
             return FileTypeEnum.IMAGE.getCode();
         } else if (documents.contains(type)) {
@@ -268,23 +268,27 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
      * @param request
      * @param response
      * @param file
+     * @param fileName 下载文件名称
      * @param deleteOnExit 下载后是否删除源文件
      * @throws WiltonException
      */
-    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file, boolean deleteOnExit) throws WiltonException {
+    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file,String fileName, boolean deleteOnExit) throws WiltonException {
         if (!file.exists()) {
             throw new WiltonException("文件未找到");
         }
         response.setCharacterEncoding(request.getCharacterEncoding());
+        // 设置强制下载不打开
+        //response.setContentType("application/force-download");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + java.net.URLEncoder.encode(file.getName(), "UTF-8"));
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
+            response.addHeader(HttpHeaders.CONTENT_LENGTH, "" + file.length());
             IOUtils.copy(fis, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            throw new WiltonException("文件下载失败！");
         } finally {
             if (fis != null) {
                 try {

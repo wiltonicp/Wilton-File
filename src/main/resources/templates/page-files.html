@@ -116,9 +116,23 @@
                         <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         </ul>
                     </li>
-                    <li class=" ">
+                    <li class="">
                         <a th:href="@{/}" class="">
                             <i class="las la-stopwatch iq-arrow-left"></i><span>我的分享</span>
+                        </a>
+                        <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a th:href="@{/}" class="">
+                            <i class="las la-stopwatch iq-arrow-left"></i><span>回收站</span>
+                        </a>
+                        <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        </ul>
+                    </li>
+                    <li class="" sec:authorize="hasRole('manage:view')">
+                        <a th:href="@{/admin}" class="">
+                            <i class="las la-stopwatch iq-arrow-left"></i><span>用户管理</span>
                         </a>
                         <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                         </ul>
@@ -232,7 +246,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="profile-detail mt-3">
-                                                    <h5><a href="user-profile-edit.html" th:text="${userName}">Ranger</a></h5>
+                                                    <h5><a href="user-profile-edit.html" th:text="${userName}"></a></h5>
                                                     <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
                                                 </div>
                                                 <a th:href="@{/logout}" class="btn btn-primary">退出</a>
@@ -282,7 +296,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <!-- Modal -->
+                    <!-- 新建文件夹 -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -325,8 +339,9 @@
                                                 <i class="ri-more-2-fill"></i>
                                             </span>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
+                                                <a class="dropdown-item" href="#" th:onclick="deleteFolder([[${folder.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                <a class="dropdown-item change-folder" th:attr="data-id=${folder.id},data-name=${folder.folderName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
                                             </div>
                                         </div>
                                     </div>
@@ -360,8 +375,10 @@
                                                 <i class="ri-more-2-fill"></i>
                                             </span>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
+                                                <a class="dropdown-item" href="#" th:onclick="deleteFile([[${file.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                <a class="dropdown-item change-file-name" th:attr="data-id=${file.id},data-name=${file.fileName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                <a class="dropdown-item" th:href="@{'/download/file?fileId=' + ${file.id}}"><i class="ri-file-download-fill mr-2"></i>下载</a>
                                             </div>
                                         </div>
                                     </div>
@@ -411,9 +428,9 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#" th:onclick="initFolder([[${folder.id}]])"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="deleteFolder([[${folder.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                        <a class="dropdown-item change-folder" th:attr="data-id=${folder.id},data-name=${folder.folderName}"><i class="ri-pencil-fill mr-2"></i>重命名</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -448,10 +465,10 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
+                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="deleteFile([[${file.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                        <a class="dropdown-item change-file-name" th:attr="data-id=${file.id},data-name=${file.fileName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                        <a class="dropdown-item" th:href="@{'/download/file?fileId=' + ${file.id}}"><i class="ri-file-download-fill mr-2"></i>下载</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -533,6 +550,7 @@
 <script th:src="@{/assets/js/iconfont.js}"></script>
 <script th:src="@{/assets/webuploader/webuploader.js}"></script>
 <script th:src="@{/assets/js/wilton-file-upload.js}"></script>
+<script th:src="@{/assets/js/wilton-confirm.js}"></script>
 
 <!-- Chart Custom JavaScript -->
 <script th:src="@{/assets/js/customizer.js}"></script>
@@ -647,15 +665,70 @@
     }
 
     /**
+     * 修改文件夹名称
+     */
+    $(document).on("click",".change-folder",function(){
+        var folderId = $(this).data("id");
+        var folderName = $(this).data("name");
+        $.confirm({
+            id: folderId,
+            title: '重命名文件夹',
+            jconfrimName: folderName,
+            confirm: function () {
+                var folderId = $('#jconfrimId').val();
+                $.ajax({
+                    url:"/folder/update",
+                    type:"POST",
+                    data:{id:folderId,folderName:$('#jconfrimName').val()},
+                    success:function (result) {
+                        $('#jconfrimName').val('');
+                        initFolder(getFolderId())
+                    }
+                });
+            }
+        });
+    });
+
+    /**
+     * 修改文件名称
+     */
+    $(document).on("click",".change-file-name",function(){
+        var fileId = $(this).data("id");
+        var fileName = $(this).data("name");
+        $.confirm({
+            id: fileId,
+            title: '重命名文件',
+            jconfrimName: fileName,
+            confirm: function () {
+                var fileId = $('#jconfrimId').val();
+                $.ajax({
+                    url:"/file/update",
+                    type:"POST",
+                    data:{id:fileId,fileName:$('#jconfrimName').val()},
+                    success:function (result) {
+                        $('#jconfrimName').val('');
+                        initFolder(getFolderId())
+                    }
+                });
+            }
+        });
+    });
+
+    /**
      * 删除文件
      */
     function deleteFile(fileId){
-        $.ajax({
-            url:"/folder/delete",
-            type:"POST",
-            data:{folderName:folderName,parentId:parentId},
-            success:function (result) {
-                initFolder(result.data.id)
+        $.confirm({
+            content: '确认要删除选中的文件到回收站？',
+            confirm: function () {
+                $.ajax({
+                    url:"/file/delete",
+                    type:"POST",
+                    data:{fileId:fileId},
+                    success:function (result) {
+                        initFolder(getFolderId())
+                    }
+                });
             }
         });
     }
@@ -664,7 +737,19 @@
      * 删除文件夹
      */
     function deleteFolder(folderId){
-
+        $.confirm({
+            content: '确认要删除选中的文件到回收站？',
+            confirm: function () {
+                $.ajax({
+                    url:"/folder/delete",
+                    type:"POST",
+                    data:{folderId:folderId},
+                    success:function (result) {
+                        initFolder(getFolderId())
+                    }
+                });
+            }
+        });
     }
 
     /**

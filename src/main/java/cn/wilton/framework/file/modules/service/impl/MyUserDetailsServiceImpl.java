@@ -10,13 +10,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,8 +49,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
             put("username", username);
         }});
         if (CollectionUtils.isEmpty(users)) {
-            log.info("账号输入错误，查询不到用户");
-            return null;
+            throw new UsernameNotFoundException("账号输入错误!");
         }
         User user = users.get(0);
         List<UserRole> userRoles = userRoleMapper.selectByMap(new HashMap<String, Object>() {{
@@ -54,37 +57,27 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         }});
         log.info("userRoles ={}",userRoles);
         if (CollectionUtils.isEmpty(userRoles)) {
-            log.info("该用户尚未分配角色");
-            return null;
+            throw new UsernameNotFoundException("该用户尚未分配角色!");
         }
         List<Long> roleIds = userRoles.stream().map(UserRole::getRoleId).distinct().collect(Collectors.toList());
         log.info("roleIds ={}",roleIds);
         List<RolePermission> rolePermissions = rolePermissionMapper.selectList(new QueryWrapper<RolePermission>().in("role_id", roleIds));
         log.info("rolePermissions ={}",rolePermissions);
         if(CollectionUtils.isEmpty(rolePermissions)){
-            log.info("所有均角色尚未绑定权限");
-            return null;
+            throw new UsernameNotFoundException("所有均角色尚未绑定权限!");
         }
         List<Long> permissionIds = rolePermissions.stream().map(RolePermission::getPermissionId).distinct().collect(Collectors.toList());
         log.info("permissionIds ={}",permissionIds);
         List<Permission> permissions = permissionMapper.selectBatchIds(permissionIds);
         log.info("permissions ={}",permissions);
         if(CollectionUtils.isEmpty(permissions)){
-            log.info("权限不存在");
-            return null;
+            throw new UsernameNotFoundException("权限不存在!");
         }
-        List<String> codes = permissions.stream().map(Permission::getCode).distinct().collect(Collectors.toList());
         String permissionStr = permissions.stream().map(Permission::getCode).collect(Collectors.joining(","));
-        String[] perArray = new String[codes.size()];
-        codes.toArray(perArray);
         boolean notLocked = true;
         AdminAuthUser authUser = new AdminAuthUser(user.getUsername(), user.getPassword(), true, true, true, notLocked,
                 AuthorityUtils.commaSeparatedStringToAuthorityList(permissionStr));
         BeanUtils.copyProperties(user,authUser);
         return authUser;
-//        return org.springframework.security.core.userdetails.User
-//                .withUsername(user.getUsername())
-//                .password(user.getPassword())
-//                .authorities(perArray).build();
     }
 }

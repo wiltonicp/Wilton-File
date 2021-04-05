@@ -1,10 +1,13 @@
 package cn.wilton.framework.file.common.entity;
 
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 
 /**
@@ -87,4 +90,9 @@ public class FileEntity extends BaseEntity{
      */
     @TableField(exist = false)
     private String createdByName;
+
+    public void update(){
+        this.setModifyBy(SecurityUtil.getLoginUser().getId());
+        this.setModifyTime(LocalDateTime.now());
+    }
 }

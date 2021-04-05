@@ -4,6 +4,7 @@ import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -50,13 +51,27 @@ public class FolderController {
     }
 
     /**
+     * 修改文件夹名称
+     * @param folderEntity
+     * @return
+     */
+    @PostMapping("/update")
+    public@ResponseBody WiltonResult<Void> update(FolderEntity folderEntity){
+        FolderEntity entity = folderService.getById(folderEntity.getId());
+        BeanUtils.copyProperties(folderEntity,entity);
+        entity.update();
+        folderService.updateById(entity);
+        return WiltonResult.success();
+    }
+
+    /**
      * 删除文件夹
      * @param folderId
      * @return
      */
     @PostMapping("/delete")
     public@ResponseBody WiltonResult<Void> delete(long folderId){
-        boolean b = folderService.removeById(folderId);
+        folderService.removeById(folderId);
         return WiltonResult.success();
     }
 

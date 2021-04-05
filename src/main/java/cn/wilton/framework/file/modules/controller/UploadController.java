@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,7 +90,7 @@ public class UploadController {
      */
     @GetMapping("downloadFile")
     public void downLoadFile(String fileName, HttpServletResponse response) {
-        File file = new File(properties.path + File.separator + "real" + File.separator + fileName);
+        File file = new File(properties.path + File.separator + WiltonConstant.REAL_PATH + File.separator + fileName);
         if (file.exists()) {
             InputStream is = null;
             OutputStream os = null;
@@ -98,7 +99,7 @@ public class UploadController {
                 // 设置强制下载不打开
                 response.setContentType("application/force-download");
                 //设置下载文件名
-                response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+                response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
                 response.addHeader("Content-Length", "" + file.length());
                 //定义输入输出流
                 os = new BufferedOutputStream(response.getOutputStream());

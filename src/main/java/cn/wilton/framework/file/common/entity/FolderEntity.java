@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.common.entity;
 
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -57,6 +58,11 @@ public class FolderEntity extends BaseEntity{
 
     public void created(){
         this.type = 0L;
+    }
+
+    public void update(){
+        this.setModifyBy(SecurityUtil.getLoginUser().getId());
+        this.setModifyTime(LocalDateTime.now());
     }
 
 }

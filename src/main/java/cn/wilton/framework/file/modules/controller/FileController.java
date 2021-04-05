@@ -12,6 +12,7 @@ import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,15 @@ public class FileController {
         model.addAttribute("fileList",fileList);
         model.addAttribute("folderList",folderList);
         return "page-files::gridList";
+    }
+
+    @PostMapping("/update")
+    public@ResponseBody WiltonResult<Void> update(FileEntity fileEntity){
+        FileEntity entity = fileService.getById(fileEntity.getId());
+        BeanUtils.copyProperties(fileEntity,entity);
+        entity.update();
+        fileService.updateById(entity);
+        return WiltonResult.success();
     }
 
     /**

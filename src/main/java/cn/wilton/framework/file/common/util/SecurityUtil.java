@@ -2,10 +2,14 @@ package cn.wilton.framework.file.common.util;
 
 import cn.wilton.framework.file.common.entity.AdminAuthUser;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -41,5 +45,19 @@ public class SecurityUtil {
      */
     public static Object getCurrentPrincipal(){
         return getUserAuthentication().getPrincipal();
+    }
+
+    /**
+     * 判断是否具有此权限
+     * @param roleName
+     * @return
+     */
+    public Boolean hasRole(String roleName) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<String> roleCodes=new ArrayList<>();
+        userDetails.getAuthorities().forEach(authority ->{
+            roleCodes.add(authority.getAuthority());
+        });
+        return roleCodes.contains(roleName);
     }
 }
