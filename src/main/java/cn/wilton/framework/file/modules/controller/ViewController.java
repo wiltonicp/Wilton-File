@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class ViewController {
     @GetMapping("/")
     public String files(Model model,Long fid){
         model.addAttribute("fid",fid);
-        model.addAttribute("userName","Ranger");
+        model.addAttribute("userName", SecurityUtil.getLoginUser().getFullName());
         return "page-files";
     }
 
@@ -37,4 +38,12 @@ public class ViewController {
         return "page-share";
     }
 
+    /**
+     * 回收站
+     * @return
+     */
+    @GetMapping("/recycle")
+    public String recycle(){
+        return "page-recycle";
+    }
 }

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<nav class="iq-sidebar-menu">
+    <ul id="iq-sidebar-toggle" class="iq-menu">
+        <li class="active">
+            <a th:href="@{/}" class="">
+                <i class="fa fa-file mr-1"></i><span>我的资源</span>
+            </a>
+            <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            </ul>
+        </li>
+        <li class="">
+            <a th:href="@{/share}" class="">
+                <i class="fa fa-share-square mr-1"></i><span>我的分享</span>
+            </a>
+            <ul id="page-share" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            </ul>
+        </li>
+        <li class="">
+            <a th:href="@{/recycle}" class="">
+                <i class="fa fa-trash mr-1"></i><span>回收站</span>
+            </a>
+            <ul id="page-recycle" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            </ul>
+        </li>
+        <li class="" sec:authorize="hasRole('manage:view')">
+            <a th:href="@{/admin}" class="">
+                <i class="fa fa-user mr-1"></i><span>用户管理</span>
+            </a>
+            <ul id="page-admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            </ul>
+        </li>
+    </ul>
+</nav>
+</html>

@@ -234,131 +234,8 @@
     <div class="content-page">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
-                        <h6>全部文件</h6>
-                        <div class="d-flex align-items-center">
-                            <div class="list-grid-toggle mr-4">
-                                <span class="icon icon-grid i-grid"><i class="ri-layout-grid-line font-size-20"></i></span>
-                                <span class="icon icon-grid i-list"><i class="ri-list-check font-size-20"></i></span>
-                                <span class="label label-list">List</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12" id="breadcrumb" th:fragment="breadcrumbList">
-                    <div class="navbar-breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item " th:each="bc,loopStatus:${breadcrumb}" th:attr="data-id=${bc.id}">
-                                    <a th:if="${loopStatus.count} eq ${loopStatus.size}" th:text="${bc.folderName}"></a>
-                                    <a th:if="${loopStatus.count} ne ${loopStatus.size}" th:text="${bc.folderName}" th:onclick="initFolder([[${bc.id}]])" href="#" ></a>
-                                </li>
-                                <li class="breadcrumb-item" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">
-                                    <a href="#">
-                                        <svg class="my-icon svg-icon" aria-hidden="true">
-                                            <use xlink:href="#icon-wenjianjia"></use>
-                                        </svg>
-                                        <span>文件夹</span>
-                                    </a>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- 新建文件夹 -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="border-bottom:none">
-                                    <h5 class="modal-title" id="exampleModalLabel">新建文件夹</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="">
-                                    <div class="form-group col-md-12">
-                                        <input type="text" autocomplete="off" class="form-control" id="folderName">
-                                    </div>
-                                </div>
-                                <div class="modal-footer" style="border-top:none">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 25%;">取消</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addFolder()" style="width: 25%;">确认</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="icon icon-grid i-grid">
-                <div class="row" id="gridTable" style="width: -webkit-fill-available;" th:fragment="gridTable">
-                    <div class="col-lg-3 col-md-6 col-sm-6" th:each="folder:${folderList}">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb" style="cursor:pointer">
-                                <div class="mb-4 text-center p-3 rounded iq-thumb" th:onclick="initFolder([[${folder.id}]])">
-                                    <div class="iq-image-overlay"></div>
-                                    <svg class="my-icon svg-icon" aria-hidden="true" style="width: 100px;height: 100px;">
-                                        <use xlink:href="#icon-wenjianjia2"></use>
-                                    </svg>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <h6 th:text="${folder.folderName}"></h6>
-                                    <div class="card-header-toolbar">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle" id="dropdownMenuButton01" data-toggle="dropdown">
-                                                <i class="ri-more-2-fill"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
-                                                <a class="dropdown-item" href="#" th:onclick="deleteFolder([[${folder.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                <a class="dropdown-item change-folder" th:attr="data-id=${folder.id},data-name=${folder.folderName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6" th:each="file:${fileList}">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body image-thumb" style="cursor:pointer">
-                                <div th:if="${file.fileType} ne 'image'" class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <div class="iq-image-overlay"></div>
-                                    <a href="#" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'pdf')}" src="assets/images/layouts/page-7/pdf.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'doc')}" src="assets/images/layouts/page-7/doc.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'xls')}" src="assets/images/layouts/page-7/xlsx.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'ppt')}" src="assets/images/layouts/page-7/ppt.png" class="img-fluid" alt="image1">
-                                    </a>
-                                </div>
-                                <div th:if="${file.fileType} eq 'image'" class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <a class="image-popup-vertical-fit" th:href="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}">
-                                        <img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" class="img-fluid" alt="images" />
-                                        <div class="iq-image-overlay"></div>
-                                    </a>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <h6 th:text="${file.fileName}"></h6>
-                                    <div class="card-header-toolbar">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle" id="dropdownMenuButton01" data-toggle="dropdown">
-                                                <i class="ri-more-2-fill"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
-                                                <a class="dropdown-item" href="#" th:onclick="deleteFile([[${file.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                <a class="dropdown-item change-file-name" th:attr="data-id=${file.id},data-name=${file.fileName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
-                                                <a class="dropdown-item" th:href="@{'/download/file?fileId=' + ${file.id}}"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="icon icon-grid i-list">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card card-block card-stretch card-height">
@@ -368,9 +245,9 @@
                                         <thead>
                                         <tr>
                                             <th scope="col" th:text="文件名"></th>
+                                            <th scope="col" th:text="原位置"></th>
                                             <th scope="col" th:text="文件大小"></th>
                                             <th scope="col" th:text="种类"></th>
-                                            <th scope="col" th:text="上传者"></th>
                                             <th scope="col" th:text="修改时间"></th>
                                             <th scope="col" th:text="操作"></th>
                                         </tr>
@@ -397,9 +274,8 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
-                                                        <a class="dropdown-item" href="#" th:onclick="deleteFolder([[${folder.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item change-folder" th:attr="data-id=${folder.id},data-name=${folder.folderName}"><i class="ri-pencil-fill mr-2"></i>重命名</a>
+                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>还原</a>
+                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -434,10 +310,8 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>分享</a>
-                                                        <a class="dropdown-item" href="#" th:onclick="deleteFile([[${file.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item change-file-name" th:attr="data-id=${file.id},data-name=${file.fileName}" href="#"><i class="ri-pencil-fill mr-2"></i>重命名</a>
-                                                        <a class="dropdown-item" th:href="@{'/download/file?fileId=' + ${file.id}}"><i class="ri-file-download-fill mr-2"></i>下载</a>
+                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>还原</a>
+                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -465,54 +339,6 @@
         </div>
     </div>
 </footer>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Title</h4>
-                <div>
-                    <a class="btn" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div id="resolte-contaniner" style="height: 500px;" class="overflow-auto">
-                    File not found
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">文件上传</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="drop-box" id="upload-file-container" style="cursor:pointer;">
-                    <div class="drop-text" rel="drop_text">把文件拖到这里，即可上传</div>
-                    <div class="btn-wrap">
-                        <div id="picker">添加文件</div>
-                    </div>
-                </div>
-                <div class="upload-box-list hider" id="hasfile">
-                    <ul id="thelist">
-                    </ul>
-                </div>
-                <div class="upload-status" id="hasfileBtn" style="display: none">
-                    <div class="btn btn-primary" style="float: left;" onclick="$('#upload-file-container').find('input').click()">添加文件</div>
-                    <a href="javascript:;" onclick="cleanFileList()" style="float: right;">清空已完成任务</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Backend Bundle JavaScript -->
 <script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
@@ -562,25 +388,13 @@
      * @param folderId
      */
     function listFile(folderId){
-        list1(folderId);
         list2(folderId);
         var path = getUrlAndPort();
         setUrl(path + "?fid=" + folderId);
     }
-
-    function list1(folderId){
-        $.ajax({
-            url:"/file/list",
-            type:"GET",
-            data:{folderId:folderId},
-            success:function (data) {
-                $("#gridTable").html(data);
-            }
-        });
-    }
     function list2(folderId){
         $.ajax({
-            url:"/file/listToTable",
+            url:"/recycle/listToTable",
             type:"GET",
             data:{folderId:folderId},
             success:function (data) {
@@ -588,100 +402,6 @@
             }
         });
     }
-
-    /**
-     * 导航信息
-     * @param folderId
-     */
-    function initBreadcrumb(folderId){
-        $.ajax({
-            url:"/folder/" + folderId,
-            type:"GET",
-            success:function (data) {
-                $("#breadcrumb").html(data);
-            }
-        });
-    }
-
-    /**
-     * 进入下一层文件夹
-     * @param id  文件夹id
-     */
-    function initFolder(folderId){
-        initBreadcrumb(folderId);
-        listFile(folderId);
-    }
-
-    /**
-     * 新增文件夹
-     */
-    function addFolder(){
-        let jQuery = $(".breadcrumb").children().last().prev();
-        let parentId = $(jQuery).data("id");
-        let folderName = $('#folderName').val();
-        if(folderName == '' || folderName == null){
-            alert("文件夹不能为空!");
-            return
-        }
-        $.ajax({
-            url:"/folder/add",
-            type:"POST",
-            data:{folderName:folderName,parentId:parentId},
-            success:function (result) {
-                initFolder(result.data.id)
-            }
-        });
-    }
-
-    /**
-     * 修改文件夹名称
-     */
-    $(document).on("click",".change-folder",function(){
-        var folderId = $(this).data("id");
-        var folderName = $(this).data("name");
-        $.confirm({
-            id: folderId,
-            title: '重命名文件夹',
-            jconfrimName: folderName,
-            confirm: function () {
-                var folderId = $('#jconfrimId').val();
-                $.ajax({
-                    url:"/folder/update",
-                    type:"POST",
-                    data:{id:folderId,folderName:$('#jconfrimName').val()},
-                    success:function (result) {
-                        $('#jconfrimName').val('');
-                        initFolder(getFolderId())
-                    }
-                });
-            }
-        });
-    });
-
-    /**
-     * 修改文件名称
-     */
-    $(document).on("click",".change-file-name",function(){
-        var fileId = $(this).data("id");
-        var fileName = $(this).data("name");
-        $.confirm({
-            id: fileId,
-            title: '重命名文件',
-            jconfrimName: fileName,
-            confirm: function () {
-                var fileId = $('#jconfrimId').val();
-                $.ajax({
-                    url:"/file/update",
-                    type:"POST",
-                    data:{id:fileId,fileName:$('#jconfrimName').val()},
-                    success:function (result) {
-                        $('#jconfrimName').val('');
-                        initFolder(getFolderId())
-                    }
-                });
-            }
-        });
-    });
 
     /**
      * 删除文件
@@ -719,36 +439,6 @@
                 });
             }
         });
-    }
-
-    /**
-     * 清除上传历史
-     */
-    function cleanFileList(){
-        $('#thelist').html("");
-        $('#hasfile').addClass("hider");
-        $('#hasfileBtn').css("display","none");
-        $('#upload-file-container').css("display","");
-    }
-
-    /**
-     * 计算文件大小
-     * @param size
-     * @returns {string}
-     */
-    function getfilesize(size) {
-        if (!size)
-            return "";
-        var num = 1024.00; //byte
-        if (size < num)
-            return size + "B";
-        if (size < Math.pow(num, 2))
-            return (size / num).toFixed(2) + "KB"; //kb
-        if (size < Math.pow(num, 3))
-            return (size / Math.pow(num, 2)).toFixed(2) + "MB"; //M
-        if (size < Math.pow(num, 4))
-            return (size / Math.pow(num, 3)).toFixed(2) + "GB"; //G
-        return (size / Math.pow(num, 4)).toFixed(2) + "TB"; //T
     }
 
     /**
