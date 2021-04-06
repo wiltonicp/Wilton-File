@@ -93,7 +93,7 @@ public class FileController {
      */
     @GetMapping("thumb")
     public@ResponseBody void preview(String fid, Long md, HttpServletResponse response) throws BizException{
-        FileEntity fileEntity = fileService.getById(Long.valueOf(FileUtil.getFileNameNoEx(fid)));
+        FileEntity fileEntity = fileService.getByFileId(Long.valueOf(FileUtil.getFileNameNoEx(fid)));
         if(fileEntity == null){
             new BizException("参数无效!");
         }

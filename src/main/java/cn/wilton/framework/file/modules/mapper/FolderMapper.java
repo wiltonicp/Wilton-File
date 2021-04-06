@@ -23,4 +23,25 @@ public interface FolderMapper extends BaseMapper<FolderEntity> {
      */
     @SqlParser(filter = true)
     List<FolderEntity> findParentById(Long id);
+
+    /**
+     * 查询已经被删除的列表
+     * @param createdBy
+     * @return
+     */
+    List<FolderEntity> deletedList(long createdBy);
+
+    /**
+     * 还原文件
+     * @param id
+     * @return
+     */
+    boolean restoreById(long id);
+
+    /**
+     * 永久删除
+     * @param id
+     * @return
+     */
+    boolean deletePermanentlyById(long id);
 }

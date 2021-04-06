@@ -22,8 +22,9 @@ public class ViewController {
     }
 
     @GetMapping("/")
-    public String files(Model model,Long fid){
+    public String file(Model model,Long fid){
         model.addAttribute("fid",fid);
+        model.addAttribute("cid",10010);
         model.addAttribute("userName", SecurityUtil.getLoginUser().getFullName());
         return "page-files";
     }
@@ -34,7 +35,8 @@ public class ViewController {
      * @return
      */
     @GetMapping("/share")
-    public String share(Model model){
+    public String share(Model model) {
+        model.addAttribute("cid",10012);
         return "page-share";
     }
 
@@ -43,7 +45,8 @@ public class ViewController {
      * @return
      */
     @GetMapping("/recycle")
-    public String recycle(){
+    public String recycle(Model model){
+        model.addAttribute("cid",10013);
         return "page-recycle";
     }
 }

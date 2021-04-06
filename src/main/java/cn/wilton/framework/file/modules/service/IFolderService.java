@@ -20,4 +20,24 @@ public interface IFolderService extends IService<FolderEntity> {
      * @return
      */
     List<FolderEntity> findParentById(Long id);
+
+    /**
+     * 查询已经被删除的列表
+     * @return
+     */
+    List<FolderEntity> deletedList();
+
+    /**
+     * 还原文件
+     * @param id
+     * @return
+     */
+    boolean restoreById(long id);
+
+    /**
+     * 永久删除
+     * @param id
+     * @return
+     */
+    boolean deletePermanentlyById(long id);
 }

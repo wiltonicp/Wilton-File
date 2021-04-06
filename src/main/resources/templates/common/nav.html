@@ -2,30 +2,31 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<nav class="iq-sidebar-menu">
+<body th:fragment="nav">
+<nav class="iq-sidebar-menu" style="height: 75%;">
     <ul id="iq-sidebar-toggle" class="iq-menu">
-        <li class="active">
+        <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
             <a th:href="@{/}" class="">
                 <i class="fa fa-file mr-1"></i><span>我的资源</span>
             </a>
             <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
-        <li class="">
+        <li class="" th:classappend="${cid == 10012} ? 'active' : '' ">
             <a th:href="@{/share}" class="">
                 <i class="fa fa-share-square mr-1"></i><span>我的分享</span>
             </a>
             <ul id="page-share" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
-        <li class="">
+        <li class="" th:classappend="${cid == 10013} ? 'active' : '' ">
             <a th:href="@{/recycle}" class="">
                 <i class="fa fa-trash mr-1"></i><span>回收站</span>
             </a>
             <ul id="page-recycle" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
-        <li class="" sec:authorize="hasRole('manage:view')">
+        <li class="" sec:authorize="hasRole('manage:view')" th:classappend="${cid == 10014} ? 'active' : '' ">
             <a th:href="@{/admin}" class="">
                 <i class="fa fa-user mr-1"></i><span>用户管理</span>
             </a>
@@ -34,4 +35,31 @@
         </li>
     </ul>
 </nav>
+<div class="sidebar-bottom">
+    <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
+    <p>17.1 / 20 GB 已使用</p>
+    <div class="iq-progress-bar mb-3">
+                    <span class="bg-primary iq-progress progress-1" data-percent="67">
+                    </span>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    var cid = [[${cid}]];
+    var path = getUrlAndPort();
+    setUrl(path + "?cid=" + cid);
+    /**
+     * @description 设置url
+     */
+    function setUrl(url) {
+        history.pushState({url: url, title: document.title}, document.title, url)
+    }
+    /**
+     * @description 获取ip和端口
+     */
+    function getUrlAndPort() {
+        let host = location.pathname;
+        return host;
+    }
+</script>
+</body>
 </html>

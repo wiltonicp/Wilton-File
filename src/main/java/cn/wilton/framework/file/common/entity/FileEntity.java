@@ -91,6 +91,12 @@ public class FileEntity extends BaseEntity{
     @TableField(exist = false)
     private String createdByName;
 
+    /**
+     * 文件夹名称
+     */
+    @TableField(exist = false)
+    private String folderName;
+
     public void update(){
         this.setModifyBy(SecurityUtil.getLoginUser().getId());
         this.setModifyTime(LocalDateTime.now());

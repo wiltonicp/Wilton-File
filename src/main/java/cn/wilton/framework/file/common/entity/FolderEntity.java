@@ -56,6 +56,12 @@ public class FolderEntity extends BaseEntity{
     @TableField(exist = false)
     private String createdByName;
 
+    /**
+     * 父路径名称
+     */
+    @TableField(exist = false)
+    private String parentName;
+
     public void created(){
         this.type = 0L;
     }

@@ -3,6 +3,7 @@ package cn.wilton.framework.file.modules.service.impl;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.FileUtil;
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.mapper.FileMapper;
 import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.service.IFileService;
@@ -44,5 +45,29 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileEntity> impleme
                 .eq(fileMd5 != null, "file_md5", fileMd5)
                 .eq("deleted",0)
         );
+    }
+
+    @Override
+    public FileEntity getByFileId(long id) {
+        return this.baseMapper.getByFileId(id);
+    }
+
+    @Override
+    public List<FileEntity> deletedList() {
+        List<FileEntity> list = this.baseMapper.deletedList(SecurityUtil.getLoginUser().getId());
+        list.forEach(file ->{
+            file.setFileSizeVal(FileUtil.getSize(file.getFileSize()));
+        });
+        return list;
+    }
+
+    @Override
+    public boolean restoreById(long id) {
+        return this.baseMapper.restoreById(id);
+    }
+
+    @Override
+    public boolean deletePermanentlyById(long id) {
+        return this.baseMapper.deletePermanentlyById(id);
     }
 }

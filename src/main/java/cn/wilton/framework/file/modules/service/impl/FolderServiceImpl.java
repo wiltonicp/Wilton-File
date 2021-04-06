@@ -2,6 +2,7 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.common.entity.User;
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.mapper.FolderMapper;
 import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.service.IFolderService;
@@ -38,5 +39,20 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, FolderEntity> i
     @Override
     public List<FolderEntity> findParentById(Long id) {
         return this.baseMapper.findParentById(id);
+    }
+
+    @Override
+    public List<FolderEntity> deletedList() {
+        return this.baseMapper.deletedList(SecurityUtil.getLoginUser().getId());
+    }
+
+    @Override
+    public boolean restoreById(long id) {
+        return this.baseMapper.restoreById(id);
+    }
+
+    @Override
+    public boolean deletePermanentlyById(long id) {
+        return this.baseMapper.deletePermanentlyById(id);
     }
 }

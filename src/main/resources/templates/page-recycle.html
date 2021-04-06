@@ -93,147 +93,25 @@
             </div>
         </div>
         <div class="data-scrollbar" data-scroll="1">
-            <div class="new-create select-dropdown input-prepend input-append">
-                <div class="btn-group" style="cursor: pointer;">
-                    <label data-toggle="dropdown">
-                        <div class="search-query selet-caption" style="cursor: pointer;color: #fff;background: #613F9D"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
-                        <span class="caret"><!--icon--></span>
-                    </label>
-                    <ul class="dropdown-menu">
-                        <li data-toggle="modal" data-target="#exampleModalCenter"><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
-                        <li data-toggle="modal" data-target=".bd-example-modal-lg">
-                            <div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div th:include="common/nav.html" style="height: 75%;"></div>
-            <div class="sidebar-bottom">
-                <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
-                <p>17.1 / 20 GB 已使用</p>
-                <div class="iq-progress-bar mb-3">
-                    <span class="bg-primary iq-progress progress-1" data-percent="67">
-                    </span>
-                </div>
-            </div>
+            <div th:replace="common/nav::nav"></div>
         </div>
-    </div>       <div class="iq-top-navbar">
-    <div class="iq-navbar-custom">
-        <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
-                <i class="ri-menu-line wrapper-menu"></i>
-                <a href="index.html" class="header-logo">
-                    <img src="assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
-                    <img src="assets/images/logo.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
-                </a>
-            </div>
-            <div class="iq-search-bar device-search">
-
-                <form>
-                    <div class="input-prepend input-append">
-                        <div class="btn-group">
-                            <label class="dropdown-toggle searchbox" data-toggle="dropdown">
-                                <input class="dropdown-toggle search-query text search-input" type="text"  placeholder="请输入你要搜索的内容..."><span class="search-replace"></span>
-                                <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                                <span class="caret"><!--icon--></span>
-                            </label>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><div class="item"><i class="far fa-file-alt bg-primary"></i>文档</div></a></li>
-                                <li><a href="#"><div class="item"><i class="far fa-file-excel bg-success"></i>音乐</div></a></li>
-                                <li><a href="#"><div class="item"><i class="far fa-file-image bg-warning"></i>图片</div></a></li>
-                                <li><a href="#"><div class="item"><i class="far fa-file-video bg-info"></i>视频</div></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="d-flex align-items-center">
-                <div class="change-mode">
-                    <div class="custom-control custom-switch custom-switch-icon custom-control-inline">
-                        <div class="custom-switch-inner">
-                            <p class="mb-0"> </p>
-                            <input type="checkbox" class="custom-control-input" id="dark-mode" data-active="true">
-                            <label class="custom-control-label" for="dark-mode" data-mode="toggle">
-                                <span class="switch-icon-left"><i class="a-left"></i></span>
-                                <span class="switch-icon-right"><i class="a-right"></i></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-label="Toggle navigation">
-                    <i class="ri-menu-3-line"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                        <li class="nav-item nav-icon search-content">
-                            <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ri-search-line"></i>
-                            </a>
-                            <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
-                                <form action="#" class="searchbox p-2">
-                                    <div class="form-group mb-0 position-relative">
-                                        <input type="text" class="text search-input font-size-12" placeholder="type here to search...">
-                                        <a href="#" class="search-link"><i class="las la-search"></i></a>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                        <li class="nav-item nav-icon dropdown">
-                            <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <i class="ri-settings-3-line"></i>
-                            </a>
-                            <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton02">
-                                <div class="card shadow-none m-0">
-                                    <div class="card-body p-0 ">
-                                        <div class="p-3">
-                                            <a href="#" class="iq-sub-card pt-0"><i class="ri-settings-3-line"></i>  设置</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item nav-icon dropdown caption-content">
-                            <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <div class="caption bg-primary line-height">R</div>
-                            </a>
-                            <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton03">
-                                <div class="card mb-0">
-                                    <div class="card-header d-flex justify-content-between align-items-center mb-0">
-                                        <div class="header-title">
-                                            <h4 class="card-title mb-0"> 个人信息</h4>
-                                        </div>
-                                        <div class="close-data text-right badge badge-primary cursor-pointer "><i class="ri-close-fill"></i></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="profile-header">
-                                            <div class="cover-container text-center">
-                                                <div class="rounded-circle profile-icon bg-primary mx-auto d-block">
-                                                    P
-                                                    <a href="">
-
-                                                    </a>
-                                                </div>
-                                                <div class="profile-detail mt-3">
-                                                    <h5><a href="user-profile-edit.html" th:text="${userName}"></a></h5>
-                                                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
-                                                </div>
-                                                <a th:href="@{/logout}" class="btn btn-primary">退出</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     </div>
-</div>
+    <div class="iq-top-navbar" >
+        <div th:replace="common/navbar::navbar"></div>
+    </div>
     <div class="content-page">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
+                        <h6>全部文件</h6>
+                        <div class="d-flex align-items-center">
+                            <div class="list-grid-toggle mr-4">
+                                文件保留15天后自动删除。
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="icon icon-grid i-grid">
                 <div class="row">
@@ -264,9 +142,9 @@
                                                     <div data-load-file="file" style="cursor: pointer;" th:text="${folder.folderName}"></div>
                                                 </div>
                                             </td>
-                                            <td> </td>
+                                            <td th:text="${folder.parentName}"></td>
+                                            <td></td>
                                             <td>文件夹</td>
-                                            <td th:text="${folder.createdByName}"></td>
                                             <td th:text="${#temporals.format(folder.modifyTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td>
                                                 <div class="dropdown">
@@ -274,8 +152,8 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>还原</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="restoreFolder([[${folder.id}]])"><i class="fa fa-share-square mr-2"></i>还原</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="deleteFolder([[${folder.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -300,9 +178,9 @@
                                                     <div th:text="${file.fileName}" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;"></div>
                                                 </div>
                                             </td>
+                                            <td th:text="${file.folderName}"></td>
                                             <td th:text="${file.fileSizeVal}"></td>
                                             <td th:text="${file.fileType}"></td>
-                                            <td th:text="${file.createdByName}"></td>
                                             <td th:text="${#temporals.format(file.modifyTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td>
                                                 <div class="dropdown">
@@ -310,8 +188,8 @@
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="fa fa-share-square mr-2"></i>还原</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="restoreFile([[${file.id}]])"><i class="fa fa-share-square mr-2"></i>还原</a>
+                                                        <a class="dropdown-item" href="#" th:onclick="deleteFile([[${file.id}]])"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -343,7 +221,6 @@
 <script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
 <script th:src="@{/assets/js/iconfont.js}"></script>
-<script th:src="@{/assets/webuploader/webuploader.js}"></script>
 <script th:src="@{/assets/js/wilton-file-upload.js}"></script>
 <script th:src="@{/assets/js/wilton-confirm.js}"></script>
 
@@ -375,30 +252,53 @@
 <!-- app JavaScript -->
 <script th:src="@{/assets/js/app.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-    var fid = [[${fid}]];
     $(function(){
-        if(fid == null || fid == ''){
-            fid = 1;
-        }
-        initFolder(fid);
+        list();
     });
-
-    /**
-     * 列表
-     * @param folderId
-     */
-    function listFile(folderId){
-        list2(folderId);
-        var path = getUrlAndPort();
-        setUrl(path + "?fid=" + folderId);
-    }
-    function list2(folderId){
+    function list(){
         $.ajax({
-            url:"/recycle/listToTable",
+            url:"/recycle/list",
             type:"GET",
-            data:{folderId:folderId},
             success:function (data) {
                 $("#gridList").html(data);
+            }
+        });
+    }
+
+    /**
+     * 还原文件
+     */
+    function restoreFile(fileId){
+        $.confirm({
+            content: '确认要还原选中的文件吗？',
+            confirm: function () {
+                $.ajax({
+                    url:"/recycle/restoreFile",
+                    type:"POST",
+                    data:{fileId:fileId},
+                    success:function (result) {
+                        list();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 还原文件夹
+     */
+    function restoreFolder(folderId){
+        $.confirm({
+            content: '确认要还原选中的文件吗？',
+            confirm: function () {
+                $.ajax({
+                    url:"/recycle/restoreFolder",
+                    type:"POST",
+                    data:{folderId:folderId},
+                    success:function (result) {
+                        list();
+                    }
+                });
             }
         });
     }
@@ -408,14 +308,14 @@
      */
     function deleteFile(fileId){
         $.confirm({
-            content: '确认要删除选中的文件到回收站？',
+            content: '确认要永久删除文件吗？',
             confirm: function () {
                 $.ajax({
-                    url:"/file/delete",
+                    url:"/recycle/deleteFile",
                     type:"POST",
                     data:{fileId:fileId},
                     success:function (result) {
-                        initFolder(getFolderId())
+                        list();
                     }
                 });
             }
@@ -427,14 +327,14 @@
      */
     function deleteFolder(folderId){
         $.confirm({
-            content: '确认要删除选中的文件到回收站？',
+            content: '确认要永久删除文件吗？',
             confirm: function () {
                 $.ajax({
-                    url:"/folder/delete",
+                    url:"/recycle/deleteFolder",
                     type:"POST",
                     data:{folderId:folderId},
                     success:function (result) {
-                        initFolder(getFolderId())
+                        list();
                     }
                 });
             }
