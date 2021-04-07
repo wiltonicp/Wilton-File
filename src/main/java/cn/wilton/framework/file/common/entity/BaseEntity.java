@@ -47,13 +47,14 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 版本信息
      */
-    @TableField(value = "version")
     @Version
+    @TableField(value = "version" ,fill = FieldFill.INSERT)
     private Long version;
 
     /**
      * 数据逻辑删除标识字段
      */
     @TableLogic
+    @TableField(fill = FieldFill.INSERT)
     private Integer deleted;
 }
