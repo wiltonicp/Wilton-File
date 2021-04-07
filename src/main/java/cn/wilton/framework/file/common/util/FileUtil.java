@@ -55,6 +55,23 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
     private static final int KB = 1024;
 
     /**
+     * 获取文件大小单位为B的double值
+     */
+    public static final int SIZE_TYPE_B = 1;
+    /**
+     * 获取文件大小单位为KB的double值
+     */
+    public static final int SIZE_TYPE_KB = 2;
+    /**
+     * 获取文件大小单位为MB的double值
+     */
+    public static final int SIZE_TYPE_MB = 3;
+    /**
+     * 获取文件大小单位为GB的double值
+     */
+    public static final int SIZE_TYPE_GB = 4;
+
+    /**
      * 格式化小数
      */
     private static final DecimalFormat DF = new DecimalFormat("0.00");
@@ -130,6 +147,34 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
             resultSize = size + " B   ";
         }
         return resultSize;
+    }
+
+    /**
+     * 转换文件大小,指定转换的类型
+     * @param fileS 文件大小
+     * @param SIZE_TYPE
+     * @return
+     */
+    private static double FormetFileSize(long fileS, int SIZE_TYPE) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        double fileSizeLong = 0;
+        switch (SIZE_TYPE) {
+            case SIZE_TYPE_B:
+                fileSizeLong = Double.valueOf(df.format((double) fileS));
+                break;
+            case SIZE_TYPE_KB:
+                fileSizeLong = Double.valueOf(df.format((double) fileS / 1024));
+                break;
+            case SIZE_TYPE_MB:
+                fileSizeLong = Double.valueOf(df.format((double) fileS / 1048576));
+                break;
+            case SIZE_TYPE_GB:
+                fileSizeLong = Double.valueOf(df.format((double) fileS / 1073741824));
+                break;
+            default:
+                break;
+        }
+        return fileSizeLong;
     }
 
     /**

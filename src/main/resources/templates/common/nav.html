@@ -7,7 +7,14 @@
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
             <a th:href="@{/}" class="">
-                <i class="fa fa-file mr-1"></i><span>我的资源</span>
+                <i class="fa fa-hdd mr-1"></i><span>我的资源</span>
+            </a>
+            <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            </ul>
+        </li>
+        <li class="" th:classappend="${cid == 10011} ? 'active' : '' ">
+            <a th:href="@{/project}" class="">
+                <i class="fa fa-server mr-1"></i><span>我的项目</span>
             </a>
             <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
@@ -39,9 +46,10 @@
     <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
     <p>17.1 / 20 GB 已使用</p>
     <div class="iq-progress-bar mb-3">
-                    <span class="bg-primary iq-progress progress-1" data-percent="67">
-                    </span>
+        <span class="bg-primary iq-progress progress-1" data-percent="67">
+        </span>
     </div>
+    <p>75% 已满 - 3.9 GB 可用</p>
 </div>
 <script type="text/javascript" th:inline="javascript">
     var cid = [[${cid}]];

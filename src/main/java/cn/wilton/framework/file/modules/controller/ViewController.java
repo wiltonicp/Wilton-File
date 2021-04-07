@@ -30,6 +30,17 @@ public class ViewController {
     }
 
     /**
+     * 我的项目
+     * @param model
+     * @return
+     */
+    @GetMapping("/project")
+    public String project(Model model){
+        model.addAttribute("cid",10011);
+        return "pages-maintenance";
+    }
+
+    /**
      * 分享
      * @param model
      * @return
@@ -37,7 +48,7 @@ public class ViewController {
     @GetMapping("/share")
     public String share(Model model) {
         model.addAttribute("cid",10012);
-        return "page-share";
+        return "pages-maintenance";
     }
 
     /**
