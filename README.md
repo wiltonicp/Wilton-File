@@ -1,7 +1,7 @@
 # Wilton-File
 
 #### 介绍
-Wilton 文件管理系统
+Wilton 项目文件管理系统
 
 #### 软件架构
 软件架构说明
