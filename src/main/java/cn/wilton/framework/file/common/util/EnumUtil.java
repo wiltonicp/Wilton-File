@@ -10,7 +10,7 @@ import cn.wilton.framework.file.common.entity.enums.EnumMessage;
  */
 public class EnumUtil {
 
-    public static <T extends EnumMessage> T getEnumByCode(Class<T> clazz, Long code) {
+    public static <T extends EnumMessage> T getEnumByCode(Class<T> clazz, Object code) {
         for(T inner : clazz.getEnumConstants()){
             if(code.equals(inner.getCode())) {
                 return inner;

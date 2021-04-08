@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.modules.service;
 
+import cn.wilton.framework.file.common.entity.FreeStorage;
 import cn.wilton.framework.file.common.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,10 +20,9 @@ public interface IUserService extends IService<User> {
     User getIdByUserName(String username);
 
     /**
-     * 获取登录用户信息
+     * 获取当前用户空闲存储空间
      * @return
      */
-    User getLoginUser();
-
+    FreeStorage getUserFreeStorageSize();
 
 }

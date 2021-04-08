@@ -45,7 +45,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
     /**
      * 定义GB的计算常量
      */
-    private static final int GB = 1024 * 1024 * 1024;
+    public static final int GB = 1024 * 1024 * 1024;
     /**
      * 定义MB的计算常量
      */
@@ -137,13 +137,13 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
         String resultSize;
         if (size / GB >= 1) {
             //如果当前Byte的值大于等于1GB
-            resultSize = DF.format(size / (float) GB) + " GB   ";
+            resultSize = DF.format(size / (double) GB) + " GB ";
         } else if (size / MB >= 1) {
             //如果当前Byte的值大于等于1MB
-            resultSize = DF.format(size / (float) MB) + " MB   ";
+            resultSize = DF.format(size / (double) MB) + " MB ";
         } else if (size / KB >= 1) {
             //如果当前Byte的值大于等于1KB
-            resultSize = DF.format(size / (float) KB) + " KB   ";
+            resultSize = DF.format(size / (double) KB) + " KB ";
         } else {
             resultSize = size + " B   ";
         }
@@ -164,13 +164,13 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
                 fileSizeLong = Double.valueOf(df.format((double) fileS));
                 break;
             case SIZE_TYPE_KB:
-                fileSizeLong = Double.valueOf(df.format((double) fileS / 1024));
+                fileSizeLong = Double.valueOf(df.format((double) fileS / KB));
                 break;
             case SIZE_TYPE_MB:
-                fileSizeLong = Double.valueOf(df.format((double) fileS / 1048576));
+                fileSizeLong = Double.valueOf(df.format((double) fileS / MB));
                 break;
             case SIZE_TYPE_GB:
-                fileSizeLong = Double.valueOf(df.format((double) fileS / 1073741824));
+                fileSizeLong = Double.valueOf(df.format((double) fileS / GB));
                 break;
             default:
                 break;

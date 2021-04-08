@@ -12,7 +12,7 @@ public interface EnumMessage {
      * code
      * @return
      */
-    String getCode();
+    Object getCode();
 
     /**
      *

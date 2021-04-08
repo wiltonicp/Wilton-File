@@ -26,6 +26,14 @@ public interface FileMapper extends BaseMapper<FileEntity>{
     FileEntity getByFileId(@Param("id") long id);
 
     /**
+     * 查询已经消耗空间
+     * @param userId
+     * @return
+     */
+    @Select("SELECT IFNULL( SUM( file_size ), 0 ) AS total FROM f_file WHERE created_by = #{userId}")
+    long getUserFreeStorageSize(@Param("userId") long userId);
+
+    /**
      * 查询已经被删除的列表
      * @param createdBy
      * @return
