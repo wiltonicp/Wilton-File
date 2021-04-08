@@ -1,6 +1,7 @@
 package cn.wilton.framework.file.common.util;
 
 import cn.hutool.core.util.IdUtil;
+import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
 import cn.wilton.framework.file.common.exception.BizException;
@@ -219,7 +220,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
             file.transferTo(dest);
             log.info("文件写入成功");
             FileEntity fileInfo = new FileEntity();
-            fileInfo.setPath(path);
+            fileInfo.setStoreName(path);
             return fileInfo;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -350,5 +351,23 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
 
     public static String getMd5(File file) {
         return getMd5(getByte(file));
+    }
+
+    /**
+     * 初始化文件路径
+     * @param path
+     */
+    public static void initLoginUserFilePath(String path){
+        /**
+         * 初始化上传路径
+         */
+        File realPath = new File(path + File.separator + WiltonConstant.REAL_PATH + File.separator);
+        if (!realPath.exists()) {
+            realPath.mkdirs();
+        }
+        File tempPath = new File(path + File.separator + WiltonConstant.TEMP_PATH + File.separator);
+        if (!tempPath.exists()) {
+            tempPath.mkdirs();
+        }
     }
 }

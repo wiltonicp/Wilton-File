@@ -26,5 +26,17 @@ public class User extends BaseEntity{
     private String fullName;
 
     private String mobile;
+
+    private String email;
+
+    /**
+     * 存储空间id
+     */
+    private String spaceCode;
+
+    /**
+     * 存储空间大小 单位 GB
+     */
+    private Long storageSize;
 }
 

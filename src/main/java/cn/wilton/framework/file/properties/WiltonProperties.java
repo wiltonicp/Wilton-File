@@ -1,8 +1,11 @@
 package cn.wilton.framework.file.properties;
 
+import cn.wilton.framework.file.common.util.SecurityUtil;
 import lombok.Data;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.io.File;
 
 /**
  *
@@ -16,4 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class WiltonProperties {
 
     public String path;
+
+    public String getUserPath(){
+        return this.path + File.separator + SecurityUtil.getLoginUser().getSpaceCode() + File.separator;
+    }
 }

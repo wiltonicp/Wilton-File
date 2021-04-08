@@ -27,4 +27,4 @@ spring:
 
 wilton:
   upload:
-    path: /wilton/data/file-upload
+    path: /home/file/upload

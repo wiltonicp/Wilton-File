@@ -57,7 +57,7 @@ public class UploadServiceImpl implements IUploadService {
 
     @Override
     public void uploadFile(MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException {
-        String filePath = properties.path + File.separator + WiltonConstant.TEMP_PATH + File.separator + guid;
+        String filePath = properties.getUserPath() + WiltonConstant.TEMP_PATH + File.separator + guid;
         File tempPath = new File(filePath);
         if (!tempPath.exists()) {
             tempPath.mkdirs();
@@ -90,6 +90,7 @@ public class UploadServiceImpl implements IUploadService {
                 fileByMd5.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
                 fileByMd5.setIco(FileUtil.getExtensionName(fileName));
                 fileByMd5.setFileSize(file.getSize());
+                fileByMd5.setStoreName(guid + fileName);
                 fileByMd5.setFileMd5(guid);
                 fileByMd5.setOpen(true);
                 this.fileService.save(fileByMd5);
@@ -102,6 +103,7 @@ public class UploadServiceImpl implements IUploadService {
                 fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
                 fileInfo.setIco(FileUtil.getExtensionName(fileName));
                 fileInfo.setFileSize(file.getSize());
+                fileInfo.setStoreName(guid + fileName);
                 fileInfo.setFileMd5(guid);
                 fileInfo.setOpen(true);
                 this.fileService.save(fileInfo);
@@ -119,8 +121,10 @@ public class UploadServiceImpl implements IUploadService {
     @Override
     public void combineBlock(String guid, String fileName) {
         //分片文件临时目录
-        File tempPath = new File(properties.path + File.separator + WiltonConstant.TEMP_PATH + File.separator + guid);
-        String realFilePath = properties.path + File.separator + WiltonConstant.REAL_PATH + File.separator + IdUtils.getId() + fileName;
+        File tempPath = new File(properties.getUserPath()
+                + WiltonConstant.TEMP_PATH + File.separator + guid);
+        String realFilePath = properties.getUserPath()
+                + WiltonConstant.REAL_PATH + File.separator + guid + fileName;
         File realFile = new File(realFilePath);
         /**
          * 文件追加写入
@@ -166,12 +170,6 @@ public class UploadServiceImpl implements IUploadService {
                     System.gc(); // 回收资源
                     tempPath.delete();
                 }
-                /**
-                 * 更新数据库文件路径
-                 */
-                FileEntity fileEntity = this.fileService.getByFileMd5(guid);
-                fileEntity.setPath(realFilePath.replace(properties.path,""));
-                this.fileService.updateById(fileEntity);
                 log.info("文件合并——结束 [ 文件名称：" + fileName + " ，MD5值：" + guid + " ]");
             }
         } catch (Exception e) {

@@ -97,7 +97,8 @@ public class FileController {
         if(fileEntity == null){
             new BizException("参数无效!");
         }
-        File file = new File(properties.path + fileEntity.getPath());
+        File file = new File(properties.getUserPath() + WiltonConstant.REAL_PATH
+                + File.separator + fileEntity.getStoreName());
         if (file.exists()) {
             byte[] data = null;
             FileInputStream input=null;

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @email wilton.icp@gmail.com
  * @since 2021/3/31
  */
-public class IdUtils {
+public class IdUtils extends IdUtil{
 
     /**
      * 生成 id
@@ -20,4 +20,9 @@ public class IdUtils {
         String nowStr = "-" + DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULLS_TIME_PATTERN);
         return uuid + nowStr + "-";
     }
+
+    public static void main(String[] args) {
+        System.out.println(fastUUID());
+    }
+
 }

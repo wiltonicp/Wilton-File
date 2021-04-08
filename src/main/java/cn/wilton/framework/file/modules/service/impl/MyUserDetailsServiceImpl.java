@@ -2,10 +2,12 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.entity.*;
 import cn.wilton.framework.file.common.service.RedisService;
+import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.modules.mapper.PermissionMapper;
 import cn.wilton.framework.file.modules.mapper.RolePermissionMapper;
 import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.mapper.UserRoleMapper;
+import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,6 +41,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserMapper userMapper;
     private final RedisService redisService;
+    private final WiltonProperties properties;
     private final UserRoleMapper userRoleMapper;
     private final PermissionMapper permissionMapper;
     private final RolePermissionMapper rolePermissionMapper;
@@ -78,6 +82,10 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         AdminAuthUser authUser = new AdminAuthUser(user.getUsername(), user.getPassword(), true, true, true, notLocked,
                 AuthorityUtils.commaSeparatedStringToAuthorityList(permissionStr));
         BeanUtils.copyProperties(user,authUser);
+        /**
+         * 初始化当前用户上传路径
+         */
+        FileUtil.initLoginUserFilePath(properties.path + File.separator + user.getSpaceCode());
         return authUser;
     }
 }

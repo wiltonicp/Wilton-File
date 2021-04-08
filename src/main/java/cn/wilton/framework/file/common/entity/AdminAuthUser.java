@@ -34,10 +34,6 @@ public class AdminAuthUser extends User {
 
     private String sex;
 
-    private Long deptId;
-
-    private String deptName;
-
     private String roleId;
 
     private String roleName;
@@ -47,6 +43,10 @@ public class AdminAuthUser extends User {
     private String description;
 
     private String status;
+
+    private String spaceCode;
+
+    private Long storageSize;
 
     public AdminAuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

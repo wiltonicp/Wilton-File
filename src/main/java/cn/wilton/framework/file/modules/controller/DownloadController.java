@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
@@ -30,9 +31,11 @@ public class DownloadController {
     private final WiltonProperties properties;
 
     @GetMapping("file")
-    public void downloadFile(Long fileId,HttpServletRequest request, HttpServletResponse response) throws WiltonException {
+    public void downloadFile(Long fileId,HttpServletRequest request,
+                             HttpServletResponse response) throws WiltonException {
         FileEntity entity = fileService.getById(fileId);
-        File file = new File(properties.path  + entity.getPath());
+        File file = new File(properties.getUserPath() + WiltonConstant.REAL_PATH
+                + File.separator + entity.getStoreName());
         FileUtil.downloadFile(request,response,file,entity.getFileName(),false);
     }
 }

@@ -3,7 +3,7 @@
     <contextName>Wilton-File</contextName>
     <!--应用名称-->
     <springProperty scope="context" name="Wilton-File" source="spring.application.name"/>
-    <property name="log.path" value="log/Wilton-File" />
+    <property name="log.path" value="log/wilton-file" />
     <property name="log.maxHistory" value="15" />
     <property name="log.colorPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) %yellow(%thread) %green(%logger) %msg%n"/>
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5level %thread %logger %msg%n"/>

@@ -62,10 +62,10 @@ public class FileEntity extends BaseEntity{
     private String fileMd5;
 
     /**
-     * 存储路径
+     * 真实存储名称
      */
-    @TableField("path")
-    private String path;
+    @TableField("store_name")
+    private String storeName;
 
     /**
      * 文件后缀
