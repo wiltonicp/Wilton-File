@@ -172,6 +172,7 @@ uploader.on('uploadError', function (file) {
 //上传完成时
 uploader.on('uploadComplete', function (file) {
     listFile(getFolderId())
+    getFreeStorage();
     $('#' + file.id).find('.progress').fadeOut();
 });
 //上传状态

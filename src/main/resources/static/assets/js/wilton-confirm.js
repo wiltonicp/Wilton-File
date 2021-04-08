@@ -83,7 +83,7 @@
         _startCountDown: function (second) {
             var that = this;
             var time = second*1000;
-            this.title = '温馨提示:'
+            this.title = '信息提示'
             this.content = 'false'
             this.interval = setInterval(function () {
                 $('#confirmModal .jconfrim-submit').trigger('click');
@@ -91,7 +91,7 @@
             }, time);
         },
         close: function () {
-            this.title = '温馨提示:'
+            this.title = '信息提示'
             this.content = 'false'
             $('#confirmModal').modal('hide');
         }

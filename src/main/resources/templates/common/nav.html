@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body th:fragment="nav">
-<nav class="iq-sidebar-menu" style="height: 75%;">
+<nav class="iq-sidebar-menu" style="height: 65%;">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
             <a th:href="@{/}" class="">
@@ -51,10 +51,13 @@
     </div>
     <p>75% 已满 - 3.9 GB 可用</p>
 </div>
+<script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/assets/js/common.js}"></script>
 <script type="text/javascript" th:inline="javascript">
     var cid = [[${cid}]];
     var path = getUrlAndPort();
     setUrl(path + "?cid=" + cid);
+    getFreeStorage();
     /**
      * @description 设置url
      */

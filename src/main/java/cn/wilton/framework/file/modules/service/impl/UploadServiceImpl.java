@@ -94,19 +94,6 @@ public class UploadServiceImpl implements IUploadService {
                 fileByMd5.setFileMd5(guid);
                 fileByMd5.setOpen(true);
                 this.fileService.save(fileByMd5);
-            }else{
-                FileEntity fileInfo = new FileEntity();
-                BeanUtils.copyProperties(fileByMd5,fileInfo);
-                fileInfo.setId(null);
-                fileInfo.setFolderId(folderId);
-                fileInfo.setFileName(fileName);
-                fileInfo.setFileType(FileUtil.getFileType(FileUtil.getExtensionName(fileName)));
-                fileInfo.setIco(FileUtil.getExtensionName(fileName));
-                fileInfo.setFileSize(file.getSize());
-                fileInfo.setStoreName(guid + fileName);
-                fileInfo.setFileMd5(guid);
-                fileInfo.setOpen(true);
-                this.fileService.save(fileInfo);
             }
         }
         if (inputStream != null) {
@@ -170,6 +157,12 @@ public class UploadServiceImpl implements IUploadService {
                     System.gc(); // 回收资源
                     tempPath.delete();
                 }
+                /**
+                 * 更新文件大小
+                 */
+                FileEntity entity = this.fileService.getByFileMd5(guid);
+                entity.setFileSize(realFile.length());
+                this.fileService.updateById(entity);
                 log.info("文件合并——结束 [ 文件名称：" + fileName + " ，MD5值：" + guid + " ]");
             }
         } catch (Exception e) {
