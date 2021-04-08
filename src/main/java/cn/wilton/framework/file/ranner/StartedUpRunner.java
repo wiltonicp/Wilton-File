@@ -32,17 +32,6 @@ public class StartedUpRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws UnknownHostException {
-        /**
-         * 初始化上传路径
-         */
-        File realPath = new File(properties.path + File.separator + WiltonConstant.REAL_PATH);
-        if (!realPath.exists()) {
-            realPath.mkdirs();
-        }
-        File tempPath = new File(properties.path + File.separator + WiltonConstant.TEMP_PATH);
-        if (!tempPath.exists()) {
-            tempPath.mkdirs();
-        }
         if (context.isActive()) {
             WiltonUtil.printStartUpBanner(environment);
         }
