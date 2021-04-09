@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .tokenValiditySeconds(60*6).rememberMeParameter("rememberMe")
         .and()
         .csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     /**

@@ -33,6 +33,17 @@ wilton:
         - /assets/**
         - /assets/**/**
         - /assets/**/**/**
+        - /wechat/**
+  weixin:
+    token: filecoding
+    appId: wx36829c1653a74812
+    appSecret: 8150ca1f70ec9cd6e1cdd277128d53bd
+    encodingAESKey: aDJHzCc6Xf0d5U9xITlWrpdFrYYs0fJmve3kqt0eZnz
+
+weixin:
+  app:
+    app_id: wx36829c1653a74812
+    app_secret: 8150ca1f70ec9cd6e1cdd277128d53bd
 
 
 mybatis-plus:
