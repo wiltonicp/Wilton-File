@@ -6,35 +6,35 @@
 <nav class="iq-sidebar-menu" style="height: 65%;">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
-            <a th:href="@{/}" class="">
+            <a th:href="@{/file?cid == 10010}" class="">
                 <i class="fa fa-hdd mr-1"></i><span>我的资源</span>
             </a>
             <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
         <li class="" th:classappend="${cid == 10011} ? 'active' : '' ">
-            <a th:href="@{/project}" class="">
+            <a th:href="@{/project?cid == 10011}" class="">
                 <i class="fa fa-server mr-1"></i><span>我的项目</span>
             </a>
-            <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+            <ul id="dashboar" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
         <li class="" th:classappend="${cid == 10012} ? 'active' : '' ">
-            <a th:href="@{/share}" class="">
+            <a th:href="@{/share?cid == 10012}" class="">
                 <i class="fa fa-share-square mr-1"></i><span>我的分享</span>
             </a>
             <ul id="page-share" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
         <li class="" th:classappend="${cid == 10013} ? 'active' : '' ">
-            <a th:href="@{/recycle}" class="">
+            <a th:href="@{/recycle?cid == 10013}" class="">
                 <i class="fa fa-trash mr-1"></i><span>回收站</span>
             </a>
             <ul id="page-recycle" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
             </ul>
         </li>
         <li class="" sec:authorize="hasRole('manage:view')" th:classappend="${cid == 10014} ? 'active' : '' ">
-            <a th:href="@{/admin}" class="">
+            <a th:href="@{/admin?cid == 10014}" class="">
                 <i class="fa fa-user mr-1"></i><span>用户管理</span>
             </a>
             <ul id="page-admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -53,7 +53,6 @@
 </div>
 <script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/common.js}"></script>
-<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 <script type="text/javascript" th:inline="javascript">
     var cid = [[${cid}]];
     var path = getUrlAndPort();
@@ -73,5 +72,6 @@
         return host;
     }
 </script>
+<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 </body>
 </html>
