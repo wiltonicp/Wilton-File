@@ -3,53 +3,88 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body th:fragment="nav">
-<nav class="iq-sidebar-menu" style="height: 65%;">
-    <ul id="iq-sidebar-toggle" class="iq-menu">
-        <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
-            <a th:href="@{/file?cid == 10010}" class="">
-                <i class="fa fa-hdd mr-1"></i><span>我的资源</span>
-            </a>
-            <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+<style>
+    .hide {
+        display: none;
+    }
+    .show {
+        display: block;
+    }
+</style>
+<div class="iq-sidebar  sidebar-default ">
+    <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
+        <a href="index.html" class="header-logo" style="height: 59px;margin-top: -9px;">
+            <img th:src="@{/assets/images/Vihackerlogo-1.png}" class="img-fluid rounded-normal light-logo" style="height: 65px; margin-left: 30px;margin-top: 5px;" alt="logo">
+            <img th:src="@{/assets/images/Vihackerlogo-1.png}" class="img-fluid rounded-normal darkmode-logo" style="height: 65px; margin-left: 30px;margin-top: 5px;" alt="logo">
+        </a>
+        <div class="iq-menu-bt-sidebar">
+            <i class="las la-bars wrapper-menu"></i>
+        </div>
+    </div>
+    <div class="data-scrollbar" data-scroll="1">
+        <div class="new-create select-dropdown input-prepend input-append">
+            <div class="btn-group" style="cursor: pointer;" th:classappend="${cid == 10010} ? 'show' : 'hide' ">
+                <label data-toggle="dropdown">
+                    <div class="search-query selet-caption" style="cursor: pointer;color: #fff;background: #613F9D"><i class="las la-plus pr-2"></i>上传</div><span class="search-replace"></span>
+                    <span class="caret"><!--icon--></span>
+                </label>
+                <ul class="dropdown-menu">
+                    <li data-toggle="modal" data-target="#exampleModalCenter"><div class="item"><i class="ri-folder-add-line pr-3"></i>新建文件夹</div></li>
+                    <li data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <div class="item"><i class="ri-file-upload-line pr-3"></i>上传文件</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <nav class="iq-sidebar-menu" style="height: 65%;">
+            <ul id="iq-sidebar-toggle" class="iq-menu">
+                <li class="" th:classappend="${cid == 10010} ? 'active' : '' ">
+                    <a th:href="@{/?cid == 10010}" class="">
+                        <i class="fa fa-hdd mr-1"></i><span>我的资源</span>
+                    </a>
+                    <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    </ul>
+                </li>
+                <li class="" th:classappend="${cid == 10011} ? 'active' : '' ">
+                    <a th:href="@{/project?cid == 10011}" class="">
+                        <i class="fa fa-server mr-1"></i><span>我的项目</span>
+                    </a>
+                    <ul id="dashboar" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    </ul>
+                </li>
+                <li class="" th:classappend="${cid == 10012} ? 'active' : '' ">
+                    <a th:href="@{/share?cid == 10012}" class="">
+                        <i class="fa fa-share-square mr-1"></i><span>我的分享</span>
+                    </a>
+                    <ul id="page-share" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    </ul>
+                </li>
+                <li class="" th:classappend="${cid == 10013} ? 'active' : '' ">
+                    <a th:href="@{/recycle?cid == 10013}" class="">
+                        <i class="fa fa-trash mr-1"></i><span>回收站</span>
+                    </a>
+                    <ul id="page-recycle" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    </ul>
+                </li>
+                <li class="" sec:authorize="hasRole('manage:view')" th:classappend="${cid == 10014} ? 'active' : '' ">
+                    <a th:href="@{/admin?cid == 10014}" class="">
+                        <i class="fa fa-user mr-1"></i><span>用户管理</span>
+                    </a>
+                    <ul id="page-admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    </ul>
+                </li>
             </ul>
-        </li>
-        <li class="" th:classappend="${cid == 10011} ? 'active' : '' ">
-            <a th:href="@{/project?cid == 10011}" class="">
-                <i class="fa fa-server mr-1"></i><span>我的项目</span>
-            </a>
-            <ul id="dashboar" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-            </ul>
-        </li>
-        <li class="" th:classappend="${cid == 10012} ? 'active' : '' ">
-            <a th:href="@{/share?cid == 10012}" class="">
-                <i class="fa fa-share-square mr-1"></i><span>我的分享</span>
-            </a>
-            <ul id="page-share" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-            </ul>
-        </li>
-        <li class="" th:classappend="${cid == 10013} ? 'active' : '' ">
-            <a th:href="@{/recycle?cid == 10013}" class="">
-                <i class="fa fa-trash mr-1"></i><span>回收站</span>
-            </a>
-            <ul id="page-recycle" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-            </ul>
-        </li>
-        <li class="" sec:authorize="hasRole('manage:view')" th:classappend="${cid == 10014} ? 'active' : '' ">
-            <a th:href="@{/admin?cid == 10014}" class="">
-                <i class="fa fa-user mr-1"></i><span>用户管理</span>
-            </a>
-            <ul id="page-admin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-            </ul>
-        </li>
-    </ul>
-</nav>
-<div class="sidebar-bottom" id="freeStorage">
-    <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
-    <p>17.1 / 20 GB 已使用</p>
-    <div class="iq-progress-bar mb-3">
+        </nav>
+        <div class="sidebar-bottom" id="freeStorage">
+            <h5 class="mb-3"><i class="las la-cloud mr-2"></i>容量</h5>
+            <p>17.1 / 20 GB 已使用</p>
+            <div class="iq-progress-bar mb-3">
         <span class="bg-primary iq-progress progress-1" data-percent="67">
         </span>
+            </div>
+            <p>75% 已满 - 3.9 GB 可用</p>
+        </div>
     </div>
-    <p>75% 已满 - 3.9 GB 可用</p>
 </div>
 <script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/common.js}"></script>

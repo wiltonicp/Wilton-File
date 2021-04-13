@@ -21,7 +21,7 @@ public class ViewController {
         return "auth-sign-in";
     }
 
-    @GetMapping("/file")
+    @GetMapping("/")
     public String file(Model model,Long fid){
         model.addAttribute("fid",fid);
         model.addAttribute("cid",10010);
