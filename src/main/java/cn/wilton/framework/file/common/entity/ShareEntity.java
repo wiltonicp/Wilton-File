@@ -38,9 +38,9 @@ public class ShareEntity extends BaseEntity{
      */
     private Boolean open;
     /**
-     * 分享链接
+     * 分享码
      */
-    private String sharePath;
+    private String shareCode;
     /**
      * 取件码
      */
@@ -48,9 +48,16 @@ public class ShareEntity extends BaseEntity{
     /**
      * 状态 0：已失效、1：永久有效、自定义天数
      */
-    private String state;
+    private Integer state;
     /**
      * 	浏览次数
      */
     private Long views;
+
+    public void created(FileEntity file){
+        this.fileId = file.getId();
+        this.fileName = file.getFileName();
+        this.fileSize = file.getFileSize();
+        this.ico = file.getIco();
+    }
 }

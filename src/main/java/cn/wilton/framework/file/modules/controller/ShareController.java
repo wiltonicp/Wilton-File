@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -39,4 +40,21 @@ public class ShareController {
         model.addAttribute("shareList",list);
         return "page-share::gridList";
     }
+
+    /**
+     * 新增分享
+     * @param fileId
+     * @return
+     */
+    @PostMapping("add")
+    public WiltonResult<ShareEntity> add(long fileId){
+        return WiltonResult.data(shareService.add(fileId));
+    }
+
+    @PostMapping("update")
+    public WiltonResult<Void> update(ShareEntity input){
+        shareService.updateById(input);
+        return WiltonResult.success();
+    }
+
 }
