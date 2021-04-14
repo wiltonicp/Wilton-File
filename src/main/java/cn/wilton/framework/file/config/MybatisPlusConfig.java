@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.config;
 
+import cn.wilton.framework.file.common.handler.ExpandSqlInjector;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
@@ -39,6 +40,11 @@ public class MybatisPlusConfig {
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
+    }
+
+    @Bean
+    public ExpandSqlInjector expandSqlInjector() {
+        return new ExpandSqlInjector();
     }
 
 }

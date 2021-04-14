@@ -18,8 +18,8 @@ public class WiltonUtil {
     public static void printStartUpBanner(Environment environment) throws UnknownHostException {
         log.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +
-                        "Login: \thttp://{}:{}\n\t" +
-                 "----------------------------------------------------------",
+                        "Login: \thttp://{}:{}\n" +
+                        "----------------------------------------------------------",
                 environment.getProperty("spring.application.name"),
                 InetAddress.getLocalHost().getHostAddress(),
                 environment.getProperty("server.port"),

@@ -48,7 +48,7 @@ public class ViewController {
     @GetMapping("/share")
     public String share(Model model) {
         model.addAttribute("cid",10012);
-        return "pages-maintenance";
+        return "page-share";
     }
 
     /**

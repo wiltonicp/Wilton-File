@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ViHacker | 云文件分享系统</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/webuploader/webuploader.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/upload.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
+
+    <!-- Viewer Plugin -->
+    <!--PDF-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/pdf/pdf.viewer.css}">
+    <!--Docs-->
+    <!--PPTX-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css}">
+    <!--All Spreadsheet -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css}">
+    <!--Image viewer-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
+    <!--officeToHtml-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
+
+    <link rel="stylesheet" th:href="@{/assets/css/file.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/file_type.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/common.css}">
+    <style>
+        .header-logo h5 {
+            color: #613F9D;
+            line-height: 50px;
+            padding-top: 2px;
+            letter-spacing: 1.5px;
+            margin-left: 10px;
+            flex: 1;
+            transition: all .6s ease-in-out;
+        }
+        .my-icon {
+            width: 2em;
+            height: 1.5em;
+            vertical-align: -0.4em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        .scroll-content {
+            height: 80%;
+        }
+        .image-thumb {
+            text-align: center;
+        }
+        #picker div:nth-child(2){
+            width:100%!important;
+            height:100%!important;
+        }
+        #thelist,#thelist li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hider {
+            height: 0px;
+            border: 0px;
+        }
+
+    </style>
+</head>
+<body class="  ">
+<!-- loader Start -->
+<div id="loading">
+    <div id="loading-center">
+        <img th:src="@{/assets/images/loader.svg}" alt="loader">
+    </div>
+</div>
+<!-- loader END -->
+<!-- Wrapper Start -->
+<div class="wrapper">
+    <div th:replace="common/nav::nav"></div>
+    <div class="iq-top-navbar" >
+        <div th:replace="common/navbar::navbar"></div>
+    </div>
+    <div class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex align-items-center justify-content-between welcome-content mb-3">
+                        <h6>全部文件</h6>
+                        <div class="d-flex align-items-center">
+                            <div class="list-grid-toggle mr-4">
+                                文件保留15天后自动删除。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="icon icon-grid i-grid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="table-responsive" id="gridList" th:fragment="gridList">
+                                    <table class="table mb-0 table-borderless tbl-server-info">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" th:text="文件名"></th>
+                                            <th scope="col" th:text="到期时间"></th>
+                                            <th scope="col" th:text="分享时间"></th>
+                                            <th scope="col" th:text="大小"></th>
+                                            <th scope="col" th:text="已接收次数"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list-contents list-cell">
+                                        <tr th:each="share:${shareList}">
+                                            <td>
+                                                <div class="file-name-wrap">
+                                                    <i class="file-type " th:classappend="'tp-' + ${share.ico}"></i>
+                                                    <div class="file-name"><em>
+                                                        <a href="javascript:;" btn="share_copy" receive_code="fa50" style="display:;" class="icon-lock"></a>
+                                                        <a href="//115.com/s/swnsqdw3wa3" th:title="${share.fileName}" rel="share_href" target="_blank" class="name">
+                                                            <span th:text="${share.fileName}"></span>
+                                                        </a></em>
+                                                    </div>
+                                                </div>
+                                                <div class="file-opr" style="margin-top: -50px;">
+                                                    <a href="javascript:;" btn="share" style="display:">
+                                                        <i class="icon-operate ifo-share"></i><span>分享</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="copy" style="display:;">
+                                                        <i class="icon-operate ifo-copy"></i><span>复制</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="reshare" style="display:none">
+                                                        <i class="icon-operate ifo-renew"></i><span>链接续期</span>
+                                                    </a>
+                                                    <a href="javascript:;"btn="auto_reshare" style="display:none">
+                                                        <i class="icon-operate ifo-autorenew"></i><span>自动续期</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="cancel_auto_reshare" style="display:none">
+                                                        <i class="icon-operate ifo-unautorenew"></i><span>取消自动续期</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="add_recivecode"  style="display:none">
+                                                        <i class="icon-operate ifo-renew"></i><span>添加访问码</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="change_recivecode" style="display:">
+                                                        <i class="icon-operate ifo-changevisitcode"></i><span>变更访问码</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="cancel_recivecode" style="display:none">
+                                                        <i class="icon-operate ifo-renew"></i><span>取消访问码</span>
+                                                    </a>
+                                                    <a href="javascript:;" btn="appeal" style="display:none"><i class="icon-operate ifo-appeal"></i><span>申诉</span>
+                                                    </a>
+                                                    <a href="javascript:;"btn="close">
+                                                        <i class="icon-operate ifo-unshare"></i><span>取消分享</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td th:text="${share.state}"></td>
+                                            <td th:text="${#temporals.format(share.createdTime,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${share.fileSizeVal}"></td>
+                                            <td th:text="${share.views}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper End-->
+<footer class="iq-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6 text-right">
+                Copyright © 2020 <a href="http://file.wiltonic.cn">Wilton-Cloud-File</a> All Rights Reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Backend Bundle JavaScript -->
+<script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/assets/js/backend-bundle.min.js}"></script>
+<script th:src="@{/assets/js/iconfont.js}"></script>
+<script th:src="@{/assets/js/wilton-confirm.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/customizer.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/chart-custom.js}"></script>
+
+<!--PDF-->
+<script th:src="@{/assets/vendor/doc-viewer/include/pdf/pdf.js}"></script>
+<!--Docs-->
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/jszip-utils.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js}"></script>
+<!--PPTX-->
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js}"></script>
+<!--All Spreadsheet -->
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js}"></script>
+<!--Image viewer-->
+<script th:src="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js}"></script>
+<!--officeToHtml-->
+<script th:src="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js}"></script>
+<script th:src="@{/assets/js/doc-viewer.js}"></script>
+<!-- app JavaScript -->
+<script th:src="@{/assets/js/app.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    $(function(){
+        list();
+    });
+    function list(){
+        $.ajax({
+            url:"/share/list",
+            type:"GET",
+            success:function (data) {
+                $("#gridList").html(data);
+            }
+        });
+    }
+
+    $(document).on('mouseover mouseout',"table > tbody > tr", function (event) {
+        if(event.type == "mouseover"){
+            //鼠标悬浮
+            $(this).css('background','#E8F0FC');
+            $(this).find('.file-opr').css('display', 'block');
+        }else if(event.type == "mouseout"){
+            //鼠标离开
+            $(this).css('background','');
+            $(this).find('.file-opr').css('display', 'none');
+        }
+    });
+
+    /**
+     * 删除文件
+     */
+    function deleteFile(fileId){
+        $.confirm({
+            content: '确认要永久删除文件吗？',
+            confirm: function () {
+                $.ajax({
+                    url:"/recycle/deleteFile",
+                    type:"POST",
+                    data:{fileId:fileId},
+                    success:function (result) {
+                        list();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * @description 设置url
+     */
+    function setUrl(url) {
+        history.pushState({url: url, title: document.title}, document.title, url)
+    }
+
+    /**
+     * @description 获取ip和端口
+     */
+    function getUrlAndPort() {
+        let host = location.pathname;
+        return host;
+    }
+</script>
+
+</body>
+</html>

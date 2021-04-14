@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: Wilton-File
   profiles:
