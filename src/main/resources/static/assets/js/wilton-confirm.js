@@ -125,6 +125,7 @@
             '                            </div>\n' +
             '                        </div>\n' +
             '                    </div>',
+
         title: '信息提示',
         id: 1,
         content: 'false',
