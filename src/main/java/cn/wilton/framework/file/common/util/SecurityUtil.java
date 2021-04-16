@@ -2,10 +2,8 @@ package cn.wilton.framework.file.common.util;
 
 import cn.wilton.framework.file.common.entity.AdminAuthUser;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;

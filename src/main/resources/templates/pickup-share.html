@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ViHacker | 云文件分享系统</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/assets/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/remixicon/fonts/remixicon.css}">
+
+    <!-- Viewer Plugin -->
+    <!--PDF-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/pdf/pdf.viewer.css}">
+    <!--Docs-->
+    <!--PPTX-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/pptxjs.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/PPTXjs/css/nv.d3.min.css}">
+    <!--All Spreadsheet -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.css}">
+    <!--Image viewer-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
+    <!--officeToHtml-->
+    <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/file_type.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/file_sharing_public.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/common.css}">
+    <style>
+        .iq-top-navbar-zhx {
+            display: flex;
+            width: 100%;
+        }
+        .iq-navbar-custom {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body class="  ">
+<!-- loader Start -->
+<div id="loading">
+    <div id="loading-center">
+        <img th:src="@{/assets/images/loader.svg}" alt="loader">
+    </div>
+</div>
+<!-- loader END -->
+<!-- Wrapper Start -->
+<div class="wrapper">
+    <div th:replace="common/nav::nav"></div>
+    <div class="iq-top-navbar">
+        <div th:replace="common/navbar::navbar"></div>
+    </div>
+    <div class="content-page" style="margin-left: 0px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="pricing-custom-tab w-100">
+
+                    <div class="pricing-content">
+                        <div id="pricing-data2" class="tab-pane fade active show">
+                            <div class="d-flex align-items-center">
+                                <div class="col-lg-4 col-sm-6" style="margin: 0 auto;">
+                                    <div class="card card-block card-stretch card-height blog pricing-details">
+                                        <div class="card-body border text-center rounded">
+                                            <div class="pricing-header bg-primary text-white">
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="mb-5 mt-3 crm-profile-img-edit position-relative">
+                                                        <img class="crm-profile-pic rounded-circle mb-2 avatar-100" th:src="@{/assets/images/user/11.png}" alt="profile-pic">
+                                                        <h5>ViHacker的分享</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h5 class="mb-3">请输入取货码</h5>
+                                            <div class="form-group col-md-9 mb-4" style="margin: auto;">
+                                                <input type="text" class="form-control" id="fname" placeholder="请输入取货码">
+                                            </div>
+                                            <a href="#" class="btn btn-primary">确认</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper End-->
+<footer class="iq-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6 text-right">
+                Copyright © 2020 <a href="http://file.wiltonic.cn">Wilton-Cloud-File</a> All Rights Reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Backend Bundle JavaScript -->
+<script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/assets/js/backend-bundle.min.js}"></script>
+<script th:src="@{/assets/js/iconfont.js}"></script>
+<script th:src="@{/assets/js/wilton-confirm.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/customizer.js}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/chart-custom.js}"></script>
+
+<!--PDF-->
+<script th:src="@{/assets/vendor/doc-viewer/include/pdf/pdf.js}"></script>
+<!--Docs-->
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/jszip-utils.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js}"></script>
+<!--PPTX-->
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/pptxjs.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/PPTXjs/js/divs2slides.js}"></script>
+<!--All Spreadsheet -->
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/handsontable.full.min.js}"></script>
+<script th:src="@{/assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js}"></script>
+<!--Image viewer-->
+<script th:src="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js}"></script>
+<!--officeToHtml-->
+<script th:src="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js}"></script>
+<script th:src="@{/assets/js/doc-viewer.js}"></script>
+<!-- app JavaScript -->
+<script th:src="@{/assets/js/app.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+</script>
+
+</body>
+<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
+</html>

@@ -28,3 +28,5 @@ spring:
 wilton:
   upload:
     path: /home/file/upload
+  share:
+    path: https://vihacker.top:8188/s/

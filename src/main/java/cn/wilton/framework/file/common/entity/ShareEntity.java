@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.common.entity;
 
+import cn.wilton.framework.file.common.util.FileUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -42,13 +43,21 @@ public class ShareEntity extends BaseEntity{
      */
     private String shareCode;
     /**
+     * 分享链接
+     */
+    @TableField(exist = false)
+    private String sharePath;
+    /**
      * 取件码
      */
     private String pickupCode;
     /**
-     * 状态 0：已失效、1：永久有效、自定义天数
+     * 状态 0：已失效、-1：永久有效、自定义天数
      */
     private Integer state;
+
+    @TableField(exist = false)
+    private String stateVal;
     /**
      * 	浏览次数
      */
@@ -59,5 +68,15 @@ public class ShareEntity extends BaseEntity{
         this.fileName = file.getFileName();
         this.fileSize = file.getFileSize();
         this.ico = file.getIco();
+    }
+
+    public void created(String sharePath){
+        this.fileSizeVal = FileUtil.getSize(this.fileSize);
+        this.sharePath = sharePath + this.getShareCode();
+        switch (this.state){
+            case -1: this.stateVal = "长期"; break;
+            case 1: this.stateVal = "1天"; break;
+            case 7: this.stateVal = "7天"; break;
+        }
     }
 }

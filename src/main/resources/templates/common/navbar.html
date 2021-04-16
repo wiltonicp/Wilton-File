@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div class="iq-navbar-custom" th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light p-0">
         <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
             <i class="ri-menu-line wrapper-menu"></i>
-            <a href="index.html" class="header-logo">
+            <a href="/" class="header-logo">
                 <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal light-logo" alt="logo">
                 <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal darkmode-logo" alt="logo">
             </a>
@@ -63,7 +63,10 @@
                             </form>
                         </div>
                     </li>
-                    <li class="nav-item nav-icon dropdown">
+<!--                    <li class="nav-item nav-icon" sec:authorize="!isAuthenticated()">-->
+<!--                        <h5>登录</h5>-->
+<!--                    </li>-->
+                    <li class="nav-item nav-icon dropdown" sec:authorize="isAuthenticated()">
                         <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <i class="ri-settings-3-line"></i>
                         </a>
@@ -77,7 +80,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item nav-icon dropdown caption-content">
+                    <li class="nav-item nav-icon dropdown caption-content" sec:authorize="isAuthenticated()">
                         <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <div class="caption bg-primary line-height">R</div>
                         </a>
@@ -99,7 +102,7 @@
                                                 </a>
                                             </div>
                                             <div class="profile-detail mt-3">
-                                                <h5><a href="user-profile-edit.html" th:text="${userName}"></a></h5>
+                                                <h5><a href="user-profile-edit.html" sec:authentication="name"></a></h5>
                                                 <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c7d727265717d6e7f735c7b717d7570327f7371">点我发送邮件</a></p>
                                             </div>
                                             <a th:href="@{/logout}" class="btn btn-primary">退出</a>

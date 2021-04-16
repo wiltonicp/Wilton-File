@@ -32,7 +32,7 @@ public class ShareServiceImpl extends ServiceImpl<ShareMapper, ShareEntity> impl
         shareEntity.setShareCode(IdUtils.createdOne(file.getId()));
         shareEntity.setOpen(true);
         shareEntity.setPickupCode(IdUtils.getCode());
-        shareEntity.setState(1);
+        shareEntity.setState(-1);
         this.baseMapper.insert(shareEntity);
         return shareEntity;
     }

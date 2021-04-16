@@ -8,6 +8,7 @@ import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IShareService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShareController {
 
+    @Value("${wilton.share.path}")
+    private String sharePath;
     private final IShareService shareService;
 
     @GetMapping("list")
@@ -35,7 +38,7 @@ public class ShareController {
                 .eq("created_by", SecurityUtil.getLoginUser().getId())
         );
         list.forEach(file ->{
-            file.setFileSizeVal(FileUtil.getSize(file.getFileSize()));
+            file.created(sharePath);
         });
         model.addAttribute("shareList",list);
         return "page-share::gridList";
@@ -47,8 +50,11 @@ public class ShareController {
      * @return
      */
     @PostMapping("add")
-    public WiltonResult<ShareEntity> add(long fileId){
-        return WiltonResult.data(shareService.add(fileId));
+    public String add(Model model,long fileId){
+        ShareEntity entity = shareService.add(fileId);
+        entity.created(sharePath);
+        model.addAttribute("shareEntity",entity);
+        return "common/share::toShare";
     }
 
     @PostMapping("update")

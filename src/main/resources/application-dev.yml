@@ -28,4 +28,6 @@ spring:
 wilton:
   upload:
     path: /Users/wilton/file/upload
+  share:
+    path: http://localhost:8127/s/
 

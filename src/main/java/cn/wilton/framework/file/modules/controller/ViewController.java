@@ -4,6 +4,7 @@ import cn.wilton.framework.file.common.util.SecurityUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -49,6 +50,16 @@ public class ViewController {
     public String share(Model model) {
         model.addAttribute("cid",10012);
         return "page-share";
+    }
+
+    /**
+     * 取货页面
+     * @return
+     */
+    @GetMapping("/s/{pickupId}")
+    public String pickup(Model model,@PathVariable("pickupId") String pickupId){
+        model.addAttribute("cid",10013);
+        return "pickup-share";
     }
 
     /**

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -370,80 +370,8 @@
         </div>
     </div>
 </div>
-<div id="exampleModalCenteredScrollable" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">分享文件</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="file_share_modal_main" style="">
-                    <div class="sharing-public-file">
-                        <div class="main-side">
-                            <div class="info-sharing">
-                                <div class="info-file"><i class="file-type tp-pdf"></i> <span>think-in-java.pdf</span></div>
-                                <div class="info-text">
-                                    <p>文件大小：<em>4.32MB</em></p>
-                                    <div class="expiration">
-                                        <span class="name">有效期：</span>
-                                            <em>长期</em>
-                                            <span class="radio-wrap">
-                                                <label class="sel-label">
-                                                    <input type="radio" name="r1" value="1">
-                                                    <span>1天</span>
-                                                </label>
-                                                <label class="sel-label">
-                                                    <input type="radio" name="r1" value="7">
-                                                    <span>7天</span>
-                                                </label>
-                                                <label class="sel-label">
-                                                    <input type="radio" name="r1" value="-1">
-                                                    <span>长期</span>
-                                                </label>
-                                        </span>
-                                    </div>
-                                    <!---->
-                                </div>
-                                <div class="info-switch">
-                                    <div class="cell"><span class="tips"><em>开启后，下载该资源需要先输入正确的取货码</em></span>
-                                        <label for="">访问码：</label>
-                                        <div class="codebox">
-                                            <label class="sel-label">
-                                                <span>oc09</span>
-                                            </label>
-                                            <label class="sel-label" style="display: none;">
-                                                <input type="radio" name="rf1" value=""> <span></span>
-                                            </label>
-                                            <span class="codetips">
-                                                <i class="icon-operate ifo-changevisitcode"></i>
-                                                <div class="common-little-pop">自定义访问码</div>
-                                             </span>
-                                        </div>
-                                        <!---->
-                                    </div>
-                                    <div class="cell psd-cell" style="width: max-content;display: flex;">
-                                        <span class="tips"><em>开启后已分享的资源会在资源仓库中展示，可供所有用户查看</em></span>
-                                        <label for="" style="margin-left: -145px;">分享至资源中心</label> <input type="checkbox" style="margin-left: -35px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-shareto">
-                                <p class="title">分享</p>
-                                <div class="link-sharing">
-                                    <input type="text" readonly="readonly" spellcheck="false" class="text">
-                                    <a href="javascript:;" class="button"><span>复制</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- share -->
+<div id="toShare"></div>
 <!-- Backend Bundle JavaScript -->
 <script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/assets/js/backend-bundle.min.js}"></script>
@@ -564,6 +492,9 @@
         });
     }
 
+    /**
+     * 分享
+     */
     function toShare(fileId){
         $.confirm({
             id: fileId,
@@ -571,7 +502,15 @@
             confirm: function () {
                 var fileId = $('#jconfrimId').val();
                 console.log(fileId)
-                $('#exampleModalCenteredScrollable').modal('show');
+                $.ajax({
+                    url:"/share/add",
+                    type:"POST",
+                    data:{fileId:fileId},
+                    success:function (result) {
+                        $('#toShare').html(result)
+                        $('#exampleModalCenteredScrollable').modal('show');
+                    }
+                });
             }
         });
     }
