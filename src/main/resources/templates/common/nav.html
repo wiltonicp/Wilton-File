@@ -92,7 +92,7 @@
 <script type="text/javascript" th:inline="javascript">
     var cid = [[${cid}]];
     var path = getUrlAndPort();
-    if(path.indexOf('/s/') >= 0 || path.indexOf('/resources') >= 0){
+    if(path.indexOf('/s/') >= 0 || path.indexOf('/resources') >= 0 || path.indexOf('/down') >= 0){
         $('.data-scrollbar').addClass("hide");
         $('.iq-sidebar').css('height','auto');
     }else{

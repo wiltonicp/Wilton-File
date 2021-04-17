@@ -1,7 +1,9 @@
 package cn.wilton.framework.file.modules.service;
 
 import cn.wilton.framework.file.common.entity.ShareEntity;
+import cn.wilton.framework.file.modules.dto.ShareQueryInput;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vihackerframework.common.core.entity.PageInfo;
 
 /**
  * <p>
@@ -11,11 +13,25 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IShareService extends IService<ShareEntity> {
 
-
+    /**
+     * 分页查询
+     * @param input
+     * @return
+     */
+    PageInfo<ShareEntity> queryPage(ShareQueryInput input);
     /**
      * 新增分享
      * @param fileId
      * @return
      */
     ShareEntity add(long fileId);
+
+    /**
+     * 校验取件码
+     * @param shareCode
+     * @param pickupCode
+     * @return
+     */
+    ShareEntity verify(String shareCode,String pickupCode);
+
 }

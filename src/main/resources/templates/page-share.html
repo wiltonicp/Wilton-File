@@ -124,38 +124,21 @@
                                                 <div class="file-name-wrap">
                                                     <i class="file-type " th:classappend="'tp-' + ${share.ico}"></i>
                                                     <div class="file-name"><em>
-                                                        <a href="javascript:;" btn="share_copy" receive_code="fa50" style="display:;" class="icon-lock"></a>
-                                                        <a href="//115.com/s/swnsqdw3wa3" th:title="${share.fileName}" rel="share_href" target="_blank" class="name">
+                                                        <a href="javascript:;" btn="share_copy" receive_code="fa50" class="icon-lock"></a>
+                                                        <a href="" th:title="${share.fileName}" rel="share_href" target="_blank" class="name">
                                                             <span th:text="${share.fileName}"></span>
                                                         </a></em>
                                                     </div>
                                                 </div>
                                                 <div class="file-opr" style="margin-top: -50px;">
-                                                    <a href="javascript:;" btn="share" style="display:">
+                                                    <a href="javascript:;" btn="share">
                                                         <i class="icon-operate ifo-share"></i><span>分享</span>
                                                     </a>
-                                                    <a href="javascript:;" btn="copy" style="display:;">
+                                                    <a href="javascript:;" btn="copy" >
                                                         <i class="icon-operate ifo-copy"></i><span>复制</span>
                                                     </a>
-                                                    <a href="javascript:;" btn="reshare" style="display:none">
-                                                        <i class="icon-operate ifo-renew"></i><span>链接续期</span>
-                                                    </a>
-                                                    <a href="javascript:;"btn="auto_reshare" style="display:none">
-                                                        <i class="icon-operate ifo-autorenew"></i><span>自动续期</span>
-                                                    </a>
-                                                    <a href="javascript:;" btn="cancel_auto_reshare" style="display:none">
-                                                        <i class="icon-operate ifo-unautorenew"></i><span>取消自动续期</span>
-                                                    </a>
-                                                    <a href="javascript:;" btn="add_recivecode"  style="display:none">
+                                                    <a href="javascript:;" btn="add_recivecode">
                                                         <i class="icon-operate ifo-renew"></i><span>添加访问码</span>
-                                                    </a>
-                                                    <a href="javascript:;" btn="change_recivecode" style="display:">
-                                                        <i class="icon-operate ifo-changevisitcode"></i><span>变更访问码</span>
-                                                    </a>
-                                                    <a href="javascript:;" btn="cancel_recivecode" style="display:none">
-                                                        <i class="icon-operate ifo-renew"></i><span>取消访问码</span>
-                                                    </a>
-                                                    <a href="javascript:;" btn="appeal" style="display:none"><i class="icon-operate ifo-appeal"></i><span>申诉</span>
                                                     </a>
                                                     <a href="javascript:;"btn="close">
                                                         <i class="icon-operate ifo-unshare"></i><span>取消分享</span>
@@ -237,18 +220,6 @@
             }
         });
     }
-
-    $(document).on('mouseover mouseout',"table > tbody > tr", function (event) {
-        if(event.type == "mouseover"){
-            //鼠标悬浮
-            $(this).css('background','#E8F0FC');
-            $(this).find('.file-opr').css('display', 'block');
-        }else if(event.type == "mouseout"){
-            //鼠标离开
-            $(this).css('background','');
-            $(this).find('.file-opr').css('display', 'none');
-        }
-    });
 
     /**
      * 删除文件

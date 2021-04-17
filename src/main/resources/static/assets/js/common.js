@@ -24,3 +24,15 @@ function getFreeStorage(){
         }
     });
 }
+
+$(document).on('mouseover mouseout',"table > tbody > tr", function (event) {
+    if(event.type == "mouseover"){
+        //鼠标悬浮
+        $(this).css('background','#E8F0FC');
+        $(this).find('.file-opr').css('display', 'block');
+    }else if(event.type == "mouseout"){
+        //鼠标离开
+        $(this).css('background','');
+        $(this).find('.file-opr').css('display', 'none');
+    }
+});

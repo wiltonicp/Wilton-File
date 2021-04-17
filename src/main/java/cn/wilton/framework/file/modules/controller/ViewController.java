@@ -1,11 +1,26 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.wilton.framework.file.common.entity.ShareEntity;
+import cn.wilton.framework.file.common.entity.User;
+import cn.wilton.framework.file.common.util.MaskUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
+import cn.wilton.framework.file.modules.service.IShareService;
+import cn.wilton.framework.file.modules.service.IUserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.QueryChainWrapper;
+import com.vihackerframework.common.exception.ViHackerException;
+import com.vihackerframework.common.exception.ViHackerRuntimeException;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p> 页面控制器
@@ -15,7 +30,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping
+@RequiredArgsConstructor
 public class ViewController {
+
+    private final IUserService userService;
+    private final IShareService shareService;
 
     @GetMapping("/toLogin")
     public String login(){
@@ -57,8 +76,16 @@ public class ViewController {
      * @return
      */
     @GetMapping("/s/{pickupId}")
-    public String pickup(Model model,@PathVariable("pickupId") String pickupId){
-        model.addAttribute("cid",10013);
+    public String pickup(Model model,@PathVariable("pickupId") @NotBlank() String pickupId){
+        ShareEntity share = shareService.getOne(new QueryWrapper<ShareEntity>()
+                .eq("share_code", pickupId)
+        );
+        if(ObjectUtils.isEmpty(share)){
+            return "common/error/404";
+        }
+        User user = userService.getById(share.getCreatedBy());
+        model.addAttribute("pickupId",pickupId);
+        model.addAttribute("userName", MaskUtil.getAnonymousRealName(user.getFullName()));
         return "pickup-share";
     }
 
@@ -68,11 +95,9 @@ public class ViewController {
      */
     @GetMapping("/resources")
     public String resources(Model model){
-        model.addAttribute("cid",10013);
+        model.addAttribute("cid",10015);
         return "resources-center";
     }
-
-
 
     /**
      * 回收站

@@ -25,6 +25,8 @@ public class ShareEntity extends BaseEntity{
      */
     private Long fileSize;
 
+    private String fileType;
+
     @TableField(exist = false)
     private String fileSizeVal;
 
@@ -63,10 +65,14 @@ public class ShareEntity extends BaseEntity{
      */
     private Long views;
 
+    @TableField(exist = false)
+    private String createdName;
+
     public void created(FileEntity file){
         this.fileId = file.getId();
         this.fileName = file.getFileName();
         this.fileSize = file.getFileSize();
+        this.fileType = file.getFileType();
         this.ico = file.getIco();
     }
 

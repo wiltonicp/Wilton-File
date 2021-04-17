@@ -5,16 +5,18 @@ import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IShareService;
+import cn.wilton.framework.file.modules.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.vihackerframework.common.api.ViHackerResult;
+import com.vihackerframework.common.exception.ViHackerException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -30,6 +32,7 @@ public class ShareController {
 
     @Value("${wilton.share.path}")
     private String sharePath;
+    private final IUserService userService;
     private final IShareService shareService;
 
     @GetMapping("list")

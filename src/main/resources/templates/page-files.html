@@ -72,6 +72,14 @@
         .breadcrumb-item+.breadcrumb-item:before {
             margin-top: 0px;
         }
+        .image_container {
+            height: 500px;
+        }
+        .jqvsiv_main_image_content {
+            transform: rotate(
+                    0deg
+            )
+        }
 
     </style>
 </head>
@@ -178,19 +186,11 @@
                     <div class="col-lg-3 col-md-6 col-sm-6" th:each="file:${fileList}">
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body image-thumb" style="cursor:pointer">
-                                <div th:if="${file.fileType} ne 'image'" class="mb-4 text-center p-3 rounded iq-thumb">
+                                <div class="mb-4 text-center p-3 rounded iq-thumb">
                                     <div class="iq-image-overlay"></div>
                                     <a href="#" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'pdf')}" src="assets/images/layouts/page-7/pdf.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'doc')}" src="assets/images/layouts/page-7/doc.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'xls')}" src="assets/images/layouts/page-7/xlsx.png" class="img-fluid" alt="image1">
-                                        <img th:if="${#strings.containsIgnoreCase(file.ico,'ppt')}" src="assets/images/layouts/page-7/ppt.png" class="img-fluid" alt="image1">
-                                    </a>
-                                </div>
-                                <div th:if="${file.fileType} eq 'image'" class="mb-4 text-center p-3 rounded iq-thumb">
-                                    <a class="image-popup-vertical-fit" th:href="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}">
-                                        <img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" class="img-fluid" alt="images" />
-                                        <div class="iq-image-overlay"></div>
+                                        <i class="file-thumb " th:classappend="'tb-' + ${file.ico}" th:if="${file.fileType} ne 'image'"></i>
+                                        <img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" th:if="${file.fileType} eq 'image'" class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -210,7 +210,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -263,19 +262,11 @@
                                         </tr>
                                         <tr th:each="file:${fileList}">
                                             <td>
-                                                <div th:if="${file.fileType} eq 'image'" class="d-flex align-items-center">
-                                                    <div class="mr-3">
-                                                        <a href="#"><img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" class="img-fluid avatar-30" alt="image1"></a>
-                                                    </div>
-                                                    <span th:text="${file.fileName}"></span>
-                                                </div>
-                                                <div th:if="${file.fileType} ne 'image'" class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
                                                     <div class="mr-3">
                                                         <a href="#">
-                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'pdf')}" src="assets/images/layouts/page-4/pdf.png" class="img-fluid avatar-30" alt="image1">
-                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'doc')}" src="assets/images/layouts/page-4/doc.png" class="img-fluid avatar-30" alt="image1">
-                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'xls')}" src="assets/images/layouts/page-4/xlsx.png" class="img-fluid avatar-30" alt="image1">
-                                                            <img th:if="${#strings.containsIgnoreCase(file.ico,'ppt')}" src="assets/images/layouts/page-4/ppt.png" class="img-fluid avatar-30" alt="image1">
+                                                            <i class="file-type " th:classappend="'tb-' + ${file.ico}" th:if="${file.fileType} ne 'image'"></i>
+                                                            <img th:src="'/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" th:if="${file.fileType} eq 'image'" class="img-fluid avatar-30" alt="image1">
                                                         </a>
                                                     </div>
                                                     <div th:text="${file.fileName}" th:attr="data-title=${file.fileName},data-url='/file/thumb?fid=' + ${file.id} + '.' + ${file.ico}" data-load-file="file" data-load-target="#resolte-contaniner" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;"></div>
@@ -650,5 +641,4 @@
 </script>
 
 </body>
-<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 </html>

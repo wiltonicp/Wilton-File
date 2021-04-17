@@ -66,19 +66,19 @@
                                 <div class="col-lg-4 col-sm-6" style="margin: 0 auto;">
                                     <div class="card card-block card-stretch card-height blog pricing-details">
                                         <div class="card-body border text-center rounded">
-                                            <div class="pricing-header bg-primary text-white">
+                                            <div class="pricing-header bg-success text-white mb-3">
                                                 <div class="d-flex justify-content-center">
                                                     <div class="mb-5 mt-3 crm-profile-img-edit position-relative">
-                                                        <img class="crm-profile-pic rounded-circle mb-2 avatar-100" th:src="@{/assets/images/user/11.png}" alt="profile-pic">
-                                                        <h5 th:text="${userName} + ' 的分享'"></h5>
+                                                        <i class="file-type " th:classappend="'tp-' + ${share.ico}" style="height: 65px; width: 65px;"></i>
+                                                        <h5 th:text="${share.fileName}"></h5>
+                                                        <p th:text="${share.fileSizeVal}"></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h5 class="mb-3">请输入取货码</h5>
-                                            <div class="form-group col-md-9 mb-4" style="margin: auto;">
-                                                <input type="text" class="form-control" id="fcode" placeholder="请输入取货码">
-                                            </div>
-                                            <a href="#" id="check" class="btn btn-primary">确认</a>
+                                            <a th:href="'/resources/download?fileId=' + ${share.fileId} + '&shareCode=' + ${share.shareCode} + '&pickupCode=' + ${share.pickupCode}" btn="download" class="button mb-3">
+                                                <i class="icon-operate ifo-download"></i>
+                                                <span>下载</span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -136,36 +136,8 @@
 <!-- app JavaScript -->
 <script th:src="@{/assets/js/app.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-    let shareCode = [[${pickupId}]];
 
-    $("#check").click(function(){
-        if($('#fcode').val() == null || $('#fcode').val() == ''){
-            alert("取件码不能为空");
-            return
-        }
-        getShare()
-    });
-
-    function getShare(){
-        $.ajax({
-            url:"/resources/verification",
-            type:"GET",
-            data:{shareCode:shareCode,
-                pickupCode: $('#fcode').val()
-            },
-            success:function (result) {
-                console.log(result)
-                if(result.code == 200){
-                    let data = result.data
-                    location.href = "/resources/down?sid="+ data.id + "&sharecode="+data.shareCode +"&pickupcode=" + data.pickupCode;
-                }else{
-                    alert(result.message);
-                }
-            }
-        });
-    }
 </script>
 
 </body>
-<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 </html>

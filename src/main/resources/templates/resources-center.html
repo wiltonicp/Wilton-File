@@ -28,6 +28,7 @@
     <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
     <!--officeToHtml-->
     <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/file.css}">
     <link rel="stylesheet" th:href="@{/assets/css/file_type.css}">
     <link rel="stylesheet" th:href="@{/assets/css/file_sharing_public.css}" />
     <link rel="stylesheet" th:href="@{/assets/css/common.css}">
@@ -62,7 +63,7 @@
                     <div class="col-lg-12">
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" th:fragment="resources-list">
                                     <table class="table mb-0 table-borderless tbl-server-info">
                                         <thead>
                                         <tr>
@@ -70,143 +71,34 @@
                                             <th scope="col">文件大小</th>
                                             <th scope="col">种类</th>
                                             <th scope="col">上传者</th>
-                                            <th scope="col">修改时间</th>
+                                            <th scope="col">分享时间</th>
                                             <th scope="col">操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
+                                        <tbody class="list-contents list-cell">
+                                        <tr th:each="share:${shareList}">
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small rounded mr-3">
-                                                        <svg class="icon svg-icon" aria-hidden="true" style="width: 40px; height: 40px;">
-                                                            <use xlink:href="#icon-wenjianjia2"></use>
-                                                        </svg>
+                                                <div class="file-name-wrap">
+                                                    <i class="file-type " th:classappend="'tb-' + ${share.ico}" th:if="${share.fileType} ne 'image'"></i>
+                                                    <img th:src="'/file/thumb?fid=' + ${share.fileId} + '.' + ${share.ico}" th:if="${share.fileType} eq 'image'" style="margin-right: 17px;" class="img-fluid avatar-30" alt="image1">
+                                                    <div class="file-name"><em>
+                                                        <a href="javascript:;" btn="share_copy" receive_code="fa50" class="icon-lock"></a>
+                                                        <a th:href="'/s/' + ${share.shareCode}" th:title="${share.fileName}" rel="share_href" target="_blank" class="name">
+                                                            <span th:text="${share.fileName}"></span>
+                                                        </a></em>
                                                     </div>
-                                                    <div data-load-file="file" style="cursor: pointer;">我的相册</div>
                                                 </div>
                                             </td>
-                                            <td> </td>
-                                            <td>文件夹</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
+                                            <td th:text="${share.fileSizeVal}"> </td>
+                                            <td th:text="${share.ico}"></td>
+                                            <td th:text="${share.createdName}"></td>
+                                            <td th:text="${#temporals.format(share.createdTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
                                                         <i class="ri-more-fill"></i>
                                                     </span>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-danger rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
-                                                    </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="alexa5.pdf" style="cursor: pointer;">Weekly Report.pdf</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>pdf</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-primary rounded mr-3">
-                                                        <i class="ri-file-download-line"></i>
-                                                    </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal" data-title="alexa6.docx" style="cursor: pointer;">Milestone.docx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>docx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton11" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-info rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
-                                                    </div>
-                                                    <div data-title="Alexa8.xlsx" data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.xlsx" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">Training center.xlsx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>xlsx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton13" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon-small bg-success rounded mr-3">
-                                                        <i class="ri-file-excel-line"></i>
-                                                    </div>
-                                                    <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal" data-title="alexa7.pptx" style="cursor: pointer;">Flavour.pptx</div>
-                                                </div>
-                                            </td>
-                                            <td>3.68 MB</td>
-                                            <td>pptx</td>
-                                            <td>Ranger</td>
-                                            <td>2021-03-27 18:35</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <span class="dropdown-toggle" id="dropdownMenuButton12" data-toggle="dropdown">
-                                                        <i class="ri-more-fill"></i>
-                                                    </span>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                        <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>查看</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>删除</a>
-                                                        <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>编辑</a>
                                                         <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>下载</a>
                                                     </div>
                                                 </div>
@@ -269,9 +161,19 @@
 <!-- app JavaScript -->
 <script th:src="@{/assets/js/app.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+    list()
 
+    function list(){
+        $.ajax({
+            url:"/resources/list",
+            type:"GET",
+            data:{fileName:"s"},
+            success:function (result) {
+                $('.table-responsive').html(result);
+            }
+        });
+    }
 </script>
 
 </body>
-<script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 </html>
