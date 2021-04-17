@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-public class WiltonMetaObjectHandler implements MetaObjectHandler {
+public class ViHackerMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {

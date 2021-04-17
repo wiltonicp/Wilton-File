@@ -1,9 +1,9 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.entity.FreeStorage;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IUserService;
+import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +27,8 @@ public class UserController {
      * @return
      */
     @GetMapping("freeStorage")
-    private WiltonResult<FreeStorage> getFreeSize(){
-        return WiltonResult.data(userService.getUserFreeStorageSize());
+    private ViHackerResult<FreeStorage> getFreeSize(){
+        return ViHackerResult.data(userService.getUserFreeStorageSize());
     }
 
     /**
@@ -36,8 +36,8 @@ public class UserController {
      * @return
      */
     @GetMapping("loginUser")
-    public WiltonResult loginUser(){
-        return WiltonResult.data(SecurityUtil.getLoginUser());
+    public ViHackerResult loginUser(){
+        return ViHackerResult.data(SecurityUtil.getLoginUser());
     };
 
 }

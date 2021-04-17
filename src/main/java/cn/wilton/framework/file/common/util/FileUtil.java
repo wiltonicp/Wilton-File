@@ -4,8 +4,8 @@ import cn.hutool.core.util.IdUtil;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
-import cn.wilton.framework.file.common.exception.BizException;
-import cn.wilton.framework.file.common.exception.WiltonException;
+import com.vihackerframework.common.exception.ViHackerException;
+import com.vihackerframework.common.exception.ViHackerRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -250,7 +250,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
         // 1M
         int len = 1024 * 1024;
         if (size > (maxSize * len)) {
-            throw new BizException("文件超出规定大小");
+            throw new ViHackerRuntimeException("文件超出规定大小");
         }
     }
 
@@ -316,11 +316,11 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
      * @param file
      * @param fileName 下载文件名称
      * @param deleteOnExit 下载后是否删除源文件
-     * @throws WiltonException
+     * @throws ViHackerException
      */
-    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file,String fileName, boolean deleteOnExit) throws WiltonException {
+    public static void downloadFile(HttpServletRequest request, HttpServletResponse response, File file,String fileName, boolean deleteOnExit) throws ViHackerException {
         if (!file.exists()) {
-            throw new WiltonException("文件未找到");
+            throw new ViHackerException("文件未找到");
         }
         response.setCharacterEncoding(request.getCharacterEncoding());
         // 设置强制下载不打开
@@ -334,7 +334,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil{
             IOUtils.copy(fis, response.getOutputStream());
             response.flushBuffer();
         } catch (Exception e) {
-            throw new WiltonException("文件下载失败！");
+            throw new ViHackerException("文件下载失败！");
         } finally {
             if (fis != null) {
                 try {

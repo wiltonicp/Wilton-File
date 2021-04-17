@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IShareService extends IService<ShareEntity> {
 
+
     /**
      * 新增分享
      * @param fileId

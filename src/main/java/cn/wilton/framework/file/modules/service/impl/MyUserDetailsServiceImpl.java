@@ -1,7 +1,6 @@
 package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.entity.*;
-import cn.wilton.framework.file.common.service.RedisService;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.modules.mapper.PermissionMapper;
 import cn.wilton.framework.file.modules.mapper.RolePermissionMapper;
@@ -9,12 +8,11 @@ import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.mapper.UserRoleMapper;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.vihackerframework.common.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,8 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;

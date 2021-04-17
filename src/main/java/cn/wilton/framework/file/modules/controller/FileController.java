@@ -1,16 +1,16 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.FolderEntity;
-import cn.wilton.framework.file.common.exception.BizException;
-import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.PicUtil;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import cn.wilton.framework.file.properties.WiltonProperties;
+import com.vihackerframework.common.api.ViHackerResult;
+import com.vihackerframework.common.exception.ViHackerException;
+import com.vihackerframework.common.exception.ViHackerRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-
 
 /**
  * 文件操作
@@ -67,12 +66,13 @@ public class FileController {
     }
 
     @PostMapping("/update")
-    public@ResponseBody WiltonResult<Void> update(FileEntity fileEntity){
+    public@ResponseBody
+    ViHackerResult<Void> update(FileEntity fileEntity){
         FileEntity entity = fileService.getById(fileEntity.getId());
         BeanUtils.copyProperties(fileEntity,entity);
         entity.update();
         fileService.updateById(entity);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
     /**
@@ -81,9 +81,9 @@ public class FileController {
      * @return
      */
     @PostMapping("/delete")
-    public@ResponseBody WiltonResult<Void> delete(long fileId){
+    public@ResponseBody ViHackerResult<Void> delete(long fileId){
         boolean b = fileService.removeById(fileId);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
     /**
@@ -92,10 +92,10 @@ public class FileController {
      * @param response
      */
     @GetMapping("thumb")
-    public@ResponseBody void preview(String fid, Long md, HttpServletResponse response) throws BizException{
+    public@ResponseBody void preview(String fid, Long md, HttpServletResponse response) throws ViHackerRuntimeException{
         FileEntity fileEntity = fileService.getByFileId(Long.valueOf(FileUtil.getFileNameNoEx(fid)));
         if(fileEntity == null){
-            new BizException("参数无效!");
+            new ViHackerRuntimeException("参数无效!");
         }
         File file = new File(properties.getUserPath() + WiltonConstant.REAL_PATH
                 + File.separator + fileEntity.getStoreName());
@@ -110,7 +110,7 @@ public class FileController {
                 input.read(bytes);
                 response.getOutputStream().write(bytes);
             } catch (Exception e) {
-                new WiltonException("文件处理异常");
+                new ViHackerException("文件处理异常");
             }finally{
                 try {
                     if(input!=null){

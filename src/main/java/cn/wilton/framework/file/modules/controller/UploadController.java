@@ -1,15 +1,14 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
-import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.IdUtils;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IUploadService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.alibaba.fastjson.JSONObject;
+import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -49,11 +48,11 @@ public class UploadController {
      * @param request
      */
     @PostMapping("checkblock")
-    public WiltonResult checkMd5(HttpServletRequest request) {
+    public ViHackerResult checkMd5(HttpServletRequest request) {
         String chunk = request.getParameter("chunk");
         String chunkSize = request.getParameter("chunkSize");
         String guid = request.getParameter("guid");
-        return WiltonResult.data(uploadService.checkMd5(chunk, Integer.parseInt(chunkSize), guid));
+        return ViHackerResult.data(uploadService.checkMd5(chunk, Integer.parseInt(chunkSize), guid));
     }
 
     /**
@@ -66,9 +65,9 @@ public class UploadController {
      * @throws IOException
      */
     @PostMapping("save")
-    public WiltonResult<Void> upload(@RequestParam MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException {
+    public ViHackerResult<Void> upload(@RequestParam MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException {
         this.uploadService.uploadFile(file,folderId,chunk,guid);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
     /**
@@ -77,9 +76,9 @@ public class UploadController {
      * @param fileName 文件名称
      */
     @PostMapping("combine")
-    public WiltonResult<Void> combineBlock(String guid, String fileName) {
+    public ViHackerResult<Void> combineBlock(String guid, String fileName) {
         this.uploadService.combineBlock(guid,fileName);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
     /**

@@ -2,8 +2,6 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
-import cn.wilton.framework.file.common.exception.BizException;
-import cn.wilton.framework.file.common.exception.WiltonException;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.IdUtils;
 import cn.wilton.framework.file.modules.service.IFileService;

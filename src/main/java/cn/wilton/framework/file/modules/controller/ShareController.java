@@ -1,12 +1,12 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.entity.ShareEntity;
 import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IShareService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -58,9 +58,9 @@ public class ShareController {
     }
 
     @PostMapping("update")
-    public WiltonResult<Void> update(ShareEntity input){
+    public ViHackerResult<Void> update(ShareEntity input){
         shareService.updateById(input);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
 }

@@ -14,7 +14,7 @@ spring:
           password: Wilton2019
   redis:
     database: 0
-    host: file.wiltonic.cn
+    host: vihacker.top
     port: 8179
     password: RocketAdmin123
     lettuce:

@@ -1,8 +1,8 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.modules.service.IFolderService;
+import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -44,10 +44,11 @@ public class FolderController {
      * @return
      */
     @PostMapping("/add")
-    public@ResponseBody WiltonResult<FolderEntity> add(@Validated FolderEntity folderEntity){
+    public@ResponseBody
+    ViHackerResult<FolderEntity> add(@Validated FolderEntity folderEntity){
         folderEntity.created();
         boolean save = folderService.save(folderEntity);
-        return WiltonResult.data(folderEntity);
+        return ViHackerResult.data(folderEntity);
     }
 
     /**
@@ -56,12 +57,12 @@ public class FolderController {
      * @return
      */
     @PostMapping("/update")
-    public@ResponseBody WiltonResult<Void> update(FolderEntity folderEntity){
+    public@ResponseBody ViHackerResult<Void> update(FolderEntity folderEntity){
         FolderEntity entity = folderService.getById(folderEntity.getId());
         BeanUtils.copyProperties(folderEntity,entity);
         entity.update();
         folderService.updateById(entity);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
     /**
@@ -70,9 +71,9 @@ public class FolderController {
      * @return
      */
     @PostMapping("/delete")
-    public@ResponseBody WiltonResult<Void> delete(long folderId){
+    public@ResponseBody ViHackerResult<Void> delete(long folderId){
         folderService.removeById(folderId);
-        return WiltonResult.success();
+        return ViHackerResult.success();
     }
 
 }

@@ -1,8 +1,7 @@
 package cn.wilton.framework.file.modules.controller;
 
-import cn.wilton.framework.file.common.api.WiltonResult;
 import cn.wilton.framework.file.common.util.SecurityUtil;
-import org.springframework.security.core.userdetails.User;
+import com.vihackerframework.common.api.ViHackerResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @GetMapping("loginUser")
-    public WiltonResult loginUser(){
-        return WiltonResult.data(SecurityUtil.getLoginUser());
+    public ViHackerResult loginUser(){
+        return ViHackerResult.data(SecurityUtil.getLoginUser());
     };
 
     @GetMapping("currentPrincipal")
-    public WiltonResult getCurrentPrincipal(){
-        return WiltonResult.data(SecurityUtil.getCurrentPrincipal());
+    public ViHackerResult getCurrentPrincipal(){
+        return ViHackerResult.data(SecurityUtil.getCurrentPrincipal());
     };
 
 
