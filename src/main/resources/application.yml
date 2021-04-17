@@ -36,7 +36,6 @@ wilton:
         - /assets/**/**
         - /assets/**/**/**
         - /wechat/**
-        - /s/**
 
 
 mybatis-plus:

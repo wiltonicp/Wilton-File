@@ -63,6 +63,18 @@ public class ViewController {
     }
 
     /**
+     * 资源中心
+     * @return
+     */
+    @GetMapping("/resources")
+    public String resources(Model model){
+        model.addAttribute("cid",10013);
+        return "resources-center";
+    }
+
+
+
+    /**
      * 回收站
      * @return
      */
