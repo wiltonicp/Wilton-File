@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 /**
@@ -13,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @TableName("t_user")
-public class User extends BaseEntity{
+public class User extends ViHackerEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;

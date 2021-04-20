@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("f_folder")
-public class FolderEntity extends BaseEntity{
+public class FolderEntity extends ViHackerEntity {
 
     /**
      * 文件id

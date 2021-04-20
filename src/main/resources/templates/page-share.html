@@ -129,15 +129,16 @@
                                                             <span th:text="${share.fileName}"></span>
                                                         </a></em>
                                                     </div>
+                                                    <input type="text" th:id="'link'+${share.id}" th:value="${share.sharePath}" style="position: absolute;z-index: -1000;display: block;">
                                                 </div>
                                                 <div class="file-opr" style="margin-top: -50px;">
-                                                    <a href="javascript:;" btn="share">
+                                                    <a href="javascript:;" btn="share" style="display: none">
                                                         <i class="icon-operate ifo-share"></i><span>分享</span>
                                                     </a>
-                                                    <a href="javascript:;" btn="copy" >
+                                                    <a href="javascript:;" class="copyBtn" th:attr="data-clipboard-target='#link'+${share.id}">
                                                         <i class="icon-operate ifo-copy"></i><span>复制</span>
                                                     </a>
-                                                    <a href="javascript:;" btn="add_recivecode">
+                                                    <a href="javascript:;" btn="add_recivecode" style="display: none">
                                                         <i class="icon-operate ifo-renew"></i><span>添加访问码</span>
                                                     </a>
                                                     <a href="javascript:;"btn="close">
@@ -145,7 +146,7 @@
                                                     </a>
                                                 </div>
                                             </td>
-                                            <td th:text="${share.state}"></td>
+                                            <td th:text="${share.state eq -1} ? '永久' : ${share.state} + '天'"></td>
                                             <td th:text="${#temporals.format(share.createdTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td th:text="${share.fileSizeVal}"></td>
                                             <td th:text="${share.views}"></td>
@@ -206,11 +207,13 @@
 <script th:src="@{/assets/js/doc-viewer.js}"></script>
 <!-- app JavaScript -->
 <script th:src="@{/assets/js/app.js}"></script>
+<script th:src="@{/assets/js/clipboard.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
 
     $(function(){
         list();
     });
+
     function list(){
         $.ajax({
             url:"/share/list",
@@ -220,6 +223,19 @@
             }
         });
     }
+
+    //实例化 ClipboardJS对象;
+    var copyBtn = new ClipboardJS('.copyBtn');
+
+    copyBtn.on("success",function(e){
+        // 复制成功
+        e.clearSelection();
+    });
+    copyBtn.on("error",function(e){
+        //复制失败；
+        console.log( e.action )
+    });
+
 
     /**
      * 删除文件

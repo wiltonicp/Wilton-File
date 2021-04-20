@@ -5,7 +5,9 @@ import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IUserService;
 import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Identityprovider.Verification;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final IUserService userService;
+
+    /**
+     * 注册 验证码
+     * @return
+     */
+    @PostMapping("register")
+    public ViHackerResult add(){
+        return null;
+    }
 
     /**
      * 当前用户存储空间使用情况

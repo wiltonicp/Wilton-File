@@ -26,6 +26,20 @@ spring:
       enabled: true
       max-request-size: 1024MB
       max-file-size: 1024MB
+  mail:
+    host: smtp.exmail.qq.com #发送邮件服务器
+    username: no-reply@vihacker.top #邮箱
+    password: DY7gJXvQSzAkpxDm #客户端授权码
+    protocol: smtp #发送邮件协议
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 465 #端口号465或587
+    properties.mail.display.sendmail: viHacker #可以任意
+    properties.mail.display.sendname: Spring Boot Guide Email #可以任意
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+    from: no-reply@vihacker.top #与上面的username保持一致
 wilton:
   security:
     ignored:

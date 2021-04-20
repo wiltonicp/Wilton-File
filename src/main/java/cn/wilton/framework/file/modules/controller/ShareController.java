@@ -60,9 +60,25 @@ public class ShareController {
         return "common/share::toShare";
     }
 
+    /**
+     * 修改分享
+     * @param input
+     * @return
+     */
     @PostMapping("update")
     public ViHackerResult<Void> update(ShareEntity input){
         shareService.updateById(input);
+        return ViHackerResult.success();
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @DeleteMapping("delete/{id}")
+    public ViHackerResult<Void> deleteById(Long id){
+        shareService.removeById(id);
         return ViHackerResult.success();
     }
 

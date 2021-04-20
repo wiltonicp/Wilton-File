@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("f_file")
-public class FileEntity extends BaseEntity{
+public class FileEntity extends ViHackerEntity {
 
     /**
      * 文件id

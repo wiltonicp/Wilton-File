@@ -3,6 +3,7 @@ package cn.wilton.framework.file.common.entity;
 import cn.wilton.framework.file.common.util.FileUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 /**
@@ -13,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @TableName("f_share")
-public class ShareEntity extends BaseEntity{
+public class ShareEntity extends ViHackerEntity {
 
     private Long id;
     /**
@@ -78,7 +79,7 @@ public class ShareEntity extends BaseEntity{
 
     public void created(String sharePath){
         this.fileSizeVal = FileUtil.getSize(this.fileSize);
-        this.sharePath = sharePath + this.getShareCode();
+        this.sharePath = sharePath + this.getShareCode() + "?pickupcode=" + this.pickupCode;
         switch (this.state){
             case -1: this.stateVal = "长期"; break;
             case 1: this.stateVal = "1天"; break;

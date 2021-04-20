@@ -157,7 +157,7 @@
                 console.log(result)
                 if(result.code == 200){
                     let data = result.data
-                    location.href = "/resources/down?sid="+ data.id + "&sharecode="+data.shareCode +"&pickupcode=" + data.pickupCode;
+                    location.href = "/s/"+data.shareCode +"&pickupcode=" + data.pickupCode;
                 }else{
                     alert(result.message);
                 }

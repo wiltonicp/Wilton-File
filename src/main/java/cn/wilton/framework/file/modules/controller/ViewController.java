@@ -3,6 +3,7 @@ package cn.wilton.framework.file.modules.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.wilton.framework.file.common.entity.ShareEntity;
 import cn.wilton.framework.file.common.entity.User;
+import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.MaskUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.service.IShareService;
@@ -13,6 +14,7 @@ import com.vihackerframework.common.exception.ViHackerException;
 import com.vihackerframework.common.exception.ViHackerRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -39,6 +41,11 @@ public class ViewController {
     @GetMapping("/toLogin")
     public String login(){
         return "auth-sign-in";
+    }
+
+    @GetMapping("/toRegister")
+    public String register(){
+        return "auth-sign-up";
     }
 
     @GetMapping("/")
@@ -75,18 +82,33 @@ public class ViewController {
      * 取货页面
      * @return
      */
-    @GetMapping("/s/{pickupId}")
-    public String pickup(Model model,@PathVariable("pickupId") @NotBlank() String pickupId){
+    @GetMapping("/s/{sharecode}")
+    public String pickup(Model model,@PathVariable("sharecode") @NotBlank() String sharecode,
+                         String pickupcode){
         ShareEntity share = shareService.getOne(new QueryWrapper<ShareEntity>()
-                .eq("share_code", pickupId)
+                .eq("share_code", sharecode)
         );
         if(ObjectUtils.isEmpty(share)){
             return "common/error/404";
         }
-        User user = userService.getById(share.getCreatedBy());
-        model.addAttribute("pickupId",pickupId);
-        model.addAttribute("userName", MaskUtil.getAnonymousRealName(user.getFullName()));
-        return "pickup-share";
+
+        if(StringUtils.isBlank(pickupcode)){
+            User user = userService.getById(share.getCreatedBy());
+            model.addAttribute("pickupId",sharecode);
+            model.addAttribute("userName", MaskUtil.getAnonymousRealName(user.getFullName()));
+            return "pickup-share";
+        }else {
+            ShareEntity one = shareService.getOne(new QueryWrapper<ShareEntity>()
+                    .eq("share_code", sharecode)
+                    .eq("pickup_code", pickupcode)
+            );
+            if(ObjectUtils.isEmpty(one)){
+                return "common/error/404";
+            }
+            one.setFileSizeVal(FileUtil.getSize(one.getFileSize()));
+            model.addAttribute("share",one);
+            return "pickup-download";
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package cn.wilton.framework.file.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 /**
@@ -12,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @TableName("t_project")
-public class ProjectEntity extends BaseEntity{
+public class ProjectEntity extends ViHackerEntity {
 
     private Long id;
 

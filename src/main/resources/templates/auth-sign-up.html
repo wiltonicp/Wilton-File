@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>登入 | ViHacker</title>
+      <title>注册 | ViHacker</title>
       <meta name="description" content="支持存储和分享文件，支持api加密上传，可以快速和项目对接">
       <!-- Favicon -->
       <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
@@ -56,38 +56,45 @@
                      <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal light-logo" style="height: 100px;" alt="logo">
                      <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal darkmode-logo" style="height: 100px;" alt="logo">
 <!--                     <h5 style="color: #000">云文件分享系统</h5>-->
-                     <h4 class="mb-3">登录</h4>
-                     <form th:action="@{/login}" method="POST">
-                        <div class="row">
-                           <div class="col-lg-12">
-                              <div class="floating-label form-group">
-                                 <input class="floating-input form-control" id="username" name="username" type="text" required placeholder=" ">
-                                 <label>用户名、电子邮箱或电话</label>
-                              </div>
-                           </div>
-                           <div class="col-lg-12">
-                              <div class="floating-label form-group">
-                                 <input class="floating-input form-control" id="password" name="password" type="password" required placeholder=" ">
-                                 <label>密码</label>
-                              </div>
-                           </div>
-                           <div class="col-lg-6">
-                              <div class="custom-control custom-checkbox mb-3 text-left">
-                                 <input type="checkbox" name="rememberMe" class="custom-control-input" id="customCheck1">
-                                 <label class="custom-control-label" for="customCheck1">记住我</label>
-                              </div>
-                           </div>
-                           <div class="col-lg-6">
-                              <a href="#" class="text-primary float-right">忘记密码?</a>
-                           </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">登录</button>
-                        <p class="mt-3">
-                           创建账户 <a href="/toRegister" class="text-primary">注册</a>
-                        </p>
+                     <h4 class="mb-3">创建一个账号</h4>
+                     <form th:action="@{/register}" method="POST">
+                         <div class="row">
+                             <div class="col-lg-12">
+                                 <div class="floating-label form-group">
+                                     <input class="floating-input form-control" type="text" placeholder=" ">
+                                     <label>姓名/昵称</label>
+                                 </div>
+                             </div>
+                             <div class="col-lg-12">
+                                 <div class="floating-label form-group">
+                                     <input class="floating-input form-control" type="email" placeholder=" ">
+                                     <label>电子邮箱</label>
+                                 </div>
+                             </div>
+                             <div class="col-lg-6">
+                                 <div class="floating-label form-group">
+                                     <input class="floating-input form-control" type="password" placeholder=" ">
+                                     <label>密码</label>
+                                 </div>
+                             </div>
+                             <div class="col-lg-6">
+                                 <div class="floating-label form-group">
+                                     <input class="floating-input form-control" type="password" placeholder=" ">
+                                     <label>确认密码</label>
+                                 </div>
+                             </div>
+                             <div class="col-lg-12">
+                                 <div class="custom-control custom-checkbox mb-3 text-left">
+                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                     <label class="custom-control-label" for="customCheck1">我同意使用条款</label>
+                                 </div>
+                             </div>
+                         </div>
+                         <button type="submit" class="btn btn-primary">注册</button>
+                         <p class="mt-3">
+                             已经有一个账户 <a href="/toLogin" class="text-primary">登录</a>
+                         </p>
                      </form>
-                      <!-- 以下为显示认证失败等提示信息（th:if=""一定要写 ） -->
-                      <div th:if="${param.error} == 0" th:text="用户名或密码错误!"></div>
                   </div>
                </div>
             </div>
