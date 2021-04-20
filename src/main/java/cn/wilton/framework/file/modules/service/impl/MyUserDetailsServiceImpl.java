@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserMapper userMapper;
-    private final RedisService redisService;
     private final WiltonProperties properties;
     private final UserRoleMapper userRoleMapper;
     private final PermissionMapper permissionMapper;

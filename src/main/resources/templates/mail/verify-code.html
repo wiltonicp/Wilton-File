@@ -1,54 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
 <div>
-    <table cellpadding="0" cellspacing="0" align="center" width="770px" style="font-family:Arial,sans-serif;color:#000000;background-color:#f8f8f8;font-size:14px;background-image:url('https://oss.wiltonic.cn/ViHackerlogo-1.png') repeat">
-        <tbody><tr>
+    <table cellpadding="0" cellspacing="0" align="center" width="770px"
+           style="font-family:Arial,sans-serif;color:#000000;background-color:#f8f8f8;font-size:14px;background-image:url('https://oss.wiltonic.cn/ViHackerlogo-1.png') repeat">
+        <tbody>
+        <tr>
             <td style="padding-top:60px;padding-right:70px;padding-bottom:60px;padding-left:70px">
-                <img src="https://oss.wiltonic.cn/ViHackerlogo-1.png" alt="" height="80" style="margin-left:30px;margin-bottom:15px" class="CToWUd">
-                <table width="100%" cellpadding="0" cellspacing="0" align="center" style="border-color:#e6e6e6;border-width:1px;border-style:solid;background-color:#fff;padding-top:25px;padding-right:0;padding-bottom:50px;padding-left:30px">
-                    <tbody><tr>
+                <img src="https://oss.wiltonic.cn/ViHackerlogo-1.png" alt="" height="80"
+                     style="margin-left:30px;margin-bottom:15px" class="CToWUd">
+                <table width="100%" cellpadding="0" cellspacing="0" align="center"
+                       style="border-color:#e6e6e6;border-width:1px;border-style:solid;background-color:#fff;padding-top:25px;padding-right:0;padding-bottom:50px;padding-left:30px">
+                    <tbody>
+                    <tr>
                         <td style="padding:0 30px 30px">
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:19px;margin-top:14px;margin-bottom:0">
-                                您好,
+                                您好:
                             </p>
-
-
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:14px;line-height:17px;margin-top:30px;margin-bottom:0">
-                                您最近输入了电子邮件地址 <b><a href="mailto:wilton.icp@gmail.com" target="_blank">wilton.icp@gmail.com</a></b> 用作 ViHacker 注册.
+                                您最近输入了电子邮件地址 <b><a th:href="'mailto:' + ${to}" target="_blank" th:text="${to}"></a></b>
+                                用作 ViHacker 注册.
                                 要确认此电子邮件地址，请在 ViHacker 上输入此代码:
                             </p>
-
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:23px;line-height:16px;margin-top:20px;margin-bottom:16px;font-weight:600">
-                                <b>976216</b>
+                                <b th:text="${code}"></b>
                             </p>
-
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:14px;line-height:17px;margin-top:30px;margin-bottom:0">
                                 此代码将保持激活状态5分钟，请尽快输入。
                             </p>
-
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:14px;line-height:17px;margin-top:30px;margin-bottom:0">
                                 如果这不是你，你不是 ViHacker 用户，请不要注意这封邮件。很可能是有人错误地输入了您的电子邮件地址。
                             </p>
-
-
                             <p style="font-family:Arial,sans-serif;color:#000000;font-size:15px;font-style:italic;margin-top:30px;margin-bottom:0">
-
                                 我们关心你账户的安全。<br><br> 真诚的,<br> ViHacker 团队
                             </p>
                         </td>
                     </tr>
-                    </tbody></table>
+                    </tbody>
+                </table>
                 <table width="100%" cellpadding="0" cellspacing="0" align="center">
-                    <tbody><tr>
+                    <tbody>
+                    <tr>
                         <td style="padding-top:12px;background-image:url('https://oss.wiltonic.cn/ViHackerlogo-1.png')"></td>
                     </tr>
                     <tr>
                         <td style="font-family:Arial,sans-serif;font-size:12px;color:#888888;padding-right:30px;padding-left:30px">
-
                             请不要回复此消息。您可以发送邮件联系 ViHacker 的支持服务 <a href="mailto:wilton.icp@gmail.com">发送邮件</a>.
-
                         </td>
                     </tr>
-                    </tbody></table>
+                    </tbody>
+                </table>
             </td>
         </tr>
-        </tbody></table><div class="yj6qo"></div><div class="adL">
-</div></div>
+        </tbody>
+    </table>
+    <div class="yj6qo"></div>
+    <div class="adL">
+    </div>
+</div>
+</body>
+</html>

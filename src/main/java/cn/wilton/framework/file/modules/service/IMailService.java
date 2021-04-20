@@ -28,7 +28,7 @@ public interface IMailService {
      */
     public void sendHtmlMail(String to, String subject, String content) throws MessagingException;
 
-    public void sendHtmlMail(String to, String subject, String content, String... cc);
+    public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException;
 
     /**
      * 发送带附件的邮件

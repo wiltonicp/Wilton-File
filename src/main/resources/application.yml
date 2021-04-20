@@ -33,13 +33,14 @@ spring:
     protocol: smtp #发送邮件协议
     properties.mail.smtp.auth: true
     properties.mail.smtp.port: 465 #端口号465或587
-    properties.mail.display.sendmail: viHacker #可以任意
+    properties.mail.display.sendmail: ViHacker #可以任意
     properties.mail.display.sendname: Spring Boot Guide Email #可以任意
     properties.mail.smtp.starttls.enable: true
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
     from: no-reply@vihacker.top #与上面的username保持一致
+    from-name: ViHacker
 wilton:
   security:
     ignored:
@@ -50,7 +51,7 @@ wilton:
         - /assets/**/**
         - /assets/**/**/**
         - /wechat/**
-
+  redisKey: vihacker.
 
 mybatis-plus:
   type-aliases-package: cn.wilton.framework.file*.entity

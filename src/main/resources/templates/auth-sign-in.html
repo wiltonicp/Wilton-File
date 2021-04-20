@@ -26,6 +26,7 @@
         <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/verySimpleImageViewer/css/jquery.verySimpleImageViewer.css}">
         <!--officeToHtml-->
         <link rel="stylesheet" th:href="@{/assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/common.css}">
       <style>
             .sign-user_card h5 {
                 color: #613F9D;
@@ -53,8 +54,8 @@
             <div class="row justify-content-center align-items-center height-self-center">
                <div class="col-md-4 col-sm-12 col-12 align-self-center">
                   <div class="sign-user_card" style="border-color: #fff;background-color: #fff;border-radius: 16px;">
-                     <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal light-logo" style="height: 100px;" alt="logo">
-                     <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal darkmode-logo" style="height: 100px;" alt="logo">
+                     <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal light-logo" style="height: 80px;" alt="logo">
+                     <img th:src="@{/assets/images/logo.png}" class="img-fluid rounded-normal darkmode-logo" style="height: 80px;" alt="logo">
 <!--                     <h5 style="color: #000">云文件分享系统</h5>-->
                      <h4 class="mb-3">登录</h4>
                      <form th:action="@{/login}" method="POST">
@@ -81,9 +82,9 @@
                               <a href="#" class="text-primary float-right">忘记密码?</a>
                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">登录</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">登录</button>
                         <p class="mt-3">
-                           创建账户 <a href="/toRegister" class="text-primary">注册</a>
+                           创建账户 <a href="/toRegister" class="text-primary">立即注册</a>
                         </p>
                      </form>
                       <!-- 以下为显示认证失败等提示信息（th:if=""一定要写 ） -->
@@ -126,5 +127,4 @@
     <!-- app JavaScript -->
     <script th:src="@{/assets/js/app.js}"></script>
   </body>
-  <script type="text/javascript" src="https://js.mfpad.com/mfsapi.js"></script>
 </html>

@@ -2,7 +2,7 @@ package cn.wilton.framework.file.modules.service.impl;
 
 import cn.wilton.framework.file.modules.service.IMailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,12 +11,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
  * <p>
- *
  * @author Ranger
  * @email wilton.icp@gmail.com
  * @since 2021/4/20
@@ -27,6 +27,8 @@ public class MailServiceImpl implements IMailService {
 
     @Value("${spring.mail.from}")
     private String from;
+    @Value("${spring.mail.from-name}")
+    private String fromName;
     private final JavaMailSender mailSender;
 
     /**
@@ -63,11 +65,13 @@ public class MailServiceImpl implements IMailService {
      * @param content
      */
     @Override
+    @SneakyThrows
     public void sendHtmlMail(String to, String subject, String content) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
         helper.setTo(to);
+
         helper.setSubject(subject);
         helper.setText(content, true);
 
@@ -75,8 +79,17 @@ public class MailServiceImpl implements IMailService {
     }
 
     @Override
+    @SneakyThrows
     public void sendHtmlMail(String to, String subject, String content, String... cc) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
+        helper.setTo(to);
+        helper.setCc(cc);
+        helper.setSubject(subject);
+        helper.setText(content, true);
 
+        mailSender.send(message);
     }
 
     /**
@@ -87,11 +100,12 @@ public class MailServiceImpl implements IMailService {
      * @param filePath
      */
     @Override
+    @SneakyThrows
     public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -104,8 +118,22 @@ public class MailServiceImpl implements IMailService {
     }
 
     @Override
+    @SneakyThrows
     public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc) {
+        MimeMessage message = mailSender.createMimeMessage();
 
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+        helper.setCc(cc);
+
+        FileSystemResource file = new FileSystemResource(new File(filePath));
+        String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
+        helper.addAttachment(fileName, file);
+
+        mailSender.send(message);
     }
 
     /**
@@ -117,11 +145,12 @@ public class MailServiceImpl implements IMailService {
      * @param rscId
      */
     @Override
+    @SneakyThrows
     public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -133,7 +162,20 @@ public class MailServiceImpl implements IMailService {
     }
 
     @Override
+    @SneakyThrows
     public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc) {
+        MimeMessage message = mailSender.createMimeMessage();
 
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(new InternetAddress(from,fromName,"UTF-8"));
+        helper.setTo(to);
+        helper.setCc(cc);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        FileSystemResource res = new FileSystemResource(new File(rscPath));
+        helper.addInline(rscId, res);
+
+        mailSender.send(message);
     }
 }

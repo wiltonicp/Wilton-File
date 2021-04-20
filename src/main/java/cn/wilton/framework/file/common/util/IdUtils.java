@@ -22,11 +22,25 @@ public class IdUtils extends IdUtil{
      */
     private static final Integer CODE_LENGTH = 16;
     private static String BASE32_STRATEGY = "abcdefghijkmnpqrstuvwxyz23456789";
+    private static String NUM_STRATEGY = "123456789";
     private static final String PASSWORD = "dak3le2";
     /**
      * 从byte转为字符表索引所需要的位数
      */
     private static final int convertByteCount = 5;
+
+    /**
+     * 生成随机4位验证码
+     * @return
+     */
+    public static Integer getVerifyCode(){
+        String uuid = new String();
+        for(int i = 0;i < 4;i++){
+            char ch = NUM_STRATEGY.charAt(new Random().nextInt(NUM_STRATEGY.length()));
+            uuid += ch;
+        }
+        return Integer.parseInt(uuid);
+    }
 
     /**
      * 生成 id
@@ -222,7 +236,7 @@ public class IdUtils extends IdUtil{
     }
 
     public static void main(String[] args) {
-        System.out.println(fastUUID());
+        System.out.println(getVerifyCode());
     }
 
 }
