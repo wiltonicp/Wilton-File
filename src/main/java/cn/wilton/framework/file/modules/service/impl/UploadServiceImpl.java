@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -54,6 +55,7 @@ public class UploadServiceImpl implements IUploadService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void uploadFile(MultipartFile file, Long folderId, Integer chunk, String guid) throws IOException {
         String filePath = properties.getUserPath() + WiltonConstant.TEMP_PATH + File.separator + guid;
         File tempPath = new File(filePath);
@@ -104,6 +106,7 @@ public class UploadServiceImpl implements IUploadService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void combineBlock(String guid, String fileName) {
         //分片文件临时目录
         File tempPath = new File(properties.getUserPath()

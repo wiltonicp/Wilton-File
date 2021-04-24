@@ -1,11 +1,13 @@
 package cn.wilton.framework.file.modules.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.common.entity.ShareEntity;
 import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.MaskUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
+import cn.wilton.framework.file.modules.service.IFolderService;
 import cn.wilton.framework.file.modules.service.IShareService;
 import cn.wilton.framework.file.modules.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -37,6 +39,7 @@ public class ViewController {
 
     private final IUserService userService;
     private final IShareService shareService;
+    private final IFolderService folderService;
 
     @GetMapping("/toLogin")
     public String login(){
@@ -48,8 +51,12 @@ public class ViewController {
         return "auth-sign-up";
     }
 
-    @GetMapping("/")
+    @GetMapping("/file")
     public String file(Model model,Long fid){
+        if(ObjectUtils.isEmpty(fid)){
+            FolderEntity byUserId = folderService.findByUserId(SecurityUtil.getLoginUser().getId());
+            fid = byUserId.getId();
+        }
         model.addAttribute("fid",fid);
         model.addAttribute("cid",10010);
         model.addAttribute("userName", SecurityUtil.getLoginUser().getFullName());
@@ -115,7 +122,7 @@ public class ViewController {
      * 资源中心
      * @return
      */
-    @GetMapping("/resources")
+    @GetMapping("/")
     public String resources(Model model){
         model.addAttribute("cid",10015);
         return "resources-center";

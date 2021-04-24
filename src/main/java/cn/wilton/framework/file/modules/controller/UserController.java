@@ -1,15 +1,16 @@
 package cn.wilton.framework.file.modules.controller;
 
 import cn.wilton.framework.file.common.entity.FreeStorage;
+import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.SecurityUtil;
+import cn.wilton.framework.file.modules.dto.UserInput;
 import cn.wilton.framework.file.modules.service.IUserService;
 import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Identityprovider.Verification;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,12 +26,13 @@ public class UserController {
     private final IUserService userService;
 
     /**
-     * 注册 验证码
+     * 注册用户
      * @return
      */
     @PostMapping("register")
-    public ViHackerResult add(){
-        return null;
+    public ViHackerResult add(@Validated UserInput input){
+        userService.addUser(input);
+        return ViHackerResult.success();
     }
 
     /**

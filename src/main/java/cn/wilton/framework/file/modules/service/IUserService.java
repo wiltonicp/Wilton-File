@@ -2,6 +2,7 @@ package cn.wilton.framework.file.modules.service;
 
 import cn.wilton.framework.file.common.entity.FreeStorage;
 import cn.wilton.framework.file.common.entity.User;
+import cn.wilton.framework.file.modules.dto.UserInput;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -24,5 +25,12 @@ public interface IUserService extends IService<User> {
      * @return
      */
     FreeStorage getUserFreeStorageSize();
+
+    /**
+     * 新增用户
+     * @param input
+     * @return
+     */
+    boolean addUser(UserInput input);
 
 }

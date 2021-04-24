@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.common.entity;
 
+import cn.wilton.framework.file.common.util.IdUtils;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -39,5 +40,10 @@ public class User extends ViHackerEntity {
      * 存储空间大小 单位 GB
      */
     private Long storageSize;
+
+    public void created(){
+        this.spaceCode = IdUtils.simpleUUID();
+        this.storageSize = 10L;
+    }
 }
 

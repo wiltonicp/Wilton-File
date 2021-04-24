@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,21 +38,32 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, FolderEntity> i
     }
 
     @Override
+    public FolderEntity findByUserId(Long userId) {
+        return this.getOne(new QueryWrapper<FolderEntity>()
+                .eq("created_by", userId)
+                .eq("parent_id", 0L)
+        );
+    }
+
+    @Override
     public List<FolderEntity> findParentById(Long id) {
         return this.baseMapper.findParentById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<FolderEntity> deletedList() {
         return this.baseMapper.deletedList(SecurityUtil.getLoginUser().getId());
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean restoreById(long id) {
         return this.baseMapper.restoreById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean deletePermanentlyById(long id) {
         return this.baseMapper.deletePermanentlyById(id);
     }

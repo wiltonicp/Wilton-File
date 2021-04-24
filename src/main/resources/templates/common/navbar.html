@@ -32,7 +32,8 @@
             </form>
         </div>
         <div class="col-lg-5 col-md-3 col-sm-3" style="text-align: end;">
-            <a href="/resources">资源中心</a>
+            <a href="/" th:if="${cid != 10015}">资源中心</a>
+            <a href="/file" th:if="${cid == 10015}">我的资源</a>
         </div>
         <div class="d-flex align-items-center">
             <div class="change-mode">

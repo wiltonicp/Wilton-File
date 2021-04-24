@@ -13,7 +13,7 @@ spring:
           username: wilton
           password: Wilton2019
   redis:
-    database: 0
+    database: 8
     host: 192.168.2.81
     port: 8179
     password: RocketAdmin123

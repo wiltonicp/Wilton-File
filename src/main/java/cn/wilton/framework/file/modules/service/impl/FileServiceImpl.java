@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileEntity> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<FileEntity> deletedList() {
         List<FileEntity> list = this.baseMapper.deletedList(SecurityUtil.getLoginUser().getId());
         list.forEach(file ->{
@@ -62,11 +64,13 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileEntity> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean restoreById(long id) {
         return this.baseMapper.restoreById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean deletePermanentlyById(long id) {
         return this.baseMapper.deletePermanentlyById(id);
     }

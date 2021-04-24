@@ -15,6 +15,13 @@ public interface IFolderService extends IService<FolderEntity> {
     List<FolderEntity> list(Long parentId);
 
     /**
+     * 查询当前用户的主节点信息
+     * @param userId
+     * @return
+     */
+    FolderEntity findByUserId(Long userId);
+
+    /**
      * 根据 子id 查询所有父节点
      * @param id
      * @return

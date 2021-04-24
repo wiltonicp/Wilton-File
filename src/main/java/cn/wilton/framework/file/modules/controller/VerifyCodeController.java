@@ -7,12 +7,15 @@ import com.vihackerframework.common.api.ViHackerResult;
 import com.vihackerframework.common.exception.ViHackerException;
 import com.vihackerframework.common.service.RedisService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+
+import javax.mail.MessagingException;
 
 
 /**
@@ -33,19 +36,15 @@ public class VerifyCodeController {
     private final TemplateEngine templateEngine;
 
     @GetMapping("sendMailCode")
-    public ViHackerResult sendMailCode(String to) throws ViHackerException {
-        try {
+    public ViHackerResult sendMailCode(String to) throws ViHackerException, MessagingException {
             Context context = new Context();
             Integer code = IdUtils.getVerifyCode();
             redisService.set(properties.redisKey + to,code);
             context.setVariable("code", code);
             context.setVariable("to", to);
-            String emailContent = templateEngine.process("/mail/verify-code", context);
+            String emailContent = templateEngine.process("mail/verify-code", context);
             mailService.sendHtmlMail(to, "确认您的电子邮件地址", emailContent);
             log.info("邮件发送成功");
-        }catch (Exception e){
-            throw new ViHackerException("邮件发送失败!");
-        }
         return ViHackerResult.success();
     }
 }

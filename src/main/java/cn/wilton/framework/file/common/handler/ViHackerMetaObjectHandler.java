@@ -3,6 +3,7 @@ package cn.wilton.framework.file.common.handler;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +23,8 @@ public class ViHackerMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         setFiledVal("version", 0L, metaObject);
         setFiledVal("deleted", 0, metaObject);
-        setFiledVal("createdBy", SecurityUtil.getLoginUser().getId(), metaObject);
-        setFiledVal("modifyBy", SecurityUtil.getLoginUser().getId(), metaObject);
+        setFiledVal("createdBy", ObjectUtils.isEmpty(SecurityUtil.getLoginUser()) ? 1L : SecurityUtil.getLoginUser().getId(), metaObject);
+        setFiledVal("modifyBy", ObjectUtils.isEmpty(SecurityUtil.getLoginUser()) ? 1L : SecurityUtil.getLoginUser().getId(), metaObject);
         setFiledVal("createdTime", LocalDateTime.now(), metaObject);
         setFiledVal("modifyTime", LocalDateTime.now(), metaObject);
     }
