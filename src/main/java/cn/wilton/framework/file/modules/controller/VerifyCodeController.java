@@ -39,7 +39,7 @@ public class VerifyCodeController {
     public ViHackerResult sendMailCode(String to) throws ViHackerException, MessagingException {
             Context context = new Context();
             Integer code = IdUtils.getVerifyCode();
-            redisService.set(properties.redisKey + to,code);
+            redisService.set(properties.redisKey + to,code,300);
             context.setVariable("code", code);
             context.setVariable("to", to);
             String emailContent = templateEngine.process("mail/verify-code", context);
