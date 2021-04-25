@@ -120,7 +120,7 @@
                                     <a th:if="${loopStatus.count} eq ${loopStatus.size}" th:text="${bc.folderName}"></a>
                                     <a th:if="${loopStatus.count} ne ${loopStatus.size}" th:text="${bc.folderName}" th:onclick="initFolder([[${bc.id}]])" href="#" ></a>
                                 </li>
-                                <li class="breadcrumb-item" aria-current="page" data-toggle="modal" data-target="#exampleModalCenter">
+                                <li class="breadcrumb-item" onclick="addFolder()">
                                     <a href="#">
                                         <svg class="my-icon svg-icon" aria-hidden="true">
                                             <use xlink:href="#icon-wenjianjia"></use>
@@ -130,28 +130,6 @@
                                 </li>
                             </ol>
                         </nav>
-                    </div>
-                    <!-- 新建文件夹 -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="border-bottom:none">
-                                    <h5 class="modal-title" id="exampleModalLabel">新建文件夹</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="">
-                                    <div class="form-group col-md-12">
-                                        <input type="text" autocomplete="off" class="form-control" id="folderName">
-                                    </div>
-                                </div>
-                                <div class="modal-footer" style="border-top:none">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 25%;">取消</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addFolder()" style="width: 25%;">确认</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -467,17 +445,25 @@
     function addFolder(){
         let jQuery = $(".breadcrumb").children().last().prev();
         let parentId = $(jQuery).data("id");
-        let folderName = $('#folderName').val();
-        if(folderName == '' || folderName == null){
-            alert("文件夹不能为空");
-            return
-        }
-        $.ajax({
-            url:"/folder/add",
-            type:"POST",
-            data:{folderName:folderName,parentId:parentId},
-            success:function (result) {
-                initFolder(result.data.id)
+        let folderName = "";
+        $.confirm({
+            id: parentId,
+            title: '新建文件夹',
+            jconfrimName: folderName,
+            confirm: function () {
+                var folderName = $('#jconfrimName').val();
+                if(folderName == '' || folderName == null){
+                    alert("文件夹不能为空");
+                    return
+                }
+                $.ajax({
+                    url:"/folder/add",
+                    type:"POST",
+                    data:{folderName:folderName,parentId:parentId},
+                    success:function (result) {
+                        initFolder(result.data.id)
+                    }
+                });
             }
         });
     }
