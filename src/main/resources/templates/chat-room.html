@@ -121,7 +121,7 @@
                         <div class="title">
                             <div>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">vihacker云畅聊室(328)</font>
+                                    <font style="vertical-align: inherit;">vihacker云畅聊室<font id="onlineNumber">(328)</font></font>
                                 </font>
                             </div>
                         </div>
@@ -165,35 +165,6 @@
                                                 <font style="vertical-align: inherit;">鬼毅创建了群聊</font>
                                             </font>
                                         </span>
-                                    </div>
-                                    <div class="msg-box local-msg">
-                                        <div class="msg-portrait-local">
-                                            <div class="caption bg-primary line-height">鬼</div>
-                                        </div>
-                                        <div class="msg-bubble" style="margin-right: 10px;">
-                                            <div class="msg-warn">
-                                            </div>
-                                            <div class="msg-text">
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">您好！</font>
-                                                </font>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="msg-box dialog-msg">
-                                        <div class="msg-bubble" style="margin-left: 30px;">
-                                            <div class="msg-portrait-online">
-                                                <div class="caption bg-primary line-height">R</div>
-                                                <span>java开发者</span>
-                                            </div>
-                                            <div class="msg-warn">
-                                            </div>
-                                            <div class="msg-text">
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">我是测试数据</font>
-                                                </font>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -242,23 +213,32 @@
 
     //连接发生错误回调方法
     websocket.onerror = function() {
-        sendMessageInnerHTML("WebSocket连接发生错误");
+        sendNoticeStrInnerHTML("连接发生错误");
     };
 
     //连接成功建立回调方法
     websocket.onopen = function() {
-        sendMessageInnerHTML("聊天室连接成功");
+        sendNoticeStrInnerHTML("连接成功");
     }
     var U01data, Uidata, Usdata
     //接收消息回调方法
     websocket.onmessage = function(event) {
         console.log(event);
-        receiveMessageInnerHTML(event.data);
+        let data = event.data;
+        data = JSON.parse(data);
+        if(data.msgType == 'NOTICE'){ //公告
+            sendNoticeInnerHTML(data);
+        }else if(data.msgType == 'NEWS') { //消息
+            receiveMessageInnerHTML(data);
+        }else if(data.msgType == 'CONNECTION') { //在线人数
+            $('#onlineNumber').html("(" + data.onlineNumber + ")");
+            sendNoticeInnerHTML(data)
+        }
     }
 
     //连接关闭回调方法
     websocket.onclose = function() {
-        sendMessageInnerHTML("WebSocket连接关闭");
+        sendNoticeStrInnerHTML("连接关闭");
     }
 
     //监听窗口关闭事件
@@ -295,6 +275,29 @@
         }
     });
 
+    //连接信息
+    function sendNoticeInnerHTML(data){
+        let htmlInfo = '<div class="msg-sys-info">\n' +
+            '               <span>\n' +
+            '                   <font style="vertical-align: inherit;">\n' +
+            '                       <font style="vertical-align: inherit;">'+ data.msg +'</font>\n' +
+            '                   </font>\n' +
+            '               </span>\n' +
+            '           </div>';
+        $('.msg-list').append(htmlInfo)
+    }
+
+    function sendNoticeStrInnerHTML(msg){
+        let htmlInfo = '<div class="msg-sys-info">\n' +
+            '               <span>\n' +
+            '                   <font style="vertical-align: inherit;">\n' +
+            '                       <font style="vertical-align: inherit;">'+ msg +'</font>\n' +
+            '                   </font>\n' +
+            '               </span>\n' +
+            '           </div>';
+        $('.msg-list').append(htmlInfo)
+    }
+
     //将消息显示在网页上
     function sendMessageInnerHTML(message) {
         let msgHtml = '<div class="msg-box local-msg">\n' +
@@ -315,7 +318,6 @@
 
     //接收消息展示在页面
     function receiveMessageInnerHTML(data){
-        data = JSON.parse(data);
         let msgHtml = '<div class="msg-box dialog-msg">\n' +
             '                     <div class="msg-bubble" style="margin-left: 30px;">\n' +
             '                     <div class="msg-portrait-online">\n' +

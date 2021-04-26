@@ -1,5 +1,6 @@
 package cn.wilton.framework.file.modules.dto;
 
+import cn.wilton.framework.file.common.entity.enums.MessageTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class RoomMessage {
 
-    private String msgType;
+    private MessageTypeEnum msgType;
 
     private String msg;
 
@@ -22,4 +23,9 @@ public class RoomMessage {
     private String nackName;
 
     private String avatarUrl;
+
+    /**
+     * 在线人数
+     */
+    private Integer onlineNumber;
 }

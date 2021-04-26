@@ -1,10 +1,12 @@
 package cn.wilton.framework.file.websocket;
 
 import cn.wilton.framework.file.common.entity.User;
+import cn.wilton.framework.file.common.entity.enums.MessageTypeEnum;
 import cn.wilton.framework.file.modules.dto.ChatRoomDto;
 import cn.wilton.framework.file.modules.dto.RoomMessage;
 import cn.wilton.framework.file.modules.service.IUserService;
 import cn.wilton.framework.file.modules.service.impl.UserServiceImpl;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.vihackerframework.common.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
@@ -77,8 +79,13 @@ public class WebSocketServer {
         // TODO 在线数加1
         addOnlineCount();
         try {
+            userService = applicationContext.getBean(UserServiceImpl.class);
+            User user = userService.getById(userId);
             RoomMessage roomMessage = new RoomMessage();
-            sendMessage("连接成功");
+            roomMessage.setMsg(user.getNickName() + " 上线了");
+            roomMessage.setOnlineNumber(getOnlineCount());
+            roomMessage.setMsgType(MessageTypeEnum.CONNECTION);
+            sendInfo(JSON.toJSONString(roomMessage),roomId);
             log.info("有新窗口开始监听:" + roomId + ",当前在线人数为:" + getOnlineCount());
         } catch (IOException e) {
             log.error("websocket IO Exception");
@@ -94,7 +101,17 @@ public class WebSocketServer {
         webSocketSet.remove(this);
         // TODO 在线数减1
         subOnlineCount();
-
+        try {
+            userService = applicationContext.getBean(UserServiceImpl.class);
+            User user = userService.getById(this.currentUserId);
+            RoomMessage roomMessage = new RoomMessage();
+            roomMessage.setMsg(user.getNickName() + " 离线了");
+            roomMessage.setOnlineNumber(getOnlineCount());
+            roomMessage.setMsgType(MessageTypeEnum.CONNECTION);
+            sendInfo(JSON.toJSONString(roomMessage),roomId);
+        } catch (IOException e) {
+            log.error("websocket IO Exception");
+        }
         log.info("释放的roomId为："+roomId);
         log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
     }
@@ -117,6 +134,7 @@ public class WebSocketServer {
          * 组装消息体
          */
         RoomMessage roomMessage = new RoomMessage();
+        roomMessage.setMsgType(MessageTypeEnum.NEWS);
         roomMessage.setMsg(parse.getString("msg"));
         roomMessage.setNackName(user.getNickName());
         roomMessage.setUserId(user.getId());
@@ -125,7 +143,7 @@ public class WebSocketServer {
         for (WebSocketServer item : webSocketSet) {
             try { // TODO 自己不推送
                 if(!item.currentUserId.equals(parse.getLongValue("uid"))){
-                    item.sendMessage(JSONObject.toJSONString(roomMessage));
+                    item.sendMessage(JSON.toJSONString(roomMessage));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
