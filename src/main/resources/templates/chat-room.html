@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>同屏畅聊 | ViHacker</title>
+
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/assets/css/chat.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/backend.min.css}" />
+    <script type="text/javascript" th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+</head>
+<style>
+    .msg-portrait-local {
+        float: right;
+    }
+    .msg-portrait-online {
+        display: flex;
+        position: absolute;
+        top: 0%;
+        left: -48px;
+        margin-top: -30px;
+    }
+
+    .msg-portrait-online span {
+        max-width: 135px;
+        width: max-content;
+        font-size: 13px;
+        color: #6e7479;
+        margin-left: 10px;
+        font-weight: 400;
+    }
+    .caption {
+        line-height: 40px;
+        font-size: 18px;
+        height: 40px;
+        border-radius: 50%;
+        width: 40px;
+        text-align: center;
+    }
+</style>
+<body>
+    <div id="app" class="im-container">
+        <div class="sub-hflow">
+            <div fragment="cf0a1d563b" class="im-search-message">
+                <div class="im-search">
+                    <div class="search-box"><input type="text" placeholder="搜索">
+                        <button type="button"><i><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">搜索</font></font></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="im-navigation">
+                <a href="javascript:;" class="nav-item">
+                    <span>
+                        <font style="vertical-align: inherit;">消息</font>
+                    </span>
+                </a>
+                <a href="javascript:;" class="nav-item">
+                    <span>
+                        <font style="vertical-align: inherit;">好友</font>
+                    </span>
+                </a>
+                <a href="javascript:;" class="nav-item current">
+                    <span>
+                        <font style="vertical-align: inherit;">群聊</font>
+                    </span>
+                </a>
+            </div>
+<!--            <div class="im-list">-->
+<!--                <div class="container-empty">-->
+<!--                    <span>-->
+<!--                        <font style="vertical-align: inherit;">-->
+<!--                            <font style="vertical-align: inherit;">暂无消息</font>-->
+<!--                        </font>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="im-list">
+                <ul>
+                    <li class="current">
+                        <div class="pic square">
+                            <img th:src="@{/assets/images/logo.png}" alt="">
+                        </div>
+                        <div class="cont">
+                            <div class="title">
+                                <div class="box">
+                                    <span class="name">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">vihacker云畅聊室</font>
+                                        </font>
+                                    </span>
+                                </div>
+                                <span class="time">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">1分钟前</font>
+                                    </font>
+                                </span></div>
+                            <div class="info-wrap">
+                                <div class="info">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">viHacker创建了群聊</font>
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-hflow">
+<!--            <div class="message-main">-->
+<!--                <div class="im-empty"></div>-->
+<!--            </div>-->
+            <div class="message-main">
+                <div fragment="13dd1624bc" class="im-header">
+                    <div class="left-tvf">
+                        <div class="title">
+                            <div>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">vihacker云畅聊室(328)</font>
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-tvf">
+                        <div class="header-side">
+                            <a href="javascript:;" class="button btn-light" style="display: none;">
+                                <i class="icon-header-side ihs-clear"></i>
+                                <s>
+                                    <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">清除</font>
+                                    </font>
+                                </s>
+                            </a>
+                            <a href="javascript:;" class="button btn-light">
+                                <i class="icon-header-side ihs-group"></i>
+                                <s>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">群聊</font>
+                                    </font>
+                                </s>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div fragment="13dd1624bc" class="im-content">
+                    <div class="msg-container">
+                        <div class="msg-hall-room">
+                            <div id="js-main_content" class="msg-contents msg-group">
+                                <div class="msg-list">
+                                    <div class="msg-timeline">
+                                        <span>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">今天17:06</font>
+                                            </font>
+                                        </span>
+                                    </div>
+                                    <div class="msg-sys-info">
+                                        <span>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">鬼毅创建了群聊</font>
+                                            </font>
+                                        </span>
+                                    </div>
+                                    <div class="msg-box local-msg">
+                                        <div class="msg-portrait-local">
+                                            <div class="caption bg-primary line-height">鬼</div>
+                                        </div>
+                                        <div class="msg-bubble" style="margin-right: 10px;">
+                                            <div class="msg-warn">
+                                            </div>
+                                            <div class="msg-text">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">您好！</font>
+                                                </font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="msg-box dialog-msg">
+                                        <div class="msg-bubble" style="margin-left: 30px;">
+                                            <div class="msg-portrait-online">
+                                                <div class="caption bg-primary line-height">R</div>
+                                                <span>java开发者</span>
+                                            </div>
+                                            <div class="msg-warn">
+                                            </div>
+                                            <div class="msg-text">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">我是测试数据</font>
+                                                </font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="msg-input">
+                            <div class="msg-input-box">
+                                <div class="left-tvf">
+                                    <div class="input-content-wrap">
+                                        <input type="text" id="inputMsg" placeholder="请输入消息" style="position: relative; width: -webkit-fill-available; border: aliceblue;height: 27px; padding-left: 10px;"/>
+                                        <div class="input-forbiden" style="display: none;">
+                                            <span>
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">禁言中</font>
+                                                </font>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-tvf">
+                                    <a href="javascript:;" class="button" onclick="send()">
+                                        <span>
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;">发送</font>
+                                            </font>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" th:inline="javascript">
+    let userId = [[${userId}]];
+    let roomId = [[${roomId}]];
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window) {
+        websocket = new WebSocket("ws://127.0.0.1:8127/api/websocket/"+ roomId +"/" + userId);
+        //websocket = new WebSocket("ws://vihacker.top:8127/api/websocket/"+ roomId +"/" + userId);
+    } else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //连接发生错误回调方法
+    websocket.onerror = function() {
+        sendMessageInnerHTML("WebSocket连接发生错误");
+    };
+
+    //连接成功建立回调方法
+    websocket.onopen = function() {
+        sendMessageInnerHTML("聊天室连接成功");
+    }
+    var U01data, Uidata, Usdata
+    //接收消息回调方法
+    websocket.onmessage = function(event) {
+        console.log(event);
+        receiveMessageInnerHTML(event.data);
+    }
+
+    //连接关闭回调方法
+    websocket.onclose = function() {
+        sendMessageInnerHTML("WebSocket连接关闭");
+    }
+
+    //监听窗口关闭事件
+    window.onbeforeunload = function() {
+        closeWebSocket();
+    }
+
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    /**
+     * 发送消息
+     */
+    function send() {
+        let message = $('#inputMsg').val()
+        if(message == null || message == ''){
+            return
+        }
+        let data = {
+            msg: message,
+            uid: userId
+        }
+        websocket.send(JSON.stringify(data));
+        sendMessageInnerHTML(message);
+        $('#inputMsg').val("")
+    }
+
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+            //TODO
+            send()
+        }
+    });
+
+    //将消息显示在网页上
+    function sendMessageInnerHTML(message) {
+        let msgHtml = '<div class="msg-box local-msg">\n' +
+            '                  <div class="msg-portrait-local">\n' +
+            '                      <img style="height: 40px; border-radius: 50%;" src="http://img01.yohoboys.com/contentimg/2018/11/22/13/0187be5a52edcdc999f749b9e24c7815fb.jpg">\n' +
+            '                  </div>\n' +
+            '                  <div class="msg-bubble" style="margin-right: 10px;">\n' +
+            '                      <div class="msg-warn"><i class="icon-msg-warn"></i></div>\n' +
+            '                      <div class="msg-text">\n' +
+            '                          <font style="vertical-align: inherit;">\n' +
+            '                              <font style="vertical-align: inherit;">' + message + '</font>\n' +
+            '                          </font>\n' +
+            '                      </div>\n' +
+            '                  </div>\n' +
+            '              </div>';
+        $('.msg-list').append(msgHtml)
+    }
+
+    //接收消息展示在页面
+    function receiveMessageInnerHTML(data){
+        data = JSON.parse(data);
+        let msgHtml = '<div class="msg-box dialog-msg">\n' +
+            '                     <div class="msg-bubble" style="margin-left: 30px;">\n' +
+            '                     <div class="msg-portrait-online">\n' +
+            '                          <div class="caption bg-primary line-height">'+ data.nackName.substr(0,1) +'</div>\n' +
+            '                           <span>'+ data.nackName +'</span>\n' +
+            '                      </div>\n' +
+            '                      <div class="msg-warn"><i class="icon-msg-warn"></i></div>\n' +
+            '                      <div class="msg-text">\n' +
+            '                          <font style="vertical-align: inherit;">\n' +
+            '                              <font style="vertical-align: inherit;">'+ data.msg +'</font>\n' +
+            '                          </font>\n' +
+            '                      </div>\n' +
+            '                  </div>\n' +
+            '              </div>';
+        $('.msg-list').append(msgHtml)
+    }
+</script>
+</body>
+
+</html>

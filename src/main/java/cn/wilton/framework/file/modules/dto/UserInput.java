@@ -22,8 +22,8 @@ public class UserInput {
     @NotBlank(message = "密码不能为空！")
     private String password;
 
-    @NotBlank(message = "姓名不能为空！")
-    private String fullName;
+    @NotBlank(message = "昵称不能为空！")
+    private String nickName;
 
     @NotNull(message = "验证码不能为空！")
     private Integer verifyCode;

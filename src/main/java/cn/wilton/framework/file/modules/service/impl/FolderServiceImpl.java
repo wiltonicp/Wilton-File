@@ -32,7 +32,7 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, FolderEntity> i
         );
         list.forEach(folder ->{
             User user = userMapper.selectById(folder.getCreatedBy());
-            folder.setCreatedByName(user.getFullName());
+            folder.setCreatedByName(user.getNickName());
         });
         return list;
     }

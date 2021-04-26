@@ -24,8 +24,8 @@ public class User extends ViHackerEntity {
 
     private String password;
 
-    @TableField("full_name")
-    private String fullName;
+    @TableField("nick_name")
+    private String nickName;
 
     private String mobile;
 

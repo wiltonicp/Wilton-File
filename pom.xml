@@ -87,6 +87,10 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
         <!--Mysql数据库驱动-->
         <dependency>
@@ -192,8 +196,6 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.13</version>
         </dependency>
-
-
 
         <!--图片压缩工具-->
         <dependency>

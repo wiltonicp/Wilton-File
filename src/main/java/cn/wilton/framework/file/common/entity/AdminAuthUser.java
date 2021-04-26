@@ -24,7 +24,7 @@ public class AdminAuthUser extends User {
 
     private Long id;
 
-    private String fullName;
+    private String nickName;
 
     private String avatar;
 

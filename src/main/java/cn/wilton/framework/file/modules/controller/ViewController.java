@@ -59,7 +59,7 @@ public class ViewController {
         }
         model.addAttribute("fid",fid);
         model.addAttribute("cid",10010);
-        model.addAttribute("userName", SecurityUtil.getLoginUser().getFullName());
+        model.addAttribute("userName", SecurityUtil.getLoginUser().getNickName());
         return "page-files";
     }
 
@@ -102,7 +102,7 @@ public class ViewController {
         if(StringUtils.isBlank(pickupcode)){
             User user = userService.getById(share.getCreatedBy());
             model.addAttribute("pickupId",sharecode);
-            model.addAttribute("userName", MaskUtil.getAnonymousRealName(user.getFullName()));
+            model.addAttribute("userName", MaskUtil.getAnonymousRealName(user.getNickName()));
             return "pickup-share";
         }else {
             ShareEntity one = shareService.getOne(new QueryWrapper<ShareEntity>()

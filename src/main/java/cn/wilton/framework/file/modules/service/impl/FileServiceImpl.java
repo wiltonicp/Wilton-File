@@ -34,7 +34,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, FileEntity> impleme
         );
         list.forEach(file ->{
             User user = userMapper.selectById(file.getCreatedBy());
-            file.setCreatedByName(user.getFullName());
+            file.setCreatedByName(user.getNickName());
             file.setFileSizeVal(FileUtil.getSize(file.getFileSize()));
         });
         return list;

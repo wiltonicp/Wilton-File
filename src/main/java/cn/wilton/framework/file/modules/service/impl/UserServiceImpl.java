@@ -1,9 +1,6 @@
 package cn.wilton.framework.file.modules.service.impl;
 
-import cn.wilton.framework.file.common.entity.FolderEntity;
-import cn.wilton.framework.file.common.entity.FreeStorage;
-import cn.wilton.framework.file.common.entity.User;
-import cn.wilton.framework.file.common.entity.UserRole;
+import cn.wilton.framework.file.common.entity.*;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.dto.UserInput;
@@ -11,6 +8,7 @@ import cn.wilton.framework.file.modules.mapper.FileMapper;
 import cn.wilton.framework.file.modules.mapper.FolderMapper;
 import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.mapper.UserRoleMapper;
+import cn.wilton.framework.file.modules.service.IChatRoomService;
 import cn.wilton.framework.file.modules.service.IUserService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -41,6 +39,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private final FolderMapper folderMapper;
     private final WiltonProperties properties;
     private final UserRoleMapper userRoleMapper;
+    private final IChatRoomService roomService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -94,6 +93,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         folderEntity.setModifyBy(user.getId());
         folderEntity.setCreatedBy(user.getId());
         folderMapper.insert(folderEntity);
+
+        /**
+         * 添加到默认聊天室
+         */
+        ChatRoomUser roomUser = new ChatRoomUser();
+        roomUser.setRoomId(1L);
+        roomUser.setUserId(user.getId());
+        roomService.addUserToRoom(roomUser);
         return true;
     }
 

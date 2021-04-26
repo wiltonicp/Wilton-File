@@ -45,7 +45,7 @@ public class ShareServiceImpl extends ServiceImpl<ShareMapper, ShareEntity> impl
         .eq("open","1"));
         shareList.getRecords().forEach(share ->{
             User user = userMapper.selectById(share.getCreatedBy());
-            share.setCreatedName(MaskUtil.getAnonymousRealName(user.getFullName()));
+            share.setCreatedName(MaskUtil.getAnonymousRealName(user.getNickName()));
             share.setFileSizeVal(FileUtil.getSize(share.getFileSize()));
         });
         return PageInfo.of(shareList,ShareEntity.class);
