@@ -40,6 +40,12 @@
         width: 40px;
         text-align: center;
     }
+    .hide {
+        display: none;
+    }
+    .show {
+        display: block;
+    }
 </style>
 <body>
     <div id="app" class="im-container">
@@ -112,10 +118,8 @@
             </div>
         </div>
         <div class="main-hflow">
-<!--            <div class="message-main">-->
-<!--                <div class="im-empty"></div>-->
-<!--            </div>-->
             <div class="message-main">
+                <div class="im-empty hide"></div>
                 <div fragment="13dd1624bc" class="im-header">
                     <div class="left-tvf">
                         <div class="title">
@@ -202,44 +206,49 @@
 <script type="text/javascript" th:inline="javascript">
     let userId = [[${userId}]];
     let roomId = [[${roomId}]];
-    var websocket = null;
-    //判断当前浏览器是否支持WebSocket
-    if('WebSocket' in window) {
-        websocket = new WebSocket("ws://127.0.0.1:8127/api/websocket/"+ roomId +"/" + userId);
-        //websocket = new WebSocket("ws://vihacker.top:8127/api/websocket/"+ roomId +"/" + userId);
-    } else {
-        alert('当前浏览器 Not support websocket')
-    }
+    var websocket = [];
+    openWebSocket(roomId)
 
-    //连接发生错误回调方法
-    websocket.onerror = function() {
-        sendNoticeStrInnerHTML("连接发生错误");
-    };
+    function openWebSocket(roomId){
+        //判断当前浏览器是否支持WebSocket
+        if('WebSocket' in window) {
+            //websocket[roomId] = new WebSocket("ws://127.0.0.1:8127/api/websocket/"+ roomId +"/" + userId);
+            websocket[roomId] = new WebSocket("ws://vihacker.top:8127/api/websocket/"+ roomId +"/" + userId);
+        } else {
+            alert('当前浏览器 Not support websocket')
+        }
 
-    //连接成功建立回调方法
-    websocket.onopen = function() {
-        sendNoticeStrInnerHTML("连接成功");
-    }
-    var U01data, Uidata, Usdata
-    //接收消息回调方法
-    websocket.onmessage = function(event) {
-        console.log(event);
-        let data = event.data;
-        data = JSON.parse(data);
-        if(data.msgType == 'NOTICE'){ //公告
-            sendNoticeInnerHTML(data);
-        }else if(data.msgType == 'NEWS') { //消息
-            receiveMessageInnerHTML(data);
-        }else if(data.msgType == 'CONNECTION') { //在线人数
-            $('#onlineNumber').html("(" + data.onlineNumber + ")");
-            sendNoticeInnerHTML(data)
+        //连接发生错误回调方法
+        websocket[roomId].onerror = function() {
+            sendNoticeStrInnerHTML("连接发生错误");
+        };
+
+        //连接成功建立回调方法
+        websocket[roomId].onopen = function() {
+            sendNoticeStrInnerHTML("连接成功");
+        }
+        var U01data, Uidata, Usdata
+        //接收消息回调方法
+        websocket[roomId].onmessage = function(event) {
+            //console.log(event);
+            let data = event.data;
+            data = JSON.parse(data);
+            if(data.msgType == 'NOTICE'){ //公告
+                sendNoticeInnerHTML(data);
+            }else if(data.msgType == 'NEWS') { //消息
+                receiveMessageInnerHTML(data);
+            }else if(data.msgType == 'CONNECTION') { //在线人数
+                $('#onlineNumber').html("(" + data.onlineNumber + ")");
+                sendNoticeInnerHTML(data)
+            }
+        }
+
+        //连接关闭回调方法
+        websocket[roomId].onclose = function() {
+            sendNoticeStrInnerHTML("连接关闭");
         }
     }
 
-    //连接关闭回调方法
-    websocket.onclose = function() {
-        sendNoticeStrInnerHTML("连接关闭");
-    }
 
     //监听窗口关闭事件
     window.onbeforeunload = function() {
@@ -248,7 +257,7 @@
 
     //关闭WebSocket连接
     function closeWebSocket() {
-        websocket.close();
+        websocket[roomId].close();
     }
 
     /**
@@ -263,7 +272,7 @@
             msg: message,
             uid: userId
         }
-        websocket.send(JSON.stringify(data));
+        websocket[roomId].send(JSON.stringify(data));
         sendMessageInnerHTML(message);
         $('#inputMsg').val("")
     }

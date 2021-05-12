@@ -20,6 +20,8 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
@@ -33,10 +35,12 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @ServerEndpoint("/api/websocket/{roomId}/{userId}")
 public class WebSocketServer {
 
-    //此处是解决无法注入的关键
+    /**
+     * 此处是解决无法注入的关键
+     */
     private static ApplicationContext applicationContext;
 
-    // TODO 你要注入的service或者dao
+    // TODO  你要注入的service或者dao
 
     private IUserService userService;
 
@@ -48,6 +52,12 @@ public class WebSocketServer {
      * 当前在线连接数
      */
     private static int onlineCount = 0;
+    /**
+     * 房间所有用户
+     * Map<用户 id, 在线用户>
+     */
+    private static Map<String, User> onlineUserMap = new ConcurrentHashMap<String, User>();
+
     /**
      * 存放每个客户端对应的MyWebSocket对象
      */
@@ -81,6 +91,7 @@ public class WebSocketServer {
         try {
             userService = applicationContext.getBean(UserServiceImpl.class);
             User user = userService.getById(userId);
+            onlineUserMap.put(user.getId().toString(),user);
             RoomMessage roomMessage = new RoomMessage();
             roomMessage.setMsg(user.getNickName() + " 上线了");
             roomMessage.setOnlineNumber(getOnlineCount());
@@ -102,8 +113,7 @@ public class WebSocketServer {
         // TODO 在线数减1
         subOnlineCount();
         try {
-            userService = applicationContext.getBean(UserServiceImpl.class);
-            User user = userService.getById(this.currentUserId);
+            User user = onlineUserMap.get(this.currentUserId);
             RoomMessage roomMessage = new RoomMessage();
             roomMessage.setMsg(user.getNickName() + " 离线了");
             roomMessage.setOnlineNumber(getOnlineCount());
@@ -128,8 +138,7 @@ public class WebSocketServer {
         /**
          * 查询发送消息者的信息
          */
-        userService = applicationContext.getBean(UserServiceImpl.class);
-        User user = userService.getById(parse.getLongValue("uid"));
+        User user = onlineUserMap.get(parse.getString("uid"));
         /**
          * 组装消息体
          */

@@ -206,16 +206,19 @@
     </dependencies>
 
     <!-- 在项目的pom.xml中 配置私服的仓库地址，可以将项目打jar包部署到私服 -->
-    <distributionManagement>
+    <repositories>
         <repository>
-            <id>nexus-releases</id> <!-- nexus认证id -->
-            <url>https://maven.wiltonic.cn/repository/maven-releases</url>
+            <id>maven-releases</id>
+            <name>maven-releases</name>
+            <url>http://rep.wiltonic.cn:8331/repository/maven-public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id> <!-- nexus认证id -->
-            <url>https://maven.wiltonic.cn/repository/maven-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+    </repositories>
 
     <build>
         <finalName>wilton-file-${project.version}</finalName>

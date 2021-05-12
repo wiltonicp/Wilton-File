@@ -2,6 +2,7 @@ package cn.wilton.framework.file.common.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.vihackerframework.common.entity.ViHackerEntity;
+import com.vihackerframework.common.util.CoreUtil;
 import lombok.Data;
 
 /**
