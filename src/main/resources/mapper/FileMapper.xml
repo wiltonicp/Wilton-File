@@ -5,7 +5,7 @@
     <select id="deletedList" resultType="cn.wilton.framework.file.common.entity.FileEntity">
         SELECT
             f.*,
-            u.full_name AS createdByName,
+            u.nick_name AS createdByName,
             p.folder_name AS folderName
         FROM
             f_file f
