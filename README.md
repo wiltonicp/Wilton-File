@@ -32,7 +32,7 @@ Wilton-File是基于SpringBoot实现的文件分享系统、支持文件分片�
 
 | 平台   | 地址                                       |
 | ------ | ------------------------------------------ |
-| GitHub |                                            |
+| GitHub | https://github.com/wiltonicp/Wilton-File  |
 | Gitee  | https://gitee.com/vihacker-sms/Wilton-File |
 
 ###  系统截图
