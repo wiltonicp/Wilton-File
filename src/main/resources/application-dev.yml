@@ -11,7 +11,7 @@ spring:
           url: jdbc:mysql://vihacker.top:3306/wilton_file_dev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           driver-class-name: com.mysql.cj.jdbc.Driver
           username: wilton
-          password: 123456
+          password: 1234567
   redis:
     database: 0
     host: vihacker.top

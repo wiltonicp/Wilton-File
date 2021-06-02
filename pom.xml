@@ -21,7 +21,7 @@
         <skipTests>true</skipTests>
         <docker.host>http://127.0.0.1:8150</docker.host>
         <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
-        <docker.serverId>docker-aliyun</docker.serverId>
+        <docker.serverId>docker-Aliyun</docker.serverId>
         <docker.registry>registry.vihacker.top/wilton</docker.registry>
         <docker.registry.name>wilton/rocket</docker.registry.name>
         <thymeleaf-spring5.version>3.0.9.RELEASE</thymeleaf-spring5.version>

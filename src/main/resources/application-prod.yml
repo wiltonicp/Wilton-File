@@ -11,7 +11,7 @@ spring:
           url: jdbc:mysql://192.168.2.81:3306/wilton_file_prod?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           driver-class-name: com.mysql.cj.jdbc.Driver
           username: wilton
-          password: 123456
+          password: 1234567
   redis:
     database: 8
     host: 192.168.2.81
