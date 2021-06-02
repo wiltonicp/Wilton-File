@@ -8,7 +8,7 @@ spring:
       primary: base
       datasource:
         base:
-          url: jdbc:mysql://rm-uf6rb2523f415bc6dno.mysql.rds.aliyuncs.com:3306/wilton_file_prod?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.2.81:3306/wilton_file_prod?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           driver-class-name: com.mysql.cj.jdbc.Driver
           username: wilton
           password: Wilton2019
@@ -16,7 +16,7 @@ spring:
     database: 8
     host: 192.168.2.81
     port: 8179
-    password: RocketAdmin123
+    password: 123456
     lettuce:
       pool:
         min-idle: 8 # 连接池中的最小空闲连接
