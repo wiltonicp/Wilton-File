@@ -387,7 +387,7 @@ CREATE TABLE `t_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Records of t_user
+-- Records of t_users
 -- ----------------------------
 BEGIN;
 INSERT INTO `t_user` VALUES (1, 'wilton.icp@gmail.com', '$2a$10$AKxb9Mzi83McsLNPbMKeW.PFYArQhQuwOuu26x7.WGlIFYRGdNbwO', 'Ranger', '20180414165909.jpg', 0, '18877778888', 'wilton.icp@gmail.com', '我是作者', 500, '5f6acede-679e-4deb-94fa-0e7d469edcee', '2021-06-01 14:08:54', 1, NULL, '2021-04-02 16:21:29', NULL, 0, 0);
