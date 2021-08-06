@@ -52,7 +52,7 @@ Wilton-File是基于SpringBoot实现的文件分享系统、支持文件分片�
 <img src="https://oss.wiltonic.cn/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hfal9jXzEyMw==,size_16,color_FFFFFF,t_70-20210601171025804.png" alt="img" style="zoom:25%;" />
 
 ### 联系作者
-<img src="https://oss.wiltonic.cn/OfficialAccounts.jpeg" alt="image-202106011656999" style="zoom: 15%;" />
+<img src="https://oss.wiltonic.cn/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" alt="image-202106011656999" style="zoom: 15%;" />
 
 
 
