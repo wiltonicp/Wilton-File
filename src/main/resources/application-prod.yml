@@ -1,17 +1,22 @@
-# 开发环境配置
+# 生产环境配置
 spring:
-  autoconfigure:
-    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
     dynamic:
+      hikari:
+        connection-timeout: 30000
+        max-lifetime: 1800000
+        max-pool-size: 15
+        min-idle: 5
+        connection-test-query: select 1
+        pool-name: ViHackerHikariCP
       p6spy: true
       primary: base
       datasource:
         base:
-          url: jdbc:mysql://192.168.2.81:3306/wilton_file_prod?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.2.81:3306/wilton_file_prod?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
           driver-class-name: com.mysql.cj.jdbc.Driver
           username: wilton
-          password: 1234567
+          password: 123456
   redis:
     database: 8
     host: 192.168.2.81
@@ -29,4 +34,4 @@ wilton:
   upload:
     path: /home/file/upload
   share:
-    path: https://vihacker.top:8188/s/
+    path: http://vihacker.top:8127/s/

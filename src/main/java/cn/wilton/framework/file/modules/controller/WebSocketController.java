@@ -4,7 +4,7 @@ import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.dto.RoomMessage;
 import cn.wilton.framework.file.websocket.WebSocketServer;
 import com.alibaba.fastjson.JSONObject;
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

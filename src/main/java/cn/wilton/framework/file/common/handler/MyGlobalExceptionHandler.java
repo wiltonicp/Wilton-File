@@ -1,6 +1,6 @@
 package cn.wilton.framework.file.common.handler;
 
-import com.vihackerframework.common.handler.BaseExceptionHandler;
+import cc.vihackerframework.core.handler.BaseExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

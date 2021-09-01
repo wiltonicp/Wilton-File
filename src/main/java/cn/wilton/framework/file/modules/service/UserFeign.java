@@ -1,6 +1,6 @@
 package cn.wilton.framework.file.modules.service;
 
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

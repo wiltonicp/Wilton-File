@@ -1,5 +1,8 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cc.vihackerframework.core.api.ViHackerResult;
+import cc.vihackerframework.core.exception.ViHackerException;
+import cc.vihackerframework.core.exception.ViHackerRuntimeException;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.FolderEntity;
@@ -8,9 +11,6 @@ import cn.wilton.framework.file.common.util.PicUtil;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IFolderService;
 import cn.wilton.framework.file.properties.WiltonProperties;
-import com.vihackerframework.common.api.ViHackerResult;
-import com.vihackerframework.common.exception.ViHackerException;
-import com.vihackerframework.common.exception.ViHackerRuntimeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -92,7 +92,7 @@ public class FileController {
      * @param response
      */
     @GetMapping("thumb")
-    public@ResponseBody void preview(String fid, Long md, HttpServletResponse response) throws ViHackerRuntimeException{
+    public@ResponseBody void preview(String fid, Long md, HttpServletResponse response) throws ViHackerRuntimeException {
         FileEntity fileEntity = fileService.getByFileId(Long.valueOf(FileUtil.getFileNameNoEx(fid)));
         if(fileEntity == null){
             new ViHackerRuntimeException("参数无效!");

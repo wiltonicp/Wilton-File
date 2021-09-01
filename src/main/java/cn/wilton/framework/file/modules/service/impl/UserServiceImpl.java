@@ -1,5 +1,7 @@
 package cn.wilton.framework.file.modules.service.impl;
 
+import cc.vihackerframework.core.exception.ViHackerRuntimeException;
+import cc.vihackerframework.redis.starter.service.RedisService;
 import cn.wilton.framework.file.common.entity.*;
 import cn.wilton.framework.file.common.util.FileUtil;
 import cn.wilton.framework.file.common.util.SecurityUtil;
@@ -13,8 +15,6 @@ import cn.wilton.framework.file.modules.service.IUserService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.vihackerframework.common.exception.ViHackerRuntimeException;
-import com.vihackerframework.common.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.Folder;
 
 /**
  * <p>

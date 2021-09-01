@@ -5,7 +5,7 @@ import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import cn.wilton.framework.file.modules.dto.UserInput;
 import cn.wilton.framework.file.modules.service.IUserService;
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Identityprovider.Verification;

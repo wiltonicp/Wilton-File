@@ -8,7 +8,7 @@ import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IUploadService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.alibaba.fastjson.JSONObject;
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

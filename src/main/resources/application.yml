@@ -29,7 +29,7 @@ spring:
   mail:
     host: smtp.exmail.qq.com #发送邮件服务器
     username: no-reply@vihacker.top #邮箱
-    password: DY7g*******pxDm #客户端授权码
+    password: DY***********pxDm #客户端授权码
     protocol: smtp #发送邮件协议
     properties.mail.smtp.auth: true
     properties.mail.smtp.port: 465 #端口号465或587
@@ -52,6 +52,7 @@ wilton:
         - /assets/**/**/**
         - /wechat/**
   redisKey: vihacker.
+
 
 mybatis-plus:
   type-aliases-package: cn.wilton.framework.file*.entity
@@ -87,3 +88,6 @@ feign:
     enabled: false
   okhttp:
     enabled: true
+vihacker:
+  redis:
+    enable: true

@@ -1,13 +1,12 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cc.vihackerframework.core.exception.ViHackerException;
+import cc.vihackerframework.redis.starter.service.RedisService;
 import cn.wilton.framework.file.common.util.IdUtils;
 import cn.wilton.framework.file.modules.service.IMailService;
 import cn.wilton.framework.file.properties.WiltonProperties;
-import com.vihackerframework.common.api.ViHackerResult;
-import com.vihackerframework.common.exception.ViHackerException;
-import com.vihackerframework.common.service.RedisService;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +38,7 @@ public class VerifyCodeController {
     public ViHackerResult sendMailCode(String to) throws ViHackerException, MessagingException {
             Context context = new Context();
             Integer code = IdUtils.getVerifyCode();
-            redisService.set(properties.redisKey + to,code,300);
+            redisService.set(properties.redisKey + to,code,300L);
             context.setVariable("code", code);
             context.setVariable("to", to);
             String emailContent = templateEngine.process("mail/verify-code", context);

@@ -8,7 +8,6 @@ import cn.wilton.framework.file.modules.mapper.UserMapper;
 import cn.wilton.framework.file.modules.mapper.UserRoleMapper;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.vihackerframework.common.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

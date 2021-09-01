@@ -1,5 +1,7 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cc.vihackerframework.core.entity.PageInfo;
+import cc.vihackerframework.core.exception.ViHackerException;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.ShareEntity;
@@ -9,10 +11,7 @@ import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IShareService;
 import cn.wilton.framework.file.properties.WiltonProperties;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.vihackerframework.common.api.ViHackerResult;
-import com.vihackerframework.common.core.entity.PageInfo;
-import com.vihackerframework.common.exception.ViHackerException;
-import com.vihackerframework.common.exception.ViHackerRuntimeException;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Controller;

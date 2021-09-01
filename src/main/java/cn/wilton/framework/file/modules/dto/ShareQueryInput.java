@@ -1,6 +1,7 @@
 package cn.wilton.framework.file.modules.dto;
 
-import com.vihackerframework.common.core.entity.QueryRequest;
+
+import cc.vihackerframework.core.entity.QueryRequest;
 
 /**
  * <p>

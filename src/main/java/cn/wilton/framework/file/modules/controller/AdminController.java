@@ -1,7 +1,7 @@
 package cn.wilton.framework.file.modules.controller;
 
+import cc.vihackerframework.core.api.ViHackerResult;
 import cn.wilton.framework.file.common.util.SecurityUtil;
-import com.vihackerframework.common.api.ViHackerResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

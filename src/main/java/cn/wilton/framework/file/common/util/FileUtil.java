@@ -1,11 +1,11 @@
 package cn.wilton.framework.file.common.util;
 
+import cc.vihackerframework.core.exception.ViHackerException;
+import cc.vihackerframework.core.exception.ViHackerRuntimeException;
 import cn.hutool.core.util.IdUtil;
 import cn.wilton.framework.file.common.constant.WiltonConstant;
 import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.enums.FileTypeEnum;
-import com.vihackerframework.common.exception.ViHackerException;
-import com.vihackerframework.common.exception.ViHackerRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;

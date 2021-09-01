@@ -3,15 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.7.RELEASE</version>
-        <relativePath/>
+        <groupId>cc.vihackerframework</groupId>
+        <artifactId>vihacker-core</artifactId>
+        <version>1.0.4.R</version>
     </parent>
     <artifactId>wilton-file</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
     <name>Wilton-File</name>
-    <url>https://blog.wiltonic.cn</url>
+    <url>https://blog.vihacker.top</url>
     <description>Wilton 文件管理系统</description>
 
     <properties>
@@ -21,31 +20,36 @@
         <skipTests>true</skipTests>
         <docker.host>http://127.0.0.1:8150</docker.host>
         <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
-        <docker.serverId>docker-Aliyun</docker.serverId>
-        <docker.registry>registry.vihacker.top/wilton</docker.registry>
+        <docker.serverId>docker-aliyun</docker.serverId>
+        <docker.registry>registry.cn-shanghai.aliyuncs.com/wilton</docker.registry>
         <docker.registry.name>wilton/rocket</docker.registry.name>
         <thymeleaf-spring5.version>3.0.9.RELEASE</thymeleaf-spring5.version>
-        <mysql-connector.version>8.0.11</mysql-connector.version>
         <hutool.version>5.4.0</hutool.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <dynamic-datasource.version>2.5.4</dynamic-datasource.version>
         <logstash-logback.version>6.1</logstash-logback.version>
     </properties>
 
     <dependencies>
 
+<!--        <dependency>-->
+<!--            <groupId>com.vihackerframework</groupId>-->
+<!--            <artifactId>vihacker-common</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.vihackerframework</groupId>
-            <artifactId>vihacker-common</artifactId>
-            <version>1.0.0</version>
+            <groupId>cc.vihackerframework</groupId>
+            <artifactId>vihacker-common-starter</artifactId>
+            <version>1.0.4.R</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>true</scope>
+            <groupId>cc.vihackerframework</groupId>
+            <artifactId>vihacker-datasource-starter</artifactId>
+            <version>1.0.4.R</version>
+        </dependency>
+        <dependency>
+            <groupId>cc.vihackerframework</groupId>
+            <artifactId>vihacker-redis-starter</artifactId>
+            <version>1.0.4.R</version>
         </dependency>
         <!--thymeleaf默认使用html5规则标签必须闭合等 使用次此包正常解析-->
         <dependency>
@@ -69,11 +73,6 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
@@ -90,24 +89,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-        <!--Mysql数据库驱动-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!--druid数据源-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.23</version>
-        </dependency>
-        <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
-            <version>3.8.1</version>
         </dependency>
 
         <!--Hutool Java工具包-->
@@ -129,22 +110,6 @@
             <version>${logstash-logback.version}</version>
         </dependency>
 
-        <!--mybatis-plus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>${dynamic-datasource.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -205,27 +170,34 @@
         </dependency>
     </dependencies>
 
-    <!-- 在项目的pom.xml中 配置私服的仓库地址，可以将项目打jar包部署到私服 -->
-    <repositories>
-        <repository>
-            <id>maven-releases</id>
-            <name>maven-releases</name>
-            <url>http://rep.wiltonic.cn:8331/repository/maven-public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <build>
-        <finalName>wilton-file-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>

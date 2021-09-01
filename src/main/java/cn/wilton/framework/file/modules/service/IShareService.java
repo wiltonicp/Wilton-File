@@ -1,9 +1,9 @@
 package cn.wilton.framework.file.modules.service;
 
+import cc.vihackerframework.core.entity.PageInfo;
 import cn.wilton.framework.file.common.entity.ShareEntity;
 import cn.wilton.framework.file.modules.dto.ShareQueryInput;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.vihackerframework.common.core.entity.PageInfo;
 
 /**
  * <p>

@@ -1,7 +1,6 @@
 package cn.wilton.framework.file.modules.mapper;
 
 import cn.wilton.framework.file.common.entity.FolderEntity;
-import com.baomidou.mybatisplus.annotation.SqlParser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +20,7 @@ public interface FolderMapper extends BaseMapper<FolderEntity> {
      * @param id
      * @return
      */
-    @SqlParser(filter = true)
+    //@SqlParser(filter = true)
     List<FolderEntity> findParentById(Long id);
 
     /**

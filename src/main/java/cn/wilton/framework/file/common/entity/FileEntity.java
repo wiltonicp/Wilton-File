@@ -1,11 +1,11 @@
 package cn.wilton.framework.file.common.entity;
 
+import cc.vihackerframework.core.entity.ViHackerEntity;
 import cn.wilton.framework.file.common.util.SecurityUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.vihackerframework.common.entity.ViHackerEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;

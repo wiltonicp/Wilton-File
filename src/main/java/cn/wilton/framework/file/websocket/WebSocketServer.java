@@ -2,20 +2,15 @@ package cn.wilton.framework.file.websocket;
 
 import cn.wilton.framework.file.common.entity.User;
 import cn.wilton.framework.file.common.entity.enums.MessageTypeEnum;
-import cn.wilton.framework.file.modules.dto.ChatRoomDto;
 import cn.wilton.framework.file.modules.dto.RoomMessage;
 import cn.wilton.framework.file.modules.service.IUserService;
 import cn.wilton.framework.file.modules.service.impl.UserServiceImpl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.vihackerframework.common.api.ViHackerResult;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;

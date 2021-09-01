@@ -2,7 +2,7 @@ package cn.wilton.framework.file.modules.controller;
 
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.modules.service.IFolderService;
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;

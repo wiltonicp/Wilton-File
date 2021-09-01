@@ -4,7 +4,7 @@ import cn.wilton.framework.file.common.entity.FileEntity;
 import cn.wilton.framework.file.common.entity.FolderEntity;
 import cn.wilton.framework.file.modules.service.IFileService;
 import cn.wilton.framework.file.modules.service.IFolderService;
-import com.vihackerframework.common.api.ViHackerResult;
+import cc.vihackerframework.core.api.ViHackerResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
