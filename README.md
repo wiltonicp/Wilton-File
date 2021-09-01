@@ -3,6 +3,9 @@
 ![https://img.shields.io/badge/license-Apache%202.0-blue.svg?longCache=true&style=flat-square](https://img.shields.io/badge/license-Apache%202.0-blue.svg?longCache=true&style=flat-square)
 ![https://img.shields.io/badge/springboot-2.3.7.RELEASE-brightgreen.svg?style=flat-square](https://img.shields.io/badge/springboot-2.3.7.RELEASE-brightgreen.svg?style=flat-square)
 
+## 如果您觉得有帮助，请点击右上角 "Star" 支持一下，谢谢！
+基于微服务的开发脚手架，持续开发中，[点击这里查看](https://gitee.com/wiltonicp/vihacker-cloud)
+
 Wilton-File是基于SpringBoot实现的文件分享系统、支持文件分片上传、下载、在线预览、分享、提取、文件上传进度监控、容量占用显示、文件回收站、文件分享、我的分享、文件下载、文件还原、同屏在线聊天等功能。
 
 ### 后台技术栈：
