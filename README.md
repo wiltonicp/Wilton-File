@@ -40,25 +40,25 @@ Wilton-File是基于SpringBoot实现的文件分享系统、支持文件分片�
 
 ###  系统截图
 
-<img src="https://oss.wiltonic.cn/image-20210601165617771.png" alt="image-20210601165617771" style="zoom: 15%;" /><img src="https://oss.wiltonic.cn/image-20210601165738810.png" alt="image-20210601165738810" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601165617771.png" alt="image-20210601165617771" style="zoom: 15%;" /><img src="https://qnoss.vihacker.top/image-20210601165738810.png" alt="image-20210601165738810" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/image-20210601165830120.png" alt="image-20210601165830120" style="zoom:15%;" /><img src="https://oss.wiltonic.cn/image-20210601165923115.png" alt="image-20210601165923115" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601165830120.png" alt="image-20210601165830120" style="zoom:15%;" /><img src="https://qnoss.vihacker.top/image-20210601165923115.png" alt="image-20210601165923115" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/image-20210601170058168.png" alt="image-20210601170058168" style="zoom:15%;" /><img src="https://oss.wiltonic.cn/image-20210601170130132.png" alt="image-20210601170130132" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601170058168.png" alt="image-20210601170058168" style="zoom:15%;" /><img src="https://qnoss.vihacker.top/image-20210601170130132.png" alt="image-20210601170130132" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/image-20210601170239239.png" alt="image-20210601170239239" style="zoom:15%;" /><img src="https://oss.wiltonic.cn/image-20210601170318809.png" alt="image-20210601170318809" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601170239239.png" alt="image-20210601170239239" style="zoom:15%;" /><img src="https://qnoss.vihacker.top/image-20210601170318809.png" alt="image-20210601170318809" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/image-20210601170415782.png" alt="image-20210601170415782" style="zoom:15%;" /><img src="https://oss.wiltonic.cn/image-20210601170520655.png" alt="image-20210601170520655" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601170415782.png" alt="image-20210601170415782" style="zoom:15%;" /><img src="https://qnoss.vihacker.top/image-20210601170520655.png" alt="image-20210601170520655" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/image-20210601170901827.png" alt="image-20210601170901827" style="zoom:15%;" /><img src="https://oss.wiltonic.cn/image-20210601170952585.png" alt="image-20210601170952585" style="zoom:15%;" />
+<img src="https://qnoss.vihacker.top/image-20210601170901827.png" alt="image-20210601170901827" style="zoom:15%;" /><img src="https://qnoss.vihacker.top/image-20210601170952585.png" alt="image-20210601170952585" style="zoom:15%;" />
 
-<img src="https://oss.wiltonic.cn/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hfal9jXzEyMw==,size_16,color_FFFFFF,t_70-20210601171025804.png" alt="img" style="zoom:25%;" />
+<img src="https://qnoss.vihacker.top/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hfal9jXzEyMw==,size_16,color_FFFFFF,t_70-20210601171025804.png" alt="img" style="zoom:25%;" />
 
 ### 联系作者
 
 **公众号:**【编程手记】
 
-<img src="http://oss.vihacker.top/image/%E5%85%B3%E6%B3%A8%E6%88%91.png" alt="关注我" width="1000" style="zoom: 50%;" />
+<img src="http://qnoss.vihacker.top/image/%E5%85%B3%E6%B3%A8%E6%88%91.png" alt="关注我" width="1000" style="zoom: 50%;" />
 
 
 
