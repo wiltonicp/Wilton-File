@@ -11,7 +11,7 @@
     <version>1.2.0</version>
     <name>Wilton-File</name>
     <url>https://blog.vihacker.top</url>
-    <description>Wilton 文件管理系统</description>
+    <description>Wilton 文件管理系统---关注公众号:【边城手记】</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,12 +30,6 @@
     </properties>
 
     <dependencies>
-
-<!--        <dependency>-->
-<!--            <groupId>com.vihackerframework</groupId>-->
-<!--            <artifactId>vihacker-common</artifactId>-->
-<!--            <version>1.0.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>cc.vihackerframework</groupId>
             <artifactId>vihacker-common-starter</artifactId>
