@@ -5,7 +5,7 @@
     <parent>
         <groupId>cc.vihackerframework</groupId>
         <artifactId>vihacker-core</artifactId>
-        <version>1.0.4.R</version>
+        <version>1.0.6.R</version>
     </parent>
     <artifactId>wilton-file</artifactId>
     <version>1.2.0</version>
@@ -17,11 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <skipTests>true</skipTests>
+        <vihacker.version>1.0.6.R</vihacker.version>
         <docker.host>http://127.0.0.1:8150</docker.host>
         <docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
         <docker.serverId>docker-aliyun</docker.serverId>
-        <docker.registry>registry.cn-shanghai.aliyuncs.com/wilton</docker.registry>
+        <docker.registry>127.0.0.1</docker.registry>
         <docker.registry.name>wilton/rocket</docker.registry.name>
         <thymeleaf-spring5.version>3.0.9.RELEASE</thymeleaf-spring5.version>
         <hutool.version>5.4.0</hutool.version>
@@ -39,17 +39,17 @@
         <dependency>
             <groupId>cc.vihackerframework</groupId>
             <artifactId>vihacker-common-starter</artifactId>
-            <version>1.0.4.R</version>
+            <version>${vihacker.version}</version>
         </dependency>
         <dependency>
             <groupId>cc.vihackerframework</groupId>
             <artifactId>vihacker-datasource-starter</artifactId>
-            <version>1.0.4.R</version>
+            <version>${vihacker.version}</version>
         </dependency>
         <dependency>
             <groupId>cc.vihackerframework</groupId>
             <artifactId>vihacker-redis-starter</artifactId>
-            <version>1.0.4.R</version>
+            <version>${vihacker.version}</version>
         </dependency>
         <!--thymeleaf默认使用html5规则标签必须闭合等 使用次此包正常解析-->
         <dependency>
@@ -109,12 +109,6 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-logback.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -123,11 +117,6 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
-        </dependency>
-        <!--lettuce-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -206,13 +195,13 @@
                 <!--将插件绑定在某个phase执行 只需执行mvn package ，就会自动执行mvn docker:build -->
                 <executions>
                     <!--执行 mvn package 时 自动 执行 mvn docker:build-->
-                    <execution>
-                        <id>build-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
+<!--                    <execution>-->
+<!--                        <id>build-image</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
                 </executions>
                 <configuration>
                     <!-- 覆盖相同标签镜像 -->
