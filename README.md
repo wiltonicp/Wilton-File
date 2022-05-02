@@ -56,7 +56,7 @@ Wilton-File是基于SpringBoot实现的文件分享系统、支持文件分片�
 
 ### 联系作者
 
-**公众号:**【编程手记】
+**公众号:**【边城手记】
 
 <img src="http://oss.vihacker.top/image/%E5%85%B3%E6%B3%A8%E6%88%91.png" alt="关注我" width="1000" style="zoom: 50%;" />
 
