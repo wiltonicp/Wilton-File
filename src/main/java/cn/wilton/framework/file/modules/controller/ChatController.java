@@ -8,4 +8,8 @@ package cn.wilton.framework.file.modules.controller;
  * @since 2021/4/25
  */
 public class ChatController {
+
+    public void show(){
+
+    }
 }

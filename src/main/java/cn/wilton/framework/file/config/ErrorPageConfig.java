@@ -11,9 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * <p>
+ *
  * @author Ranger
- * @since 2021/4/2
  * @email wilton.icp@gmail.com
+ * @since 2021/4/2
  */
 @Component
 public class ErrorPageConfig implements ErrorPageRegistrar {
@@ -32,7 +33,7 @@ public class ErrorPageConfig implements ErrorPageRegistrar {
                 new ErrorPage(HttpStatus.FORBIDDEN, "/error/403"),
                 new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"),
                 new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500")
-                );
+        );
     }
 }
 
@@ -42,17 +43,17 @@ public class ErrorPageConfig implements ErrorPageRegistrar {
 @Controller
 class ErrorPageController {
     @GetMapping("/error/403")
-    public ModelAndView error403(){
+    public ModelAndView error403() {
         return new ModelAndView("common/error/403");
     }
 
     @GetMapping("/error/404")
-    public ModelAndView error404(){
+    public ModelAndView error404() {
         return new ModelAndView("common/error/404");
     }
 
     @GetMapping("/error/500")
-    public ModelAndView error500(){
+    public ModelAndView error500() {
         return new ModelAndView("common/error/500");
     }
 }
